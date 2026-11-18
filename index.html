@@ -1,0 +1,1734 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Budget Builder — 50/30/20, 70/20/10 & 50/50</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F1E8; --surface:#FFFFFF; --surface2:#EDE9DC; --ink:#13211B; --muted:#5C6B62; --line:#DDD8C8;
+  --green:#16694A; --green-dark:#0E4D35; --green-soft:#DDEEE3; --gold:#C98A12; --gold-soft:#FDF0D0;
+  --coral:#C2410C; --coral-soft:#FDE8DC; --teal:#0F766E; --teal-soft:#CCECE8;
+  --radius:18px; --shadow:0 10px 30px rgba(19,33,27,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0F1713; --surface:#18231D; --surface2:#1E2E25; --ink:#EDF3EE; --muted:#9AAEA2; --line:#2A3B31; --green:#3DBE84; --green-dark:#7ED3A6; --green-soft:#1C3528; --gold:#E5A82B; --gold-soft:#332A12; --coral:#F08A5B; --coral-soft:#3A2216; --teal:#2DD4BF; --teal-soft:#12332F; --shadow:0 10px 30px rgba(0,0,0,.35); }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.55}
+a{color:var(--green)}
+button,[role="button"],select,summary,input:not([type="checkbox"]){min-height:44px}
+h1,h2,h3,h4{line-height:1.08;margin:0}
+h1{font-family:"Baloo 2","Public Sans",system-ui,sans-serif;font-weight:800;font-size:clamp(2.5rem,6vw,4.1rem);letter-spacing:0}
+h2{font-family:"Baloo 2","Public Sans",system-ui,sans-serif;font-weight:700;font-size:clamp(1.7rem,3vw,2.2rem)}
+h3,h4{font-family:"Baloo 2","Public Sans",system-ui,sans-serif;font-weight:700;letter-spacing:.01em}
+.wrap{max-width:1080px;margin:0 auto;padding:20px 18px 56px}
+.hero{padding:28px 0 8px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-radius:999px}
+.hero p.lede{font-size:1.12rem;color:var(--muted);max-width:680px;margin:16px 0 0}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:end}
+.hero-card{background:var(--green);color:#fff;border-radius:20px;padding:20px}
+.hero-card strong{font-size:1.05rem}
+.hero-card p{margin:6px 0 0;color:#D6EBDD;font-size:.95rem}
+.rule-picker{margin:26px 0 18px}
+.rule-picker legend,.label{font-weight:800;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.rule-btn{appearance:none;text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:14px 14px 12px;cursor:pointer;color:var(--ink)}
+.rule-btn b{font-size:1.25rem;display:block}
+.rule-btn span{font-size:.88rem;color:var(--muted);display:block;margin-top:2px;line-height:1.35}
+.rule-btn[aria-pressed="true"]{border-color:var(--green);background:var(--green-soft);box-shadow:var(--shadow)}
+.rule-btn:focus-visible,.faq-q:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card + .card{margin-top:16px}
+.card h3{font-size:1.18rem}
+.hero-card strong{font-family:"Baloo 2","Public Sans",system-ui,sans-serif;font-weight:700}
+.rule-picker legend{font-family:"Baloo 2","Public Sans",system-ui,sans-serif;font-size:1.1rem;letter-spacing:.02em}
+.sub{color:var(--muted);font-size:.93rem;margin:6px 0 0}
+.income-row{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-top:14px}
+.field{flex:1;min-width:180px}
+.field label{font-weight:700;font-size:.9rem;display:block;margin-bottom:6px}
+.money{position:relative}
+.money::before{content:"$";position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:700}
+.money input{padding-left:28px !important}
+input[type="number"],input[type="text"],input[type="email"],textarea,select{width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;font:inherit;color:var(--ink)}
+input:focus,textarea:focus{border-color:var(--green);outline:none}
+.btn{border:0;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer;font:inherit}
+.btn-primary{background:var(--ink);color:var(--bg)}
+.btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn-green{background:var(--green);color:#fff}
+.group{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+.group-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.group-head h4{margin:0;font-size:1rem}
+.group-total{font-weight:800;white-space:nowrap}
+.rows{display:grid;gap:10px;margin-top:12px}
+.row{display:grid;grid-template-columns:1fr 132px;gap:10px;align-items:center}
+.row label{font-size:.95rem}
+.row label small{display:block;color:var(--muted);font-size:.82rem}
+.hint{font-size:.88rem;color:var(--muted);background:var(--surface2);border-radius:12px;padding:10px 12px;margin-top:12px}
+.sticky{position:sticky;top:16px}
+.bar-wrap{margin-top:16px}
+.bar-label{display:flex;justify-content:space-between;font-size:.86rem;font-weight:700;margin-bottom:6px}
+.bar{height:16px;background:var(--surface2);border-radius:999px;overflow:hidden;display:flex}
+.seg{height:100%;transition:width .35s ease}
+.seg-needs{background:var(--green)} .seg-wants{background:var(--gold)} .seg-save{background:var(--teal)} .seg-living{background:var(--green)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:.86rem;color:var(--muted)}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
+.bucket{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}
+.bucket-top{display:flex;justify-content:space-between;gap:12px;align-items:start}
+.bucket-top b{font-size:1rem}
+.pct{font-family:"Public Sans",system-ui,sans-serif;font-size:1.7rem;font-weight:800;line-height:1}
+.delta{font-size:.9rem;font-weight:700;margin-top:6px}
+.delta.over{color:var(--coral)} .delta.under{color:var(--green)} .delta.on{color:var(--teal)}
+.mini{height:8px;background:var(--surface2);border-radius:999px;overflow:hidden;margin-top:10px;position:relative}
+.mini i{display:block;height:100%;border-radius:999px}
+.target-note{font-size:.86rem;color:var(--muted);margin-top:6px}
+.verdict{border-radius:14px;padding:14px 16px;margin-top:16px;font-weight:600}
+.verdict.good{background:var(--green-soft)} .verdict.warn{background:var(--gold-soft)} .verdict.bad{background:var(--coral-soft)}
+.recs{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:10px}
+.recs li{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.recs li b{display:block;margin-bottom:2px}
+.recs li span{color:var(--muted);font-size:.94rem}
+.unalloc{margin-top:12px;font-size:.94rem;color:var(--muted)}
+.section{margin-top:34px}
+.section-head{max-width:720px}
+.faq{display:grid;gap:10px;margin-top:16px}
+.faq-item{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.faq-q{width:100%;text-align:left;background:none;border:0;padding:16px 18px;font:inherit;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;gap:16px;color:var(--ink)}
+.faq-a{padding:0 18px 16px;color:var(--muted);display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .chev{transform:rotate(180deg)}
+.chev{transition:transform .2s}
+.ask-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px;align-items:start}
+.form-grid{display:grid;gap:12px;margin-top:14px}
+textarea{resize:vertical;min-height:120px}
+.form-note{font-size:.88rem;color:var(--muted)}
+.success{background:var(--green-soft);border-radius:12px;padding:12px 14px;margin-top:12px;display:none}
+.footer{margin-top:36px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:18px}
+.preset-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.preset-btn{text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;color:var(--ink)}
+.preset-btn b{font-size:1.15rem;display:block}.preset-btn span{font-size:.86rem;color:var(--muted);display:block;line-height:1.35;margin-top:2px}
+.preset-btn[aria-pressed="true"]{border-color:var(--green);background:var(--green-soft)}
+.afford-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.afford-box{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px}
+.afford-box b{font-size:1.05rem;display:block}.afford-box span{font-size:.86rem;color:var(--muted)}
+.goal-row{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:8px;align-items:end}
+.goal-ideas{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.idea-chip{appearance:none;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:8px 13px;font:inherit;font-size:.9rem;font-weight:700;cursor:pointer;min-height:40px}
+.idea-chip:hover{border-color:var(--green);background:var(--green-soft)}
+.idea-chip:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.goal-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.goal-form .full{grid-column:1/-1}
+.goal-form label{font-weight:700;display:block;margin-bottom:6px;font-size:.92rem}
+.goal-optional{margin-top:14px;border:1px dashed var(--line);border-radius:12px;padding:4px 14px 12px;background:var(--bg)}
+.goal-optional summary{font-weight:700;font-size:.92rem;cursor:pointer;padding:10px 0 4px;color:var(--muted)}
+.goal-optional .money{max-width:240px;margin-top:8px}
+.goal-card{border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:12px;background:var(--bg)}
+.goal-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.goal-badge{font-size:.76rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--surface2);color:var(--ink)}
+.goal-badge.type{background:var(--green-soft);color:var(--green)}
+.goal-badge.first{background:var(--gold-soft);color:#7A5500}
+.goal-cost{font-size:.86rem;color:var(--muted);margin-top:8px}
+@media (max-width:640px){.goal-form{grid-template-columns:1fr}}
+.goal-card{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px;background:var(--bg)}
+.goal-card-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.goal-meta{color:var(--muted);font-size:.9rem}
+.progress{height:10px;background:var(--surface2);border-radius:999px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:var(--teal)}
+.bill-head,.bill-row{display:grid;grid-template-columns:1.4fr .9fr .7fr .8fr auto;gap:8px;align-items:center}
+.bill-head{font-size:.8rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:0 2px}
+.bill-row{margin-top:8px}.due-badge{font-size:.82rem;font-weight:800;padding:5px 8px;border-radius:999px;white-space:nowrap}
+.due-soon{background:var(--coral-soft);color:var(--coral)} .due-ok{background:var(--green-soft);color:var(--green)} .due-mid{background:var(--gold-soft);color:#7A5500}
+.card-guide-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.guide-box{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg)} .guide-box b{display:block}
+.small-note{font-size:.86rem;color:var(--muted)}
+.icon-btn{width:40px;height:40px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-weight:900}
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.tip-card{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--bg);display:flex;flex-direction:column}
+.tip-top{display:flex;gap:12px;align-items:flex-start}
+.tip-num{flex:0 0 auto;width:32px;height:32px;border-radius:999px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem}
+.tip-card h3{font-size:1rem;line-height:1.25}
+.tip-card p{margin:8px 0 0;color:var(--muted);font-size:.94rem}
+.tip-card p strong{color:var(--ink)}
+.tip-script{margin-top:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.92rem}
+.tip-script span{display:block;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.catch{margin-top:10px;background:var(--coral-soft);border-radius:10px;padding:10px 12px;font-size:.92rem}
+.catch b{color:var(--coral)}
+.tips-order{margin-top:14px}
+.tabs-nav{position:sticky;top:0;z-index:30;background:var(--bg);padding:10px 0 8px;display:flex;gap:8px;flex-wrap:wrap;border-bottom:2px solid var(--line);margin-top:20px}
+.tab-btn{appearance:none;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:10px 16px;font-family:"Baloo 2","Public Sans",system-ui,sans-serif;font-size:1.02rem;font-weight:700;cursor:pointer;min-height:44px}
+.tab-btn small{display:block;font-family:"Public Sans",system-ui,sans-serif;font-weight:600;font-size:.78rem;color:var(--muted);line-height:1.2}
+.tab-btn[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tab-btn[aria-selected="true"] small{color:var(--bg);opacity:.85}
+.tab-btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.tab-panel .section:first-child{margin-top:18px}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeIn .18s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.flags-grid{display:grid;gap:12px;margin-top:14px}
+.flag-card{border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--bg);display:grid;gap:6px}
+.flag-card.over{border-color:var(--coral);background:var(--coral-soft)}
+.flag-card.watch{border-color:var(--gold);background:var(--gold-soft)}
+.flag-card.ok{border-color:var(--line);background:var(--bg)}
+.flag-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.flag-top b{font-size:1rem}
+.flag-pill{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px;white-space:nowrap}
+.flag-pill.over{background:var(--coral);color:#fff}
+.flag-pill.watch{background:var(--gold);color:#1A1400}
+.flag-pill.ok{background:var(--green-soft);color:var(--green)}
+.flag-meta{font-size:.92rem;color:var(--muted)}
+.flag-meta strong{color:var(--ink)}
+.flag-msg{font-size:.94rem}
+.flag-bar{height:8px;background:var(--surface2);border-radius:999px;overflow:hidden;position:relative;margin-top:4px}
+.flag-bar i{display:block;height:100%;border-radius:999px}
+.flag-bar .marker{position:absolute;top:-2px;bottom:-2px;width:3px;background:var(--ink);border-radius:2px}
+.inline-flag{font-size:.82rem;font-weight:700;margin-top:4px;display:none}
+.inline-flag.show{display:block}
+.inline-flag.over{color:var(--coral)} .inline-flag.watch{color:#8A6200}
+@media (prefers-color-scheme: dark){ .inline-flag.watch{color:var(--gold)} .flag-pill.watch{color:#1A1400} }
+.smart-note{background:var(--gold-soft);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.93rem}
+.smart-note b{color:var(--ink)}
+.adjusted-tag{display:inline-block;background:var(--green);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:999px;vertical-align:middle;margin-left:6px}
+.steps{margin-top:8px}
+.plan-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.plan-row .plan-pct{font-weight:800;color:var(--muted);white-space:nowrap}
+.plan-row .plan-amt{font-family:"Public Sans",system-ui,sans-serif;font-weight:800;font-size:1.3rem;white-space:nowrap}
+.plan-row .plan-amt small{font-family:"Public Sans",sans-serif;font-size:.78rem;color:var(--muted);font-weight:600}
+.step-arrow{text-align:center;color:var(--muted);font-size:1.3rem;line-height:1;margin:10px 0 -6px}
+.focus-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.focus-btn{appearance:none;text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:12px 14px;cursor:pointer;color:var(--ink)}
+.focus-btn b{font-size:1.05rem;display:block}
+.focus-btn span{font-size:.86rem;color:var(--muted);display:block;margin-top:2px;line-height:1.35}
+.focus-btn[aria-pressed="true"]{border-color:var(--gold);background:var(--gold-soft);box-shadow:var(--shadow)}
+.focus-btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wheel-block{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}
+.wheel-wrap{display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:center;margin-top:14px}
+.wheel-stage{position:relative;width:230px;height:230px;margin:0 auto}
+.wheel-pointer{position:absolute;top:-8px;left:50%;transform:translateX(-50%);z-index:3;width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-top:20px solid var(--ink)}
+.wheel{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from -60deg, var(--green) 0deg 120deg, var(--gold) 120deg 240deg, var(--teal) 240deg 360deg);border:6px solid var(--ink);box-shadow:var(--shadow);transition:transform 4.2s cubic-bezier(.1,.7,.08,1)}
+.wlabel{position:absolute;top:50%;left:50%;color:#fff;font-family:"Baloo 2","Public Sans",system-ui,sans-serif;font-weight:800;font-size:1.08rem;text-align:center;line-height:1.15;text-shadow:0 1px 3px rgba(0,0,0,.35);white-space:nowrap}
+.wlabel small{display:block;font-family:"Public Sans",system-ui,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.92}
+.wheel-hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:var(--surface);border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:"Baloo 2","Public Sans",system-ui,sans-serif;font-weight:800;font-size:1.5rem;color:var(--ink);z-index:2;pointer-events:none}
+.wheel-result{margin-top:14px;background:var(--green-soft);border-radius:14px;padding:14px 16px}
+.wheel-result b{font-size:1.05rem}
+.wheel-result p{margin:6px 0 0;font-size:.95rem}
+.match-rec{background:var(--gold-soft);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:14px;font-size:.94rem}
+.match-rec:empty{display:none}
+.health-grid{display:grid;grid-template-columns:190px 1fr;gap:20px;align-items:center;margin-top:14px}
+.health-score{text-align:center}
+.health-ring{position:relative;width:170px;height:170px;margin:0 auto}
+.health-ring svg{transform:rotate(-90deg);display:block}
+.health-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.health-num b{font-family:"Baloo 2","Public Sans",sans-serif;font-size:3rem;line-height:1}
+.health-num span{font-size:.78rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.health-band{font-weight:800;margin-top:10px}
+.health-part{margin-top:14px}
+.health-part:first-child{margin-top:0}
+.hp-top{display:flex;justify-content:space-between;gap:10px;font-size:.94rem;align-items:baseline}
+.hp-top b{font-weight:800}
+.hp-top span{font-weight:800;white-space:nowrap}
+.hp-bar{height:9px;background:var(--surface2);border-radius:999px;overflow:hidden;margin-top:5px}
+.hp-bar i{display:block;height:100%;border-radius:999px}
+.hp-note{font-size:.87rem;color:var(--muted);margin-top:4px}
+.whatif-toggles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.whatif-btn{appearance:none;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;color:var(--ink);font:inherit}
+.whatif-btn b{display:block;font-size:1rem}
+.whatif-btn span{font-size:.87rem;color:var(--muted);display:block;margin-top:2px;line-height:1.4}
+.whatif-btn .wi-cost{font-weight:800;color:var(--ink);margin-top:6px;font-size:.92rem}
+.whatif-btn[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft)}
+.whatif-btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wi-table{margin-top:16px;display:grid;gap:8px}
+.wi-row{display:grid;grid-template-columns:1.25fr .75fr .75fr .65fr;gap:10px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.wi-row.head{background:none;border:none;padding:0 14px;font-size:.76rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.wi-row b{font-size:1.05rem}
+.wi-delta{font-weight:800;white-space:nowrap}
+.wi-delta.up{color:var(--green)} .wi-delta.down{color:var(--coral)} .wi-delta.flat{color:var(--muted)}
+.chal-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.chal-stat{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+.chal-stat b{font-family:"Baloo 2","Public Sans",sans-serif;font-size:1.6rem;display:block;line-height:1.1}
+.chal-stat span{font-size:.82rem;color:var(--muted);font-weight:700}
+.badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.badge{border:1.5px dashed var(--line);border-radius:14px;padding:12px 14px;background:var(--bg);opacity:.72}
+.badge.earned{border:1.5px solid var(--gold);background:var(--gold-soft);opacity:1}
+.badge b{display:block;font-size:.98rem}
+.badge span{font-size:.85rem;color:var(--muted);display:block;margin-top:2px;line-height:1.4}
+.badge .badge-state{font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-top:8px;color:var(--muted)}
+.badge.earned .badge-state{color:#7A5500}
+@media (prefers-color-scheme: dark){ .badge.earned .badge-state{color:var(--gold)} }
+.chal-card{border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:14px;background:var(--surface);box-shadow:var(--shadow)}
+.chal-tag{display:inline-block;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--coral-soft);color:var(--coral)}
+.chal-tag.money-in{background:var(--teal-soft);color:var(--teal)}
+.chal-tag.squeeze{background:var(--gold-soft);color:#7A5500}
+@media (prefers-color-scheme: dark){ .chal-tag.squeeze{color:var(--gold)} }
+.chal-card h3{font-size:1.25rem;margin-top:10px}
+.chal-story{color:var(--muted);margin:8px 0 0}
+.chal-hit{font-weight:800;margin-top:10px}
+.chal-choices{display:grid;gap:8px;margin-top:14px}
+.chal-choice{appearance:none;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;color:var(--ink);font:inherit;width:100%}
+.chal-choice b{display:block}
+.chal-choice span{font-size:.9rem;color:var(--muted);display:block;margin-top:2px;line-height:1.45}
+.chal-choice:hover:not(:disabled){border-color:var(--green)}
+.chal-choice:disabled{cursor:default;opacity:.6}
+.chal-choice.picked{border-color:var(--ink);opacity:1;background:var(--surface)}
+.chal-choice:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.chal-outcome{border-radius:12px;padding:13px 15px;margin-top:14px;font-size:.96rem}
+.chal-outcome.good{background:var(--green-soft)} .chal-outcome.warn{background:var(--gold-soft)} .chal-outcome.bad{background:var(--coral-soft)}
+.chal-outcome b{display:block;margin-bottom:3px}
+.chal-done{font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-top:10px}
+@media (max-width:640px){ .health-grid{grid-template-columns:1fr} .whatif-toggles{grid-template-columns:1fr} .chal-stats{grid-template-columns:1fr 1fr} .badge-grid{grid-template-columns:1fr} .wi-row{grid-template-columns:1fr 1fr} .wi-row.head{display:none} }
+@media (max-width:640px){ .focus-row{grid-template-columns:1fr} .wheel-wrap{grid-template-columns:1fr} }
+@media (max-width:860px){ .hero-grid,.layout,.ask-grid{grid-template-columns:1fr} .sticky{position:static} .rules{grid-template-columns:1fr} .row{grid-template-columns:1fr 118px} .preset-row,.afford-grid{grid-template-columns:1fr} .goal-row{grid-template-columns:1fr 1fr} .bill-head{display:none} .bill-row{grid-template-columns:1fr 1fr} .card-guide-grid,.tips-grid{grid-template-columns:1fr} .tabs-nav{flex-wrap:wrap} .tab-btn{flex:1 1 42%} }
+@media (prefers-reduced-motion: reduce){ *{transition:none !important;scroll-behavior:auto !important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Money, Made Simple</span>
+        <h1>Build a budget<br>you can actually hit.</h1>
+        <p class="lede">Four steps. <strong>1.</strong> Put in how much you make a month. <strong>2.</strong> See what you <em>should</em> spend on needs, wants, and saving under your rule — <strong>50/30/20</strong>, <strong>70/20/10</strong>, or <strong>50/50</strong>. <strong>3.</strong> Enter what you actually spend — <strong>live flags call out rent, car, and eating out the second they run high</strong>. <strong>4.</strong> See exactly how much you&rsquo;re over or under, bucket by bucket. No bank login. Nothing leaves this page.</p>
+      </div>
+      <aside class="hero-card">
+        <strong>Which rule fits you?</strong>
+        <p><b>50/30/20</b> — the recommended standard for most people. <b>70/20/10</b> — when charity &amp; paying off debt are the priority: 70% for needs &amp; wants together, 20% saving, 10% for extra debt payoff &amp; giving. <b>50/50</b> — the aggressive pick: half to live on, half to save &amp; invest. Not sure? Pick your focus and spin the wheel in step 1 — it lands on the rule that fits. In 50/30/20, wants &amp; saving adjust to your actual needs; in 50/50 and 70/20/10, needs &amp; wants combine into one bucket with a fixed target — see the Budget tab.</p>
+      </aside>
+    </div>
+
+    <form class="rule-picker" aria-label="Choose your budget rule">
+      <fieldset>
+        <legend>1 · Choose your rule</legend>
+        <div class="rules" role="group" aria-label="Budget rules">
+          <button type="button" class="rule-btn" data-rule="503020" aria-pressed="true"><b>50 / 30 / 20</b><span>50% Needs · 30% Wants · 20% Save &amp; Invest<br>The recommended standard — balanced for most people.</span></button>
+          <button type="button" class="rule-btn" data-rule="702010" aria-pressed="false"><b>70 / 20 / 10</b><span>70% Needs &amp; Wants · 20% Saving · 10% Debt &amp; Giving<br>When giving &amp; debt payoff are the priority.</span></button>
+          <button type="button" class="rule-btn" data-rule="5050" aria-pressed="false"><b>50 / 50</b><span>50% Living Expenses · 50% Save &amp; Invest<br>The aggressive pick — for serious wealth-building.</span></button>
+        </div>
+      </fieldset>
+
+      <div class="wheel-block">
+        <span class="label" id="focus-label">Not sure which rule? Start with your focus</span>
+        <div class="focus-row" role="group" aria-labelledby="focus-label">
+          <button type="button" class="focus-btn" data-focus="balanced" aria-pressed="true"><b>Balanced</b><span>Steady and sustainable — the recommended start for most people.</span></button>
+          <button type="button" class="focus-btn" data-focus="aggressive" aria-pressed="false"><b>Aggressive</b><span>Build wealth as fast as possible — save hard now.</span></button>
+          <button type="button" class="focus-btn" data-focus="charity" aria-pressed="false"><b>Giving first</b><span>Charity and paying off debt come before everything else.</span></button>
+        </div>
+        <div class="wheel-wrap">
+          <div class="wheel-stage" aria-hidden="true">
+            <div class="wheel-pointer"></div>
+            <div class="wheel" id="wheel">
+              <span class="wlabel" style="transform:translate(-50%,-50%) rotate(0deg) translateY(-74px)">50/30/20<small>Recommended</small></span>
+              <span class="wlabel" style="transform:translate(-50%,-50%) rotate(120deg) translateY(-74px)">70/20/10<small>Giving first</small></span>
+              <span class="wlabel" style="transform:translate(-50%,-50%) rotate(240deg) translateY(-74px)">50/50<small>Aggressive</small></span>
+            </div>
+            <div class="wheel-hub">$</div>
+          </div>
+          <div>
+            <button type="button" class="btn btn-green" id="spinBtn" style="font-size:1.05rem;padding:14px 24px">Spin the wheel →</button>
+            <p class="sub" style="margin-top:10px">Pick your focus above, then spin. The wheel lands on the rule that matches your focus — that becomes your budget below, with real numbers from your pay.</p>
+            <div class="wheel-result" id="wheelResult" aria-live="polite" hidden></div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </header>
+
+  <nav class="tabs-nav" role="tablist" aria-label="Budget Builder sections">
+    <button type="button" class="tab-btn" role="tab" id="tab-budget" aria-controls="panel-budget" aria-selected="true" data-tab="panel-budget">Your Budget<small>Pay → plan → actual → over/under</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-goals" aria-controls="panel-goals" aria-selected="false" data-tab="panel-goals">Goals &amp; Afford It<small>Experiences &amp; things you want</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-bills" aria-controls="panel-bills" aria-selected="false" data-tab="panel-bills">Bills &amp; Cards<small>Due dates + points guide</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-help" aria-controls="panel-help" aria-selected="false" data-tab="panel-help">Tips &amp; Help<small>Tight months, FAQ &amp; ask</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-challenges" aria-controls="panel-challenges" aria-selected="false" data-tab="panel-challenges">Challenges<small>Life cards · badges &amp; streaks</small></button>
+  </nav>
+
+  <div id="panel-budget" class="tab-panel active" role="tabpanel" aria-labelledby="tab-budget">
+  <main class="steps">
+      <section class="card" aria-labelledby="income-h">
+        <h3 id="income-h">2 · Step one — how much you make</h3>
+        <p class="sub">Use your monthly take-home pay — what actually hits your account after tax.</p>
+        <div class="income-row">
+          <div class="field">
+            <label for="income">Monthly take-home pay</label>
+            <div class="money"><input id="income" type="number" inputmode="decimal" min="0" step="10" value="3800" aria-describedby="income-hint"></div>
+          </div>
+          <button type="button" class="btn btn-ghost" id="exampleBtn">Load example</button>
+          <button type="button" class="btn btn-ghost" id="clearBtn">Clear</button>
+        </div>
+        <p class="hint" id="income-hint">Example numbers are loaded so you can see how it works — replace them with yours. Paid every two weeks? Multiply one check by 26, then divide by 12.</p>
+
+        <div class="group" aria-labelledby="work-h">
+          <div class="group-head"><h4 id="work-h">Saving through work — 401(k) / 403(b)</h4><span class="group-total" id="total-work">$0</span></div>
+          <p class="sub" style="margin-top:6px">Optional — skip it if you don’t have a work plan. This money comes out of your paycheck <em>before</em> take-home pay, so it isn’t in the number above. But it absolutely counts: everything here is added to your Save &amp; Invest bucket below, employer match included.</p>
+          <div class="rows">
+            <div class="row"><label for="workContrib">Your contribution<small>Per month, straight from your paycheck</small></label><div class="money"><input type="number" inputmode="decimal" min="0" step="5" id="workContrib" value="0"></div></div>
+            <div class="row"><label for="workMatch">Employer match<small>Per month — your job adds this on top</small></label><div class="money"><input type="number" inputmode="decimal" min="0" step="5" id="workMatch" value="0"></div></div>
+            <div class="row"><label for="matchType">How does your employer match work?<small>Check your plan summary or ask HR — this drives your recommendation</small></label>
+              <select id="matchType">
+                <option value="unsure">Not sure — skip the math</option>
+                <option value="none">My job doesn’t match</option>
+                <option value="100-3">They match 100% of the first 3% I put in</option>
+                <option value="100-4">They match 100% of the first 4% I put in</option>
+                <option value="50-6" selected>They match 50% of the first 6% I put in</option>
+                <option value="100-6">They match 100% of the first 6% I put in</option>
+              </select></div>
+          </div>
+          <div class="match-rec" id="matchRec" aria-live="polite"></div>
+          <p class="hint">The match is free money — part of your pay, not a bonus. If your job matches, contributing enough to get the <strong>full match</strong> beats almost every other money move: it’s an instant 100% return. Not sure of your monthly amounts? Check a pay stub, or divide your per-check amounts the same way as your pay: per check × 26 ÷ 12.</p>
+        </div>
+
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="card" aria-labelledby="plan-h">
+        <h3 id="plan-h">3 · Step two — what you should spend</h3>
+        <p class="sub">Your plan, built from your pay and the <strong id="planRuleName">50/30/20</strong> rule. This is the target. Next you enter what you really spend — and the last step shows how far over or under you land.</p>
+        <div id="planBody"></div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="card" aria-labelledby="spend-h">
+        <h3 id="spend-h">4 · Step three — what you actually spend</h3>
+        <p class="sub">Now the honest part: what actually goes out in a normal month. Guesses are fine — close beats perfect. Watch the flags below — they update live as you type.</p>
+        <div id="inputGroups"></div>
+        <div id="liveFlagsInline" aria-live="polite"></div>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="card" aria-labelledby="flags-h" aria-live="polite">
+        <h3 id="flags-h">Spending flags — what&rsquo;s running high?</h3>
+        <p class="sub">These update the second you change a number above. No waiting, no saving — if rent, car, or eating out is eating your check, you&rsquo;ll see it here right away, in dollars.</p>
+        <div class="flags-grid" id="flagsList"></div>
+        <p class="hint" style="margin-top:14px"><strong>How to read this:</strong> <span style="color:var(--green);font-weight:800">On track</span> means you&rsquo;re at or under the guide. <span style="font-weight:800">A little high</span> means you&rsquo;re just over — a small trim fixes it. <span style="color:var(--coral);font-weight:800">Over</span> means this one line is big enough to squeeze your saving — start here before cutting the small stuff. Guides used: rent ≤ 30% of take-home, car &amp; transport ≤ 15%, eating out ≤ 5%.</p>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="card" aria-labelledby="split-h" aria-live="polite">
+        <h3 id="split-h">5 · Step four — how you stack up: over or under</h3>
+        <p class="sub" id="ruleDesc">Target: 50% Needs · 30% Wants · 20% Save &amp; Invest</p>
+        <div class="smart-note" id="smartNote" aria-live="polite"></div>
+
+        <div class="bar-wrap">
+          <div class="bar-label"><span>What you actually spend</span><span id="allocatedLabel">$0 allocated</span></div>
+          <div class="bar" id="actualBar" role="img" aria-label="Bar showing your current budget split"></div>
+          <div class="legend" id="legend"></div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar-label"><span id="targetBarLabel">Your adjusted target — based on your needs</span><span id="targetLabel"></span></div>
+          <div class="bar" id="targetBar"></div>
+        </div>
+
+        <div id="buckets"></div>
+        <div class="unalloc" id="unalloc"></div>
+        <div class="verdict warn" id="verdict"></div>
+      </section>
+
+      <section class="card" aria-labelledby="health-h">
+        <h3 id="health-h">Your financial health score</h3>
+        <p class="sub">One number for how sturdy this budget really is — built from three things: your emergency cushion, your debt load, and whether the month actually adds up. Change any number on this tab and the score moves with it.</p>
+        <div class="health-grid">
+          <div class="health-score">
+            <div class="health-ring" role="img" aria-label="Financial health score dial">
+              <svg width="170" height="170" viewBox="0 0 170 170" aria-hidden="true">
+                <circle cx="85" cy="85" r="74" fill="none" stroke="var(--surface2)" stroke-width="14"/>
+                <circle id="healthArc" cx="85" cy="85" r="74" fill="none" stroke="var(--green)" stroke-width="14" stroke-linecap="round" stroke-dasharray="465" stroke-dashoffset="465"/>
+              </svg>
+              <div class="health-num"><b id="healthNum">–</b><span>out of 100</span></div>
+            </div>
+            <div class="health-band" id="healthBand">Add your numbers above</div>
+          </div>
+          <div>
+            <div id="healthParts"></div>
+            <div class="field" style="margin-top:16px;max-width:360px">
+              <label for="efBalance">Money you have saved up right now</label>
+              <div class="money"><input id="efBalance" type="number" inputmode="decimal" min="0" step="25" value="2400"></div>
+              <p class="small-note" style="margin-top:6px">Savings accounts, cash set aside — everything you could reach in an emergency. This drives the cushion part of your score.</p>
+            </div>
+          </div>
+        </div>
+        <h4 style="margin-top:20px">How to raise your score</h4>
+        <ul class="recs" id="healthTips"></ul>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="card" aria-labelledby="recs-h">
+        <h3 id="recs-h">6 · Your moves to close the gaps</h3>
+        <p class="sub" id="recsSub">Specific, in dollars — based on your adjusted wants &amp; saving targets, not the fixed percentages. Start with move #1 this payday.</p>
+        <ul class="recs" id="recs"></ul>
+      </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="card" aria-labelledby="whatif-h">
+        <h3 id="whatif-h">Try it — the what-if simulator</h3>
+        <p class="sub">Real decisions, tested safely before you sign anything. Flip one switch — or all three — and watch your month-end numbers move. This is a sandbox: nothing here changes your real budget above.</p>
+        <div class="whatif-toggles" role="group" aria-label="What-if scenarios">
+          <button type="button" class="whatif-btn" data-wi="rent" aria-pressed="false"><b>Rent goes up $300</b><span>Your landlord raises the rent at renewal — same place, new price.</span><span class="wi-cost">Needs +$300/mo</span></button>
+          <button type="button" class="whatif-btn" data-wi="car" aria-pressed="false"><b>Buy a $35,000 car</b><span>A 60-month loan at 7% APR runs about $693/mo, plus roughly $120/mo more for insurance.</span><span class="wi-cost">Needs +$813/mo</span></button>
+          <button type="button" class="whatif-btn" data-wi="save" aria-pressed="false"><b>Save $200 more a month</b><span>One extra automatic transfer on payday, before spending starts.</span><span class="wi-cost">Saving +$200/mo</span></button>
+        </div>
+        <div id="whatIfOut" aria-live="polite"></div>
+      </section>
+  </main>
+  </div><!-- /panel-budget -->
+
+  <div id="panel-goals" class="tab-panel" role="tabpanel" aria-labelledby="tab-goals" hidden>
+  <!-- GOALS -->
+  <section class="section" aria-labelledby="goals-h">
+    <div class="section-head"><h2 id="goals-h">Your goals — experiences &amp; things, not just numbers</h2><p class="sub" style="font-size:1rem;margin-top:8px">Start with what you actually want — a trip, a night out, a thing you&rsquo;ve been eyeing. You don&rsquo;t need a price tag to put it on the list. Name it first; worry about what it costs later, only if that helps.</p></div>
+    <div class="card" style="margin-top:16px">
+      <span class="label">Need an idea? Tap one to start</span>
+      <div class="goal-ideas" role="group" aria-label="Goal ideas">
+        <button type="button" class="idea-chip" data-idea="Weekend getaway" data-type="Experience">Weekend getaway</button>
+        <button type="button" class="idea-chip" data-idea="Concert or game tickets" data-type="Experience">Concert or game tickets</button>
+        <button type="button" class="idea-chip" data-idea="A really good dinner out — no checking prices" data-type="Experience">A really good dinner out</button>
+        <button type="button" class="idea-chip" data-idea="Day trip with friends or family" data-type="Experience">Day trip with friends or family</button>
+        <button type="button" class="idea-chip" data-idea="Spa or self-care day" data-type="Experience">Spa / self-care day</button>
+        <button type="button" class="idea-chip" data-idea="New sneakers" data-type="Item">New sneakers</button>
+        <button type="button" class="idea-chip" data-idea="New headphones" data-type="Item">New headphones</button>
+        <button type="button" class="idea-chip" data-idea="A gift for someone I care about" data-type="Item">A gift for someone</button>
+      </div>
+
+      <div class="goal-form">
+        <div class="full"><label for="goalName">What do you want to do or get?</label><input id="goalName" type="text" placeholder="e.g. Weekend in the Poconos, courtside tickets, a winter coat I actually love"></div>
+        <div><label for="goalType">Is it an experience or a thing?</label>
+          <select id="goalType"><option>Experience</option><option>Item</option><option>A mix of both</option></select></div>
+        <div><label for="goalWhen">When do you want it?</label>
+          <select id="goalWhen"><option>Soon — this month</option><option selected>In the next few months</option><option>This year</option><option>No rush — just on my list</option></select></div>
+        <div><label for="goalWho">Who&rsquo;s it with — or who&rsquo;s it for? <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input id="goalWho" type="text" placeholder="e.g. With my partner, Solo, For Mom"></div>
+        <div><label for="goalNote">Any detail you want to remember <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input id="goalNote" type="text" placeholder="e.g. Drive up Friday, back Sunday"></div>
+      </div>
+
+      <details class="goal-optional">
+        <summary>Add a rough cost — optional, only if you already know it</summary>
+        <p class="small-note" style="margin-top:6px">Skip this if you don&rsquo;t want to think in dollars yet. If you do add it, it shows as a small note on your card — not a target, not a countdown, just a rough idea.</p>
+        <div class="money"><input id="goalAmount" type="number" min="0" step="10" placeholder="Rough idea only"></div>
+      </details>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button type="button" class="btn btn-green" id="addGoalBtn">Add to my list →</button><span class="small-note" style="align-self:center">Add as many as you want. Then pick one as your #1 — that&rsquo;s the one your budget makes room for first.</span></div>
+      <div id="goalsList"></div>
+      <div id="goalsSummary" class="verdict warn" style="margin-top:16px"></div>
+      <p class="hint"><strong>Why no price required?</strong> The Budget tab already handles the money — how much you can set aside each month. This tab is about direction: what that saving is <em>for</em>. A list that starts with experiences and things you&rsquo;ll actually enjoy is easier to stick to than a list of dollar targets.</p>
+    </div>
+  </section>
+
+  <!-- AFFORDABILITY PRESETS -->
+  <section class="section" aria-labelledby="afford-h">
+    <div class="section-head"><h2 id="afford-h">What can you afford at $50k, $100k, or $150k?</h2><p class="sub" style="font-size:1rem;margin-top:8px">Estimates for a single filer — taxes vary by state and situation, so treat take-home as a close estimate, not a paycheck promise. Tap a salary to see the breakdown.</p></div>
+    <div class="card" style="margin-top:16px">
+      <div class="preset-row" role="group" aria-label="Income presets">
+        <button type="button" class="preset-btn" data-salary="50000" aria-pressed="true"><b>$50,000 / year</b><span>Est. take-home ~$3,250/mo<br>Starting out / first job</span></button>
+        <button type="button" class="preset-btn" data-salary="100000" aria-pressed="false"><b>$100,000 / year</b><span>Est. take-home ~$6,400/mo<br>Mid-career breathing room</span></button>
+        <button type="button" class="preset-btn" data-salary="150000" aria-pressed="false"><b>$150,000 / year</b><span>Est. take-home ~$9,100/mo<br>High earner — lifestyle creep is the risk</span></button>
+      </div>
+      <div id="affordDisplay"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button type="button" class="btn btn-primary" id="usePresetBtn">Use this take-home in my budget ↑</button><span class="small-note" style="align-self:center">Loads the estimate into Step 2 so you can test your own spending against it.</span></div>
+    </div>
+  </section>
+
+  </div><!-- /panel-goals -->
+
+  <div id="panel-bills" class="tab-panel" role="tabpanel" aria-labelledby="tab-bills" hidden>
+  <!-- BILLS & REMINDERS -->
+  <section class="section" aria-labelledby="bills-h">
+    <div class="section-head"><h2 id="bills-h">Bills, due dates &amp; late fees</h2><p class="sub" style="font-size:1rem;margin-top:8px">A website can’t text you a reminder — but this list shows what’s due next, how soon, and what a late payment would cost you. Check it on payday and you’ll never pay a dumb fee again.</p></div>
+    <div class="card" style="margin-top:16px">
+      <div class="bill-head"><span>Bill</span><span>Amount</span><span>Due day</span><span>Late fee if late</span><span></span></div>
+      <div id="billsList"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button type="button" class="btn btn-ghost" id="addBillBtn">+ Add a bill</button><button type="button" class="btn btn-ghost" id="resetBillsBtn">Reset examples</button></div>
+      <div id="billsSummary"></div>
+      <div class="hint"><strong>Pay on time, every time — the system:</strong> 1) Turn on autopay for at least the minimum on every card. 2) Pay 2 days <em>before</em> the due date — weekends and processing delays cause “on-time” payments to post late. 3) Put due dates on your calendar with a 3-day warning. 4) If you do get hit, call and ask for a one-time courtesy waiver — first-time late fees are waived more often than people think. One $30 late fee is a week of groceries.</div>
+    </div>
+  </section>
+
+  <!-- CARD POINTS GUIDE -->
+  <section class="section" aria-labelledby="cards-h">
+    <div class="section-head"><h2 id="cards-h">Which card should you use for points?</h2><p class="sub" style="font-size:1rem;margin-top:8px">Points only help if you pay in full. If you carry a balance, interest wipes out every reward — use a debit card until the balance is gone. If you do pay in full, match the card to the purchase:</p></div>
+    <div class="card" style="margin-top:16px">
+      <label for="spendCat" style="font-weight:700;display:block;margin-bottom:6px">What are you buying?</label>
+      <select id="spendCat"><option value="groceries">Groceries</option><option value="dining">Dining &amp; eating out</option><option value="travel">Travel — flights &amp; hotels</option><option value="gas">Gas &amp; transit</option><option value="online">Online shopping</option><option value="everyday">Everyday / everything else</option></select>
+      <div id="cardRec" style="margin-top:14px"></div>
+      <div class="card-guide-grid">
+        <div class="guide-box"><b>🛒 Groceries → Grocery card</b><span class="small-note">Look for 3–6% back at supermarkets. Your biggest weekly spend deserves your best rate.</span></div>
+        <div class="guide-box"><b>🍽️ Dining → Dining card</b><span class="small-note">Look for 3–4% back on restaurants and takeout. Check if delivery apps count — many do.</span></div>
+        <div class="guide-box"><b>✈️ Travel → Travel card</b><span class="small-note">Look for 3–5x points on flights/hotels booked direct, plus no foreign transaction fee.</span></div>
+        <div class="guide-box"><b>💳 Everything else → Flat 2% card</b><span class="small-note">One flat-rate cash-back card (around 2% on all purchases) beats guessing. Simple wins.</span></div>
+      </div>
+      <p class="hint">General guide only — specific cards and offers change constantly, so compare current offers before you apply, and never open a card just for points if it tempts you to overspend. Your budget split above matters 10× more than your points rate.</p>
+    </div>
+  </section>
+
+  </div><!-- /panel-bills -->
+
+  <div id="panel-help" class="tab-panel" role="tabpanel" aria-labelledby="tab-help" hidden>
+  <!-- TIGHT-MONTH TIPS -->
+  <section class="section" aria-labelledby="tips-h">
+    <div class="section-head"><h2 id="tips-h">When money is tight: moves that buy you time</h2><p class="sub" style="font-size:1rem;margin-top:8px">Budgeting assumes the month lines up. Real life doesn’t. If bills are due before payday or one bad month has you behind, these are the calls worth making — in this order. Every one has a catch, so read that part before you use it.</p></div>
+    <div class="card" style="margin-top:16px">
+      <div class="tips-grid">
+        <article class="tip-card">
+          <div class="tip-top"><span class="tip-num" aria-hidden="true">1</span><h3>Move your due dates to after payday</h3></div>
+          <p><strong>What it does:</strong> Lines your bills up with your money instead of against it. Most credit card companies, auto lenders, phone and utility providers let you pick a new due date — once, sometimes twice a year — for free. Spread big bills across your two paydays instead of stacking them all on the 1st.</p>
+          <div class="tip-script"><span>Say this</span>“Hi, I’d like to change my payment due date to the [15th / day after payday]. Can you do that, and will it change anything else on my account?”</div>
+          <p class="catch"><b>The catch:</b> Almost none — this is the safest move on this list, so do it first. Just know the change can take one billing cycle to kick in, and your first “long” or “short” month may make one payment look bigger or smaller than usual.</p>
+        </article>
+
+        <article class="tip-card">
+          <div class="tip-top"><span class="tip-num" aria-hidden="true">2</span><h3>Ask your lender to move a car payment to the back of the loan</h3></div>
+          <p><strong>What it does:</strong> This is called a deferment or extension. Your lender skips this month’s payment and tacks it onto the end of the loan, so you get a month of breathing room without a late fee or a credit hit — if they approve it <em>before</em> you miss the payment. Many lenders allow it once or twice over the life of the loan.</p>
+          <div class="tip-script"><span>Say this</span>“I’m having a tight month but I want to stay current. Do you offer a one-month deferment that moves this payment to the end of my loan? Will it be reported as on-time?”</div>
+          <p class="catch"><b>The catch:</b> Interest keeps growing. You’re not skipping the cost — that month’s interest gets added, so you’ll pay a little more over the life of the loan and finish a month later. And never just skip a payment without calling: an unapproved skip is a late payment, and that <em>does</em> hurt your credit.</p>
+        </article>
+
+        <article class="tip-card">
+          <div class="tip-top"><span class="tip-num" aria-hidden="true">3</span><h3>Pause student loans with forbearance — last resort only</h3></div>
+          <p><strong>What it does:</strong> For federal student loans, forbearance lets you stop making payments for a set stretch (often up to 12 months at a time) when you can’t pay. You apply through your loan servicer — don’t stop paying until it’s approved. Before you ask, check income-driven repayment first: it can lower your payment to fit your income, sometimes to $0, while keeping you on track toward forgiveness.</p>
+          <div class="tip-script"><span>Say this</span>“What are my options to lower or pause my payment? Can you walk me through income-driven repayment first, and forbearance if that doesn’t work?”</div>
+          <p class="catch"><b>The catch:</b> Interest keeps growing the whole time — and when forbearance ends, that unpaid interest can be added to your balance, so you owe interest on interest. That’s why this is a last resort, not a first move: use the shortest pause you actually need, and pay the interest during it if you possibly can.</p>
+        </article>
+
+        <article class="tip-card">
+          <div class="tip-top"><span class="tip-num" aria-hidden="true">4</span><h3>Owe the IRS? Get on a payment plan</h3></div>
+          <p><strong>What it does:</strong> The IRS lets you pay a tax bill monthly instead of all at once. Most people can set up a short-term plan (up to 180 days) or a long-term installment agreement online at irs.gov — no phone call needed. Being on an approved plan stops the worst collection actions while you pay it down. Still file your return on time even if you can’t pay — the plan handles the bill, filing late adds a separate, bigger penalty.</p>
+          <div class="tip-script"><span>Do this</span>Go to irs.gov, search “payment plan,” and apply online. Pick the monthly amount you can truly afford — a smaller plan you keep beats a bigger one you default on.</div>
+          <p class="catch"><b>The catch:</b> Interest and a late-payment penalty keep ticking (at a reduced rate) until the balance is gone, and there’s a setup fee for long-term plans — lower if you pay by direct debit, and waived or reduced for low-income filers. A plan buys you time; it doesn’t shrink what you owe.</p>
+        </article>
+      </div>
+      <div class="hint tips-order"><strong>The order matters:</strong> Start with due dates (free, no downside). Then call lenders <em>before</em> a payment is due — every option on this list is easier to get while you’re still current. Pauses and deferments buy you a month or two; use that time to fix the gap with your split and moves above, not just to push the problem forward. If several debts are behind at once, a nonprofit credit counselor (look for NFCC members) can review your whole picture for free or cheap — avoid any company that charges upfront fees to “settle” your debt.</div>
+    </div>
+  </section>
+
+  <!-- FAQ + ASK -->
+  <section class="section" aria-labelledby="faq-h">
+    <div class="section-head">
+      <h2 id="faq-h">Common budgeting questions</h2>
+      <p class="sub" style="font-size:1rem;margin-top:8px">Plain answers to the questions people ask most. Tap a question to open it.</p>
+    </div>
+    <div class="faq" id="faq"></div>
+  </section>
+
+  <section class="section" aria-labelledby="ask-h">
+    <div class="section-head">
+      <h2 id="ask-h">Ask a question</h2>
+      <p class="sub" style="font-size:1rem;margin-top:8px">Didn’t find your answer above? Send your question and get a personal reply by email. No question is too basic — that’s the whole point.</p>
+    </div>
+    <div class="ask-grid">
+      <div class="card">
+        <h3>Send your question</h3>
+        <form id="askForm" class="form-grid">
+          <div><label for="askName" style="font-weight:700;display:block;margin-bottom:6px">Your name</label><input id="askName" type="text" autocomplete="name" placeholder="e.g. Jordan" required></div>
+          <div><label for="askEmail" style="font-weight:700;display:block;margin-bottom:6px">Your email — for the reply</label><input id="askEmail" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+          <div><label for="askTopic" style="font-weight:700;display:block;margin-bottom:6px">Topic</label>
+            <select id="askTopic"><option>Choosing a budget rule</option><option>Needs vs. wants</option><option>Rent / housing costs</option><option>Debt payments</option><option>Tight month / behind on payments</option><option>Saving on a tight income</option><option>Irregular / freelance income</option><option>Something else</option></select></div>
+          <div><label for="askQ" style="font-weight:700;display:block;margin-bottom:6px">Your question</label><textarea id="askQ" placeholder="Ask it like you’d ask a friend — e.g. “My rent is $1,600 and I take home $2,900. Is 50/30/20 even possible for me?”" required></textarea></div>
+          <button type="submit" class="btn btn-green">Send my question →</button>
+          <p class="form-note">This opens your email app with your question addressed and ready to send — just hit send there. Your numbers stay between you and the reply.</p>
+          <div class="success" id="askSuccess" role="status"></div>
+        </form>
+      </div>
+      <div class="card">
+        <h3>What happens next</h3>
+        <ol style="margin:12px 0 0;padding-left:20px;color:var(--muted);display:grid;gap:10px">
+          <li><b style="color:var(--ink)">You send it.</b> Your email app opens with everything filled in.</li>
+          <li><b style="color:var(--ink)">You get a personal reply.</b> A real answer to your situation — not a copy-paste template.</li>
+          <li><b style="color:var(--ink)">Good questions help everyone.</b> Common ones get added to the answers above (without your name or numbers).</li>
+        </ol>
+        <div class="hint">In a hurry? Most questions are already answered above — especially “my rent is over 50%” and “where do debt payments go?” — the two people ask most.</div>
+        <p style="margin-top:14px"><a href="mailto:po2223@stern.nyu.edu?subject=Budget%20Builder%20question">Prefer to write your own email? Tap here →</a></p>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /panel-help -->
+
+  <div id="panel-challenges" class="tab-panel" role="tabpanel" aria-labelledby="tab-challenges" hidden>
+  <!-- CHALLENGES: MONEY KIT LIFE CARDS -->
+  <section class="section" aria-labelledby="chal-h">
+    <div class="section-head"><h2 id="chal-h">Challenges — life deals the cards</h2><p class="sub" style="font-size:1rem;margin-top:8px">This is the Money Kit card game, played with your real budget. In the Money, Made Simple card game, life cards hit you out of nowhere — a lost job, a busted car, a surprise bonus — and you win by handling them without wrecking your money. Same rules here: every card below is judged against the actual numbers in your Budget tab. Make the smart, sustainable play to earn badges and build your streak.</p></div>
+
+    <div class="card" style="margin-top:16px" aria-labelledby="chal-progress-h">
+      <h3 id="chal-progress-h">Your progress &amp; badges</h3>
+      <div class="chal-stats">
+        <div class="chal-stat"><b id="statPlayed">0 / 6</b><span>Cards played</span></div>
+        <div class="chal-stat"><b id="statSmart">0</b><span>Smart plays</span></div>
+        <div class="chal-stat"><b id="statStreak">0</b><span>Current streak</span></div>
+        <div class="chal-stat"><b id="statBest">0</b><span>Best streak</span></div>
+      </div>
+      <div class="badge-grid" id="badgeGrid"></div>
+      <p class="small-note" style="margin-top:12px">A <strong>smart play</strong> is the sustainable call — the one that handles the card without new debt or a broken budget. Streaks count smart plays in a row. Badges and progress live on this page while you play.</p>
+      <div style="margin-top:12px"><button type="button" class="btn btn-ghost" id="resetChalBtn">Start the deck over</button></div>
+    </div>
+
+    <div id="challengeList"></div>
+    <p class="hint" style="margin-top:14px">Playing with the example numbers? Load your own pay and spending in the Budget tab first — every card re-judges itself against your real numbers, so a play that&rsquo;s smart on the example budget might not be smart on yours.</p>
+  </section>
+
+  </div><!-- /panel-challenges -->
+
+  <footer class="footer">
+    <p><strong>Budget Builder</strong> — a Money, Made Simple tool. The rule is free everywhere. What matters is seeing <em>your</em> numbers and the exact moves to change them. This page stores nothing and sends nothing unless you tap send in the question form.</p>
+  </footer>
+</div>
+
+<script>
+var RULES = {
+  "503020": { name:"50/30/20", desc:"Target: 50% Needs · 30% Wants · 20% Save & Invest",
+    buckets:[{key:"needs",label:"Needs",pct:50,color:"var(--green)",cls:"seg-needs"},{key:"wants",label:"Wants",pct:30,color:"#C98A12",cls:"seg-wants"},{key:"save",label:"Save & Invest",pct:20,color:"var(--teal)",cls:"seg-save"}] },
+  "702010": { name:"70/20/10", desc:"Target: 70% Needs & Wants · 20% Saving · 10% Debt & Giving — built for months when bills take most of the check. Investing lives in the 20% saving bucket.",
+    buckets:[{key:"spending",label:"Needs & Wants",pct:70,color:"var(--green)",cls:"seg-needs"},{key:"save",label:"Saving",pct:20,color:"var(--teal)",cls:"seg-save"},{key:"debtgive",label:"Debt & Giving",pct:10,color:"#C98A12",cls:"seg-wants"}] },
+  "5050": { name:"50/50", desc:"Target: 50% Living Expenses (needs + wants together) · 50% Save & Invest — the aggressive wealth-building split.",
+    buckets:[{key:"living",label:"Living Expenses",pct:50,color:"var(--green)",cls:"seg-living"},{key:"save",label:"Save & Invest",pct:50,color:"var(--teal)",cls:"seg-save"}] }
+};
+var GROUPS = [
+  {key:"needs", title:"Needs — you have to pay these", totalLabel:"Needs total", items:[
+    ["rent","Rent / mortgage",""], ["utilities","Utilities & phone","Electric, water, internet, phone"],
+    ["groceries","Groceries","Food you cook — not eating out"], ["transport","Transportation","Car payment, gas, transit pass"],
+    ["insurance","Insurance","Health, car, renters"], ["mindebt","Minimum debt payments","Minimums only — extra goes under Save"],
+    ["otherneeds","Other needs","Childcare, meds, essentials"]]},
+  {key:"wants", title:"Wants — the fun and the flexible", totalLabel:"Wants total", items:[
+    ["eatingout","Eating out & coffee",""], ["entertainment","Entertainment & going out",""],
+    ["shopping","Shopping & sneakers",""], ["subs","Subscriptions","Streaming, apps, memberships"],
+    ["travel","Travel & trips",""], ["otherwants","Other wants",""]]},
+  {key:"save", title:"Save & Invest — pay yourself", totalLabel:"Save & Invest total", items:[
+    ["savings","Savings account","Emergency fund counts here"], ["investing","Investing","IRA, brokerage — your paycheck plan goes in the section above"],
+    ["extradebt","Extra debt payoff & giving","Above the minimum, plus donations — counts toward Debt & Giving in 70/20/10"]]}
+];
+var EXAMPLE = { income:3800, workContrib:200, workMatch:100, matchType:"50-6", rent:1450, utilities:210, groceries:420, transport:310, insurance:165, mindebt:95, otherneeds:60, eatingout:260, entertainment:140, shopping:180, subs:55, travel:100, otherwants:45, savings:120, investing:80, extradebt:0 };
+var MATCH_TYPES = { "100-3":{rate:1,cap:3}, "100-4":{rate:1,cap:4}, "50-6":{rate:0.5,cap:6}, "100-6":{rate:1,cap:6} };
+function matchInfo(income, contrib){
+  var sel=document.getElementById("matchType"); var type=sel?sel.value:"unsure";
+  var mt=MATCH_TYPES[type]||null;
+  if(!mt) return { type:type, mt:null };
+  var required=income*mt.cap/100;
+  var fullMatch=required*mt.rate;
+  var captured=Math.min(contrib, required)*mt.rate;
+  return { type:type, mt:mt, required:required, fullMatch:fullMatch, captured:captured, left:fullMatch-captured, gap:Math.max(0, required-contrib) };
+}
+var FLAG_DEFS = [
+  {id:"rent", label:"Rent / mortgage", guidePct:30, watchPct:38, guideNote:"30% of take-home is the classic rent guide", overMsg:"Housing is your biggest lever. A roommate, a move at renewal, or a rent negotiation moves this more than cutting coffee ever will.", watchMsg:"Just over the guide — common in expensive cities. It can work, but it means wants and saving have to stay tighter.", okMsg:"Rent is inside the guide — housing isn&rsquo;t squeezing the rest of your budget."},
+  {id:"transport", label:"Car & transport", guidePct:15, watchPct:20, guideNote:"Keep car payment + gas + transit under 15% combined", overMsg:"Car costs stack up fast — payment, gas, and rides together. Look at insurance, gas, and whether a transit pass or cheaper ride cuts this before anything else.", watchMsg:"A little over the 15% guide. Watch it — car costs creep up with gas and insurance, so leave yourself room.", okMsg:"Car &amp; transport is inside the guide — this one isn&rsquo;t holding you back."},
+  {id:"eatingout", label:"Eating out & coffee", guidePct:5, watchPct:10, guideNote:"Around 5% of pay for eating out keeps wants in check", overMsg:"This is the fastest fix you have. You don&rsquo;t have to stop eating out — cutting it by a third already frees real money without touching a single bill.", watchMsg:"A little high — not a crisis, but this is usually the easiest place to find $50–$100 without feeling it much.", okMsg:"Eating out is under control — you&rsquo;re enjoying it without letting it run the budget."}
+];
+function flagLevel(pct, def){ if(pct<=def.guidePct) return "ok"; if(pct<=def.watchPct) return "watch"; return "over"; }
+var currentRule = "503020";
+var values = {};
+
+function fmt(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+function num(id){ var el=document.getElementById(id); var v=el?parseFloat(el.value):0; return isNaN(v)||v<0?0:v; }
+
+// Build input groups
+var groupsEl = document.getElementById("inputGroups");
+GROUPS.forEach(function(g){
+  var div=document.createElement("div"); div.className="group";
+  var rowsHtml = g.items.map(function(it){
+    var flagged = (it[0]==="rent"||it[0]==="transport"||it[0]==="eatingout");
+    var flagHtml = flagged ? '<span class="inline-flag" id="inline-flag-'+it[0]+'" aria-live="polite"></span>' : '';
+    return '<div class="row"><label for="f-'+it[0]+'">'+it[1]+(it[2]?'<small>'+it[2]+'</small>':"")+flagHtml+'</label><div class="money"><input type="number" inputmode="decimal" min="0" step="5" id="f-'+it[0]+'" data-group="'+g.key+'" value="0"></div></div>';
+  }).join("");
+  div.innerHTML = '<div class="group-head"><h4>'+g.title+'</h4><span class="group-total" id="total-'+g.key+'">$0</span></div><div class="rows">'+rowsHtml+'</div>';
+  groupsEl.appendChild(div);
+});
+
+function groupTotal(key){
+  var t=0; document.querySelectorAll('input[data-group="'+key+'"]').forEach(function(i){ t+=parseFloat(i.value)||0; }); return t;
+}
+function largestItem(key){
+  var best={label:"",val:0};
+  document.querySelectorAll('input[data-group="'+key+'"]').forEach(function(i){
+    var v=parseFloat(i.value)||0; if(v>best.val){ var lab=document.querySelector('label[for="'+i.id+'"]'); best={label:lab?lab.childNodes[0].textContent.trim():i.id, val:v}; }
+  }); return best;
+}
+
+function getAdjusted(income, totals, rule){
+  var spendingTotal = totals.spending!=null ? totals.spending : (totals.needs + totals.wants);
+  if(currentRule==="702010"){
+    var basePct = income>0 ? (spendingTotal/income*100) : 0;
+    var rem2 = Math.max(0, income - spendingTotal);
+    var remPct2 = income>0 ? (rem2/income*100) : 0;
+    var over2 = income>0 && spendingTotal>income;
+    // Combined rule: needs + wants are ONE spending bucket with a fixed 70% target.
+    // Saving keeps its fixed 20% target and debt & giving its fixed 10% — neither
+    // shrinks when spending runs high.
+    var saveAmt2 = income*0.20; var debtAmt2 = income*0.10;
+    return { needsPct:basePct, remainder:rem2, remainderPct:remPct2, over:over2, wantsShare:20/30, saveShare:20/30,
+      amt:{needs:totals.needs, wants:totals.wants, spending:income*0.70, save:saveAmt2, debtgive:debtAmt2, living:income*0.70},
+      pct:{needs:income>0?totals.needs/income*100:0, wants:income>0?totals.wants/income*100:0, spending:income>0?70:0, save:income>0?20:0, debtgive:income>0?10:0, living:income>0?70:0} };
+  }
+  var needsPct = income>0 ? (totals.needs/income*100) : 0;
+  var remainder = Math.max(0, income - totals.needs);
+  var remainderPct = income>0 ? (remainder/income*100) : 0;
+  var over = income>0 && totals.needs>income;
+  var wantsShare, saveShare, wantsAmt, saveAmt, livingAmt;
+  if(currentRule==="5050"){
+    // Combined rule: needs + wants are ONE living bucket with a fixed 50% target,
+    // and Save & Invest keeps its fixed 50% target — on $5,000 pay that is $2,500
+    // living and $2,500 saved, and neither target shrinks when needs run high.
+    // wantsAmt here is the room left for wants inside the living half, after needs.
+    wantsShare=0; saveShare=1;
+    saveAmt = income*0.5;
+    livingAmt = income*0.5;
+    wantsAmt = Math.max(0, livingAmt - totals.needs);
+  }
+  else { var wb=rule.buckets.filter(function(x){return x.key==="wants";})[0]; var sb=rule.buckets.filter(function(x){return x.key==="save";})[0]; var tot=(wb?wb.pct:30)+(sb?sb.pct:20); wantsShare=(wb?wb.pct:30)/tot; saveShare=1-wantsShare;
+    wantsAmt = remainder * wantsShare; saveAmt = remainder * saveShare;
+    livingAmt = totals.needs + wantsAmt; }
+  var wantsPct = income>0 ? wantsAmt/income*100 : 0; var savePct = income>0 ? saveAmt/income*100 : 0;
+  var livingPct = income>0 ? livingAmt/income*100 : 0;
+  return { needsPct:needsPct, remainder:remainder, remainderPct:remainderPct, over:over, wantsShare:wantsShare, saveShare:saveShare,
+    amt:{needs:totals.needs, wants:wantsAmt, save:saveAmt, living:livingAmt, spending:spendingTotal, debtgive:0},
+    pct:{needs:needsPct, wants:wantsPct, save:savePct, living:livingPct, spending:income>0?spendingTotal/income*100:0, debtgive:0} };
+}
+function adjustedSaveTarget(income){
+  if(income<=0) return 0;
+  var t={needs:groupTotal("needs"), wants:groupTotal("wants"), save:groupTotal("save")};
+  return getAdjusted(income, t, RULES[currentRule]).amt.save;
+}
+
+function render(){
+  var income = num("income");
+  var workContrib = num("workContrib"), workMatch = num("workMatch");
+  var workSave = workContrib + workMatch;
+  var saveManual = groupTotal("save");
+  var fieldVal=function(id){ var e=document.getElementById("f-"+id); return e?(parseFloat(e.value)||0):0; };
+  var pureSaveManual = fieldVal("savings") + fieldVal("investing");
+  var extraDebtGive = fieldVal("extradebt");
+  var totals = { needs:groupTotal("needs"), wants:groupTotal("wants"), save:saveManual + workSave };
+  if(currentRule==="702010"){ totals.save = pureSaveManual + workSave; totals.debtgive = extraDebtGive; }
+  totals.spending = totals.needs + totals.wants;
+  totals.living = totals.needs + totals.wants;
+  GROUPS.forEach(function(g){ document.getElementById("total-"+g.key).textContent = fmt(groupTotal(g.key)); });
+  document.getElementById("total-work").textContent = fmt(workSave);
+
+  // --- Spending flags: live, per-line checks for rent, car, eating out ---
+  (function renderFlags(){
+    var list=document.getElementById("flagsList"); if(!list) return;
+    if(income<=0){
+      list.innerHTML='<div class="flag-card"><div class="flag-msg">Enter your take-home pay above and these flags light up as you type your rent, car, and eating out numbers.</div></div>';
+      FLAG_DEFS.forEach(function(d){ var el=document.getElementById("inline-flag-"+d.id); if(el){ el.className="inline-flag"; el.textContent=""; } });
+      return;
+    }
+    var html="";
+    var overCount=0;
+    FLAG_DEFS.forEach(function(d){
+      var amt=fieldVal(d.id);
+      var pct=income>0? amt/income*100:0;
+      var guideAmt=income*d.guidePct/100;
+      var level=flagLevel(pct,d);
+      if(level==="over") overCount++;
+      var pillTxt= level==="over" ? "⚠ Over" : (level==="watch" ? "A little high" : "✓ On track");
+      var diff=amt-guideAmt;
+      var headline="";
+      if(level==="over") headline="<strong>"+fmt(diff)+" over</strong> the "+fmt(guideAmt)+" guide — you&rsquo;re at <strong>"+Math.round(pct)+"% of pay</strong>.";
+      else if(level==="watch") headline="<strong>"+fmt(diff)+" over</strong> the "+fmt(guideAmt)+" guide — you&rsquo;re at <strong>"+Math.round(pct)+"% of pay</strong>. Close, but over.";
+      else headline="You&rsquo;re at <strong>"+Math.round(pct)+"% of pay</strong> — "+fmt(Math.max(0,-diff))+" under the "+fmt(guideAmt)+" guide.";
+      var msg= level==="over"? d.overMsg : (level==="watch"? d.watchMsg : d.okMsg);
+      var barPct=Math.min(100, pct);
+      var markerPct=Math.min(98, d.guidePct*2); // scale: guide sits at guide*2 % of bar width for visibility (bar represents 0–50%)
+      var barWidth=Math.min(100, pct*2);
+      var barColor= level==="over"? "var(--coral)" : (level==="watch"? "var(--gold)" : "var(--green)");
+      html+='<div class="flag-card '+level+'"><div class="flag-top"><b>'+d.label+' — '+fmt(amt)+'/mo</b><span class="flag-pill '+level+'">'+pillTxt+'</span></div>'
+        +'<div class="flag-meta">'+headline+' Guide: '+d.guideNote+'.</div>'
+        +'<div class="flag-bar" aria-hidden="true"><i style="width:'+barWidth+'%;background:'+barColor+'"></i><span class="marker" style="left:'+markerPct+'%"></span></div>'
+        +'<div class="flag-meta" style="font-size:.82rem">Black line = guide ('+d.guidePct+'% of pay). Bar = where you are now.</div>'
+        +'<div class="flag-msg">'+msg+'</div></div>';
+      // inline flag next to the input itself, so you see it while typing
+      var inline=document.getElementById("inline-flag-"+d.id);
+      if(inline){
+        if(level==="ok"){ inline.className="inline-flag"; inline.textContent=""; }
+        else { inline.className="inline-flag show "+level; inline.textContent= level==="over" ? "⚠ "+fmt(diff)+" over the "+fmt(guideAmt)+" guide ("+Math.round(pct)+"% of pay)" : "A little high — "+fmt(diff)+" over the "+fmt(guideAmt)+" guide ("+Math.round(pct)+"% of pay)"; }
+      }
+    });
+    // Summary line on top when something is over
+    var summary="";
+    if(overCount>0) summary='<div class="verdict bad" style="margin-top:0;margin-bottom:2px">'+overCount+(overCount===1?" thing is":" things are")+' flagged over its guide right now. Start with the biggest “over” below — fixing one big line beats trimming ten small ones.</div>';
+    list.innerHTML=summary+html;
+  })();
+
+  var rule = RULES[currentRule];
+  // --- Smart targets: wants & saving adjust to actual needs ---
+  var adj = getAdjusted(income, totals, rule);
+  window.__adj = adj; window.__totals = totals; window.__income = income;
+  document.getElementById("ruleDesc").textContent = rule.desc + (currentRule==="503020" ? " — adjusted below to your actual needs." : " — judged below against these fixed targets, with needs & wants combined into one bucket.");
+  var tbl=document.getElementById("targetBarLabel"); if(tbl) tbl.textContent = currentRule==="503020" ? "Your adjusted target — based on your needs" : "Your rule target — fixed percentages";
+  var rsub=document.getElementById("recsSub"); if(rsub) rsub.textContent = currentRule==="503020" ? "Specific, in dollars — based on your adjusted wants & saving targets, not the fixed percentages. Start with move #1 this payday." : "Specific, in dollars — based on the fixed "+rule.name+" targets: needs & wants combined in one bucket, saving at its full rule percentage. Start with move #1 this payday.";
+  document.getElementById("targetLabel").textContent = rule.buckets.map(function(b){ var p=adj.pct[b.key]!=null?adj.pct[b.key]:b.pct; return Math.round(p)+"% "+b.label; }).join(" · ");
+  var sn=document.getElementById("smartNote");
+  if(sn){
+    if(income<=0){ sn.innerHTML="<b>How targets work:</b> Enter your pay and spending. In 50/30/20 your needs become the base and the wants &amp; saving targets adjust to what&rsquo;s left. In 50/50 and 70/20/10, needs &amp; wants combine into one bucket and every target stays at its fixed rule percentage."; }
+    else if(adj.over){
+      if(currentRule==="702010"){ sn.innerHTML="<b>Your needs &amp; wants take "+fmt(totals.spending)+" — more than you take home.</b> Needs &amp; wants are one combined bucket in this rule, and yours alone passes your whole check. The targets stay fixed — <b>saving "+fmt(adj.amt.save)+" (20%)</b> and <b>debt &amp; giving "+fmt(adj.amt.debtgive)+" (10%)</b> — but there is no room for them until spending comes down or income goes up. Start with the moves below."; }
+      else if(currentRule==="5050"){ sn.innerHTML="<b>Your needs take "+fmt(totals.needs)+" — more than you take home.</b> Needs &amp; wants are one combined living bucket in this rule, and needs alone already pass your whole check, let alone the <b>"+fmt(adj.amt.living)+" living half</b>. Your <b>Save &amp; Invest target stays "+fmt(adj.amt.save)+" (50%)</b> — it never shrinks — but nothing fits until needs come down or income goes up. Start with the moves below."; }
+      else sn.innerHTML="<b>Your needs take "+fmt(totals.needs)+" — more than you take home.</b> That leaves <b>$0</b> for wants and saving in the adjusted plan. The fixed "+rule.name+" percentages don&rsquo;t fit until needs come down or income goes up — start with the moves below.";
+    } else if(currentRule==="702010"){
+      sn.innerHTML="<b>Combined spending:</b> Your needs ("+fmt(totals.needs)+") + wants ("+fmt(totals.wants)+") = <b>"+fmt(totals.spending)+" ("+Math.round(totals.spending/income*100)+"% of pay)</b> — together they are the one spending bucket, against a target of <b>70% = "+fmt(adj.amt.spending)+"</b>. Your <b>saving target stays the full 20% = "+fmt(adj.amt.save)+"</b> and <b>debt &amp; giving stays 10% = "+fmt(adj.amt.debtgive)+"</b> — they don&rsquo;t shrink when spending runs high.";
+    } else if(currentRule==="5050"){
+      var livDiff = totals.living - adj.amt.living;
+      sn.innerHTML="<b>Combined 50/50:</b> Needs &amp; wants are one bucket — the half you live on. Your needs ("+fmt(totals.needs)+") + wants ("+fmt(totals.wants)+") = <b>"+fmt(totals.living)+" ("+Math.round(totals.living/income*100)+"% of pay)</b>, against a living target of <b>50% = "+fmt(adj.amt.living)+"</b>"+(livDiff>1 ? " — so living is <b>"+fmt(livDiff)+" over</b>." : livDiff<-1 ? " — so living is <b>"+fmt(-livDiff)+" under</b>, inside the half." : " — right on the half.")+" Your <b>Save &amp; Invest target is the full other half: "+fmt(adj.amt.save)+" (50% of your "+fmt(income)+" pay)</b> — it never shrinks because needs ran high; that&rsquo;s the whole point of 50/50."+(totals.needs>adj.amt.living ? " Heads up: needs alone ("+fmt(totals.needs)+") already pass the "+fmt(adj.amt.living)+" living half — 50/50 only fits once needs drop under that line or pay rises." : "");
+    } else {
+      var wb=rule.buckets.filter(function(x){return x.key==="wants";})[0], sb=rule.buckets.filter(function(x){return x.key==="save";})[0];
+      sn.innerHTML="<b>Adjusted to your needs:</b> Your needs are <b>"+fmt(totals.needs)+" ("+Math.round(adj.needsPct)+"% of pay)</b> — the rule started at "+wb.pct+"% needs, but yours are the base now. That leaves <b>"+fmt(adj.remainder)+"</b>, split <b>"+Math.round(adj.wantsShare*100)+" / "+Math.round((1-adj.wantsShare)*100)+"</b> between wants and saving (the "+rule.name+" wants-to-saving ratio). So your <b>adjusted wants target is "+fmt(adj.amt.wants)+" ("+Math.round(adj.pct.wants)+"%)</b> and your <b>adjusted save target is "+fmt(adj.amt.save)+" ("+Math.round(adj.pct.save)+"%)</b> — not the fixed "+fmt(income*wb.pct/100)+" / "+fmt(income*sb.pct/100)+". Raise or lower a need and watch both move.";
+    }
+  }
+
+  // "Allocated" tracks take-home pay only — work-plan saving never passes through it.
+  var allocated = totals.needs+totals.wants+saveManual;
+  document.getElementById("allocatedLabel").textContent = fmt(allocated)+" allocated";
+
+  // Bars
+  function barHTML(map){ // map: bucketKey -> pct width
+    if(income<=0) return "";
+    return rule.buckets.map(function(b){ var w=Math.max(0,Math.min(100,map[b.key]||0)); return '<div class="seg '+b.cls+'" style="width:'+w+'%"></div>'; }).join("");
+  }
+  var actualMap={}, targetMap={};
+  rule.buckets.forEach(function(b){ actualMap[b.key]= income>0 ? (totals[b.key]/income*100) : 0; targetMap[b.key]= adj.pct[b.key]!=null ? adj.pct[b.key] : b.pct; });
+  document.getElementById("actualBar").innerHTML = barHTML(actualMap);
+  document.getElementById("targetBar").innerHTML = barHTML(targetMap);
+  document.getElementById("legend").innerHTML = rule.buckets.map(function(b){ return '<span><span class="dot" style="background:'+b.color+'"></span>'+b.label+'</span>'; }).join("");
+
+  // Bucket cards
+  var bucketsEl=document.getElementById("buckets"); bucketsEl.innerHTML="";
+  var allOn=true, anyOver=false;
+  rule.buckets.forEach(function(b){
+    var amt=totals[b.key]||0; var pct= income>0? amt/income*100:0;
+    var adjPct = adj.pct[b.key]!=null ? adj.pct[b.key] : b.pct; var targetAmt=income*adjPct/100; var fixedAmt=income*b.pct/100;
+    var isNeeds = b.key==="needs"; var isCombined = b.key==="living" || b.key==="spending"; var isSave = b.key==="save" || b.key==="debtgive";
+    // Needs and the combined buckets (living / spending) are judged against the fixed
+    // rule target; in 50/30/20, wants/save are judged against the adjusted target.
+    var judgePct = (isNeeds||isCombined) ? b.pct : adjPct; var judgeAmt = (isNeeds||isCombined) ? fixedAmt : targetAmt; var diff=amt-judgeAmt;
+    var status, cls;
+    if(income<=0){ status="Enter your pay to see this bucket."; cls=""; }
+    else if(isNeeds){ if(Math.abs(pct-b.pct)<1){ status="On the rule&rsquo;s needs target — wants &amp; saving use the classic split."; cls="on"; } else if(diff>0){ status=fmt(diff)+" over the rule&rsquo;s needs target — that&rsquo;s why wants &amp; saving shrank below."; cls="over"; anyOver=true; } else { status=fmt(-diff)+" under the rule&rsquo;s needs target — that frees extra room for wants &amp; saving"; cls="under"; } }
+    else if(isCombined){ var cLbl=b.key==="living"?"living":"needs &amp; wants"; if(Math.abs(pct-b.pct)<1){ status="On the rule&rsquo;s "+cLbl+" target — needs &amp; wants together fit this one bucket."; cls="on"; } else if(diff>0){ status=fmt(diff)+" over the rule&rsquo;s "+cLbl+" target — needs &amp; wants count together here, and the save target below stays at its full rule percentage."; cls="over"; anyOver=true; } else { status=fmt(-diff)+" under the rule&rsquo;s "+cLbl+" target — room to spare in this bucket."; cls="under"; } }
+    else if(Math.abs(amt-judgeAmt)<Math.max(10,income*0.01)){ status= currentRule==="503020" ? "On your adjusted target — nice." : "On the "+rule.name+" target — nice."; cls="on"; }
+    else if(isSave){ var tgtWord= currentRule==="503020" ? "your adjusted target" : "the "+rule.name+" target"; if(diff<0){ status=fmt(-diff)+" short of "+tgtWord; cls="over"; allOn=false; } else { status=fmt(diff)+" above "+tgtWord+" — strong."; cls="under"; } }
+    else { if(diff>0){ status=fmt(diff)+" over your adjusted target"; cls="over"; allOn=false; anyOver=true; } else { status=fmt(-diff)+" under your adjusted target — room to spare."; cls="under"; } }
+    var fill = income>0? Math.min(100, pct) : 0; var marker = Math.round(judgePct);
+    var targetLine = isNeeds ? 'Rule target '+b.pct+'% = '+fmt(fixedAmt)+' &nbsp;·&nbsp; You: '+fmt(amt)+' — your actual needs set the adjusted targets for the other buckets'
+      : isCombined ? 'Rule target '+b.pct+'% = '+fmt(fixedAmt)+' &nbsp;·&nbsp; You: '+fmt(amt)+' — needs &amp; wants combined in one bucket, judged against the fixed rule target'
+      : (currentRule!=="503020" ? 'Rule target '+b.pct+'% = '+fmt(fixedAmt)+' &nbsp;·&nbsp; You: '+fmt(amt)+' — fixed in this rule; it does not shrink when spending runs high'
+      : 'Adjusted target '+Math.round(adjPct)+'% = '+fmt(targetAmt)+' <span class="adjusted-tag">Adjusted</span><br>Fixed rule was '+b.pct+'% = '+fmt(fixedAmt)+' &nbsp;·&nbsp; You: '+fmt(amt));
+    var card=document.createElement("div"); card.className="bucket";
+    card.innerHTML='<div class="bucket-top"><div><b>'+b.label+'</b><div class="target-note">'+targetLine+'</div></div><div class="pct">'+(income>0?Math.round(pct):0)+'%</div></div>'
+      +'<div class="mini"><i style="width:'+fill+'%;background:'+b.color+'"></i></div>'
+      +'<div class="target-note">'+((isNeeds||isCombined||currentRule!=="503020")?'Rule marker':'Adjusted marker')+': '+marker+'% of pay</div>'
+      +(b.key==="save" && workSave>0 ? '<div class="target-note">Includes '+fmt(workSave)+' saved through work — your '+fmt(workContrib)+(workMatch>0 ? ' + '+fmt(workMatch)+' employer match.' : ', no match entered.')+'</div>' : '')
+      +'<div class="delta '+cls+'">'+status+'</div>';
+    bucketsEl.appendChild(card);
+  });
+
+  var unallocAmt = income - allocated;
+  var unallocEl=document.getElementById("unalloc");
+  if(income>0){
+    if(unallocAmt>1) unallocEl.textContent = fmt(unallocAmt)+" of your pay isn’t assigned yet — give it a job below.";
+    else if(unallocAmt<-1) unallocEl.textContent = "Heads up: you’ve assigned "+fmt(-unallocAmt)+" more than you take home. Something has to give — start with Wants.";
+    else unallocEl.textContent = "Every dollar is assigned. That’s the goal.";
+  } else unallocEl.textContent="";
+
+  // Verdict
+  var verdict=document.getElementById("verdict");
+  if(income<=0){ verdict.className="verdict warn"; verdict.textContent="Add your take-home pay and your spending, and your split and moves will appear here."; }
+  else if(allocated>income+1){ verdict.className="verdict bad"; verdict.textContent="You’re spending "+fmt(allocated-income)+" more than you bring in. No rule fixes that — the first move is closing that gap."; }
+  else if(allOn){ verdict.className="verdict good"; verdict.textContent= currentRule==="503020" ? "You’re on your adjusted "+rule.name+" plan — wants and saving fit what’s left after your needs. Protect it: automate the savings move on payday so a bad month can’t undo it." : "You’re on your "+rule.name+" plan — needs & wants together fit their bucket and saving hits its full rule target. Protect it: automate the savings move on payday so a bad month can’t undo it."; }
+  else if(totals.save>0){ verdict.className="verdict warn"; verdict.textContent= currentRule==="503020" ? "You’re judged against your adjusted targets above — the ones based on your actual needs, not the fixed percentages. You don’t need a new budget, you need a few specific moves. They’re listed below, biggest first." : "You’re judged against the fixed "+rule.name+" targets above — needs & wants combined in one bucket, and the saving target at its full rule percentage. You don’t need a new budget, you need a few specific moves. They’re listed below, biggest first."; }
+  else { verdict.className="verdict warn"; verdict.textContent="You’re not saving yet — and that’s exactly where most people start. Move #1 below is a small, doable first step."; }
+
+  // --- How much to save through work: the employer-match recommendation ---
+  (function renderMatchRec(){
+    var box=document.getElementById("matchRec"); if(!box) return;
+    var mi=matchInfo(income, workContrib);
+    var saveTgt=adj.amt.save||0;
+    if(income<=0){ box.innerHTML="<b>How much should you save through work?</b> Enter your take-home pay above and this turns into a real number — built from your employer match and your rule&rsquo;s saving target."; return; }
+    if(mi.type==="none"){
+      box.innerHTML="<b>Your work-saving recommendation:</b> No match means no free money to chase — a work plan is still fine for the tax break, but your rule&rsquo;s saving target ("+fmt(saveTgt)+"/mo) can go wherever it grows best: emergency savings first, then an IRA or brokerage. You&rsquo;re putting in "+fmt(workContrib)+"/mo through work now.";
+      return;
+    }
+    if(!mi.mt){
+      box.innerHTML="<b>Your work-saving recommendation:</b> Rule #1 of work saving — put in <b>at least enough to get your employer&rsquo;s full match</b>, whatever it is. Find your match formula (plan summary or HR), pick it above, and this box will tell you the exact dollar amount to contribute. Your rule&rsquo;s total saving target is "+fmt(saveTgt)+"/mo; you&rsquo;re at "+fmt(workSave)+"/mo through work, match included.";
+      return;
+    }
+    var rest=Math.max(0, saveTgt-workSave);
+    var splitLine = workSave>=saveTgt && saveTgt>0
+      ? "Work alone covers your whole saving target of "+fmt(saveTgt)+"/mo — anything you save below is bonus."
+      : "Your saving target is "+fmt(saveTgt)+"/mo total. Work (you + match) covers "+fmt(workSave)+" of it — aim to save the other "+fmt(rest)+"/mo from take-home in the Save &amp; Invest lines below.";
+    if(mi.gap>1){
+      box.innerHTML="<b>Your work-saving recommendation: raise your contribution to "+fmt(mi.required)+"/mo.</b> Your plan matches "+Math.round(mi.mt.rate*100)+"% of the first "+mi.mt.cap+"% you put in, so "+fmt(mi.required)+" is what it takes to grab the <b>full "+fmt(mi.fullMatch)+"/mo match</b>. You&rsquo;re at "+fmt(workContrib)+" — raising it by "+fmt(mi.gap)+" captures another "+fmt(mi.left)+"/mo in free money, <b>"+fmt(mi.left*12)+" a year</b> you&rsquo;re currently leaving on the table. "+splitLine+" <span style='color:var(--muted)'>(Match percentages run on gross pay; this uses your take-home, so treat it as close and round up — check a pay stub for the exact figure.)</span>";
+    } else {
+      box.innerHTML="<b>Your work-saving recommendation: you&rsquo;re capturing the full match — "+fmt(mi.fullMatch)+"/mo free, "+fmt(mi.fullMatch*12)+" a year.</b> Your "+fmt(workContrib)+" contribution clears the "+fmt(mi.required)+" it takes ("+mi.mt.cap+"% of pay at a "+Math.round(mi.mt.rate*100)+"% match). Keep it there even in tight months — dropping below is a pay cut you give yourself. "+splitLine;
+    }
+  })();
+
+  renderRecs(income, totals, rule, unallocAmt, {contrib:workContrib, match:workMatch, total:workSave, mi:matchInfo(income, workContrib)}, adj);
+}
+
+function renderRecs(income, totals, rule, unallocAmt, work, adj){
+  var recs=[]; var el=document.getElementById("recs"); el.innerHTML="";
+  if(income<=0){ el.innerHTML='<li><b>Start with your pay</b><span>Enter your monthly take-home pay above and your personal moves will show up here.</span></li>'; return; }
+  if(!adj) adj=getAdjusted(income, totals, rule);
+  function target(key){ if(key==="needs"||key==="spending"){ var b=rule.buckets.filter(function(x){return x.key===key;})[0]; return b? income*b.pct/100 : (key==="spending"?totals.spending:totals.needs); } if(adj.amt[key]!=null) return adj.amt[key]; var bb=rule.buckets.filter(function(x){return x.key===key;})[0]; return bb? income*bb.pct/100 : 0; }
+  function fixedTarget(key){ var b=rule.buckets.filter(function(x){return x.key===key;})[0]; return b? income*b.pct/100 : 0; }
+  var is5050 = currentRule==="5050";
+
+  // Savings shortfall — usually the headline move
+  var saveGap = target("save") - totals.save;
+  if(saveGap>1){
+    var fromWants = is5050? 0 : Math.max(0, totals.wants - target("wants"));
+    var tgtPhrase = currentRule==="503020"
+      ? "your adjusted target — based on your "+fmt(totals.needs)+" in needs — is "+fmt(target("save"))+" (the fixed rule said "+fmt(fixedTarget("save"))+")"
+      : currentRule==="702010"
+      ? "the 70/20/10 saving target is "+fmt(target("save"))+" — a fixed 20% of your "+fmt(income)+" pay, and it doesn&rsquo;t shrink when spending runs high"
+      : "the 50/50 saving target is "+fmt(target("save"))+" — a fixed 50% of your "+fmt(income)+" pay. Needs &amp; wants share the other half; this half doesn&rsquo;t shrink";
+    recs.push({t:"Move "+fmt(saveGap)+" to savings on payday", s:"You&rsquo;re at "+fmt(totals.save)+" saved; "+tgtPhrase+". Set an automatic transfer for the day you get paid — money you never see is money you don&rsquo;t spend."+(work.total>0?" That "+fmt(totals.save)+" already counts the "+fmt(work.total)+" you save through work, match included — this gap is what&rsquo;s left after your paycheck does its part.":"")+(fromWants>1?" Your Wants are "+fmt(fromWants)+" over your adjusted target, so this move and the next one are the same dollars.":"")});
+  } else if(saveGap<-1){
+    recs.push({t:"You’re beating your savings target by "+fmt(-saveGap), s:(currentRule==="503020" ? "Your adjusted target was "+fmt(target("save"))+" after your needs — you saved more." : "The "+rule.name+" target was "+fmt(target("save"))+" — you saved more.")+" Keep the habit. Next level: check what that money is doing — savings account first for emergencies, then investing for the long term."});
+  } else {
+    recs.push({t:"Savings are on target — automate them", s:"Set the "+fmt(totals.save)+" transfer to happen automatically on payday so it survives busy months."});
+  }
+
+  // Employer match — free money gets its own move, right after the savings move
+  if(work.mi && work.mi.mt && work.mi.gap>1){
+    recs.push({t:"Raise your work contribution by "+fmt(work.mi.gap)+" — free money is waiting", s:"Your plan matches "+Math.round(work.mi.mt.rate*100)+"% of the first "+work.mi.mt.cap+"% you put in. Contributing "+fmt(work.mi.required)+"/mo instead of "+fmt(work.contrib)+" captures the full "+fmt(work.mi.fullMatch)+" match — that&rsquo;s "+fmt(work.mi.left*12)+" a year you&rsquo;re leaving on the table right now. No spending cut beats free money: make this change before trimming anything else."});
+  } else if(work.contrib>0 && work.match<=0){
+    recs.push({t:"You’re in the work plan but entered $0 match — check that", s:"If your employer offers any match and you’re not capturing the full amount, that’s part of your pay left on the table. Ask HR what it takes to get the full match and grab it before trimming anything else — no spending cut beats free money."});
+  } else if(work.contrib<=0 && saveGap>1){
+    recs.push({t:"Have a 401(k) or 403(b) at work? Start there", s:"If your job offers a plan with a match, contributing enough to get the full match is the fastest way to close this savings gap — it comes out before you ever see the money, and the match is an instant 100% return. Add it under “Saving through work” above and watch the gap shrink."});
+  } else if(work.match>0){
+    recs.push({t:"Your employer match adds "+fmt(work.match)+" a month — "+fmt(work.match*12)+" a year", s:"That’s free money you’re already capturing. Keep your contribution high enough to hold the full match even in tight months — dropping below it is a pay cut you give yourself."});
+  }
+
+  if(currentRule==="702010"){
+    var spendGap = totals.spending - target("spending");
+    if(spendGap>1){
+      var bn2=largestItem("needs"), bw2=largestItem("wants"); var big2=bw2.val>bn2.val?bw2:bn2;
+      recs.push({t:"Needs & wants are "+fmt(spendGap)+" over the 70% spending target", s:"Needs and wants are one combined bucket in this rule — yours total "+fmt(totals.spending)+". Your biggest spending item is "+big2.label+" at "+fmt(big2.val)+". Your saving target ("+fmt(target("save"))+") and debt & giving target ("+fmt(target("debtgive"))+") stay fixed at 20% / 10% — they don&rsquo;t shrink to fit this spending, so the gap has to close inside the bucket. Even closing half of it frees "+fmt(spendGap/2)+" a month."});
+    } else {
+      recs.push({t:"Spending fits inside the 70% target", s:"Needs & wants together are "+fmt(totals.spending)+" of "+fmt(income)+". That leaves real room for the 20% saving and 10% debt & giving buckets — protect them on payday."});
+    }
+    var debtGap = target("debtgive") - (totals.debtgive||0);
+    if(debtGap>1){
+      recs.push({t:"Move "+fmt(debtGap)+" to extra debt & giving", s:"You&rsquo;re at "+fmt(totals.debtgive||0)+" for extra debt payoff & giving; your target is "+fmt(target("debtgive"))+" — a fixed 10% of pay. Extra debt above the minimum shrinks interest fastest — start with the highest-interest balance — and giving counts here too."});
+    } else if(debtGap<-1){
+      recs.push({t:"You&rsquo;re beating your debt & giving target by "+fmt(-debtGap), s:"Extra debt payoff & giving are above the "+fmt(target("debtgive"))+" target. Keep it up — every extra dollar on high-interest debt is a guaranteed return."});
+    }
+  } else if(is5050){
+    var livingGap = totals.living - target("living");
+    if(livingGap>1){
+      var bigN=largestItem("needs"), bigW=largestItem("wants");
+      var big = bigW.val>bigN.val? bigW : bigN;
+      recs.push({t:"Living (needs + wants) is "+fmt(livingGap)+" over the 50% target of "+fmt(target("living")), s:"That&rsquo;s about "+fmt(livingGap/4.33)+" a week over. In 50/50, needs and wants are one bucket — yours are "+fmt(totals.needs)+" in needs + "+fmt(totals.wants)+" in wants = "+fmt(totals.living)+". The save half stays "+fmt(target("save"))+" no matter what, so this gap has to close inside living. Your biggest single lever is "+big.label+" at "+fmt(big.val)+"."});
+    } else {
+      recs.push({t:"Living fits inside the 50% target", s:"Your needs + wants together fit inside "+fmt(target("living"))+" — the half you live on. Guard it — lifestyle creep is how this rule quietly breaks."});
+    }
+    if(totals.wants>totals.needs && totals.wants>0) recs.push({t:"Wants are bigger than needs inside your living half", s:"Wants are "+fmt(totals.wants)+" of your "+fmt(totals.living)+" living total. That’s unusual — one honest pass through eating out, shopping, and subscriptions usually finds real money here."});
+  } else {
+    var needsGap = totals.needs - target("needs");
+    if(needsGap>1){
+      var bn=largestItem("needs");
+      recs.push({t:"Needs are "+fmt(needsGap)+" over the rule’s starting target — so wants & saving adjusted down", s:"Your biggest need is "+bn.label+" at "+fmt(bn.val)+". Your adjusted wants ("+fmt(target("wants"))+") and saving ("+fmt(target("save"))+") already shrank to fit these needs. Needs are the hardest to cut fast — the honest levers are housing (roommate, refinance, move at renewal), transport, and groceries with a list. Even closing half this gap frees "+fmt(needsGap/2)+" a month and raises both adjusted targets again."});
+    }
+    var wantsGap = totals.wants - target("wants");
+    if(wantsGap>1){
+      var bw=largestItem("wants");
+      recs.push({t:"Trim Wants by "+fmt(wantsGap)+" — about "+fmt(wantsGap/4.33)+" a week", s:"That gets you to your adjusted wants target of "+fmt(target("wants"))+" (fixed rule was "+fmt(fixedTarget("wants"))+"). Start with "+bw.label+" ("+fmt(bw.val)+") — it’s your biggest want. You don’t have to kill it: cutting it by a third gets you "+fmt(bw.val/3)+". Then audit subscriptions — most people find $30–$60 they forgot about."});
+    } else if(wantsGap<-10){
+      recs.push({t:"Wants are under your adjusted target — enjoy that, on purpose", s:"You have "+fmt(-wantsGap)+" of room under your adjusted "+fmt(target("wants"))+" wants target. Spending it deliberately on things you actually enjoy beats letting it leak away."});
+    }
+  }
+
+  if(unallocAmt>10) recs.push({t:"Give your unassigned "+fmt(unallocAmt)+" a job", s: saveGap>1 ? "Send it straight to savings — that alone closes part of the gap above." : "Unassigned money disappears. Point it at savings, extra debt payoff, or a goal with a name."});
+  if(unallocAmt<-1) recs.push({t:"You’re "+fmt(-unallocAmt)+" over your income", s:"Before any rule: cut or pause "+fmt(-unallocAmt)+" of spending this month, starting with wants, so the month doesn’t go on a credit card."});
+  if(totals.save===0) recs.push({t:"Start embarrassingly small: "+fmt(Math.max(25, income*0.02))+" this payday", s:"Zero to something beats zero to perfect. One automatic transfer — even 2% of pay — builds the habit the whole rule stands on."});
+
+  if(currentRule==="702010" && totals.spending/income>0.7) recs.push({t:"Even 70% is tight — that’s a housing/income problem, not a discipline problem", s:"When needs & wants pass 70%, no app fixes it. The real moves are bigger: housing change at renewal, a raise or second income, or refinancing expensive debt. Use this rule to hold the line until one of those lands."});
+  if(currentRule==="5050" && saveGap>income*0.2) recs.push({t:"The full 50/50 split is a stretch right now — and that’s fine", s:"Your save target is the full "+fmt(target("save"))+" — 50% of your pay — and you&rsquo;re "+fmt(saveGap)+" short of it. 50/50 is the aggressive end state, not the starting line for most budgets: try 50/30/20 first, bank the wins, then tighten toward 50/50 as income rises or big costs fall. Switching rules is one tap above."});
+
+  recs.slice(0,5).forEach(function(r,i){
+    var li=document.createElement("li"); li.innerHTML="<b>"+(i+1)+". "+r.t+"</b><span>"+r.s+"</span>"; el.appendChild(li);
+  });
+}
+
+// Rule switching
+function applyRule(ruleKey){
+  currentRule=ruleKey;
+  document.querySelectorAll(".rule-btn").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-rule")===ruleKey ? "true" : "false"); });
+  render();
+}
+document.querySelectorAll(".rule-btn").forEach(function(btn){
+  btn.addEventListener("click", function(){ applyRule(btn.getAttribute("data-rule")); });
+});
+
+// ---- SPIN THE WHEEL: focus picks the rule, the wheel reveals it ----
+var FOCUS_RULE = { balanced:"503020", aggressive:"5050", charity:"702010" };
+var RULE_CENTER = { "503020":0, "702010":120, "5050":240 }; // segment centers, degrees clockwise from the pointer
+var FOCUS_WHY = {
+  balanced:"You picked <b>Balanced</b> — a steady split you can actually hold every month. That&rsquo;s why 50/30/20 is the recommended standard: half for needs, room to enjoy life, and a real saving habit.",
+  aggressive:"You picked <b>Aggressive</b> — build wealth as fast as possible. 50/50 puts half of everything you make into saving &amp; investing. It&rsquo;s demanding, and that&rsquo;s the point.",
+  charity:"You picked <b>Giving first</b> — charity and clearing debt are the priority. 70/20/10 protects a full 10% for extra debt payoff &amp; giving, while saving still gets its 20%."
+};
+var currentFocus = "balanced";
+var wheelRot = 0, spinning = false;
+document.querySelectorAll(".focus-btn").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    document.querySelectorAll(".focus-btn").forEach(function(b){ b.setAttribute("aria-pressed","false"); });
+    btn.setAttribute("aria-pressed","true"); currentFocus=btn.getAttribute("data-focus");
+  });
+});
+document.getElementById("spinBtn").addEventListener("click", function(){
+  if(spinning) return;
+  spinning = true;
+  var btn=this; btn.disabled=true; btn.textContent="Spinning…";
+  var result=document.getElementById("wheelResult"); result.hidden=true;
+  var ruleKey=FOCUS_RULE[currentFocus];
+  var center=RULE_CENTER[ruleKey];
+  var curMod=((wheelRot%360)+360)%360;
+  var wantMod=((-center)%360+360)%360;
+  var delta=((wantMod-curMod)%360+360)%360;
+  var jitter=Math.round(Math.random()*44-22); // land inside the segment, not dead-center every time
+  wheelRot += 360*5 + delta + jitter;
+  var wheel=document.getElementById("wheel");
+  wheel.style.transform="rotate("+wheelRot+"deg)";
+  var reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  setTimeout(function(){
+    spinning=false; btn.disabled=false; btn.textContent="Spin again →";
+    applyRule(ruleKey);
+    var rule=RULES[ruleKey]; var income=num("income");
+    var numsLine = income>0
+      ? "On your "+fmt(income)+" take-home: "+rule.buckets.map(function(b){ return "<b>"+b.label+" "+fmt(income*b.pct/100)+"</b>"; }).join(" · ")+" / month."
+      : "Add your take-home pay below and your plan fills in with real numbers.";
+    result.innerHTML="<b>The wheel landed on "+rule.name+" — your rule.</b><p>"+FOCUS_WHY[currentFocus]+"</p><p>"+numsLine+" Your full budget below now runs on "+rule.name+" — scroll down and make it yours.</p>";
+    result.hidden=false;
+    var plan=document.getElementById("plan-h");
+    if(plan) plan.scrollIntoView({behavior: reduced?"auto":"smooth", block:"start"});
+  }, reduced?120:4400);
+});
+
+// Inputs — delegate through a function so listeners always call the current
+// render() (it is wrapped further down to also refresh the plan, goals and
+// affordability sections; attaching render directly would freeze the old one).
+document.getElementById("income").addEventListener("input", function(){ render(); });
+document.getElementById("workContrib").addEventListener("input", function(){ render(); });
+document.getElementById("workMatch").addEventListener("input", function(){ render(); });
+document.getElementById("matchType").addEventListener("change", function(){ render(); });
+document.querySelectorAll('input[data-group]').forEach(function(i){ i.addEventListener("input", function(){ render(); }); });
+
+function loadValues(map){
+  document.getElementById("income").value = map.income||0;
+  document.getElementById("workContrib").value = map.workContrib||0;
+  document.getElementById("workMatch").value = map.workMatch||0;
+  if(map.matchType) document.getElementById("matchType").value = map.matchType;
+  Object.keys(EXAMPLE).forEach(function(k){ if(k==="income"||k==="workContrib"||k==="workMatch"||k==="matchType")return; var el=document.getElementById("f-"+k); if(el) el.value = map[k]||0; });
+  render();
+}
+document.getElementById("exampleBtn").addEventListener("click", function(){ loadValues(EXAMPLE); });
+document.getElementById("clearBtn").addEventListener("click", function(){
+  document.getElementById("income").value="";
+  document.getElementById("workContrib").value=0;
+  document.getElementById("workMatch").value=0;
+  document.getElementById("matchType").value="unsure";
+  document.querySelectorAll('input[data-group]').forEach(function(i){ i.value=0; }); render();
+});
+
+// FAQ
+var FAQS=[
+ ["What are the spending flags for rent, car, and eating out?",
+  "They&rsquo;re live warnings that update as you type. Rent is flagged when it passes 30% of your take-home pay, car &amp; transport when payment + gas + transit passes 15%, and eating out when it passes 5%. Just over shows as “a little high”; well over shows as “over” with exactly how many dollars you&rsquo;re over the guide. They don&rsquo;t wait until you finish — change a number and the flag changes with it, both next to the line you typed and in the Spending flags card."],
+ ["Why do my wants and saving targets change when my needs change?",
+  "In 50/30/20, because needs come first in real life. That rule locks in what you actually spend on needs, then splits what’s left 60 / 40 between wants and saving — so if rent goes up, the other targets go down together instead of pretending you can still hit the fixed percentages on money that isn’t there. If needs fall, both targets rise, and the bucket cards show both numbers: the fixed rule target and your adjusted target. The combined rules work differently: in 50/50 and 70/20/10, needs and wants are a single bucket — the 50% you live on, or the 70% you spend — and the saving target stays at its full fixed percentage (50% or 20%) no matter how high needs run. That’s why a 50/50 budget on $5,000 take-home always shows a $2,500 Save &amp; Invest target."],
+ ["What’s the difference between the three rules — and which one should I pick?",
+  "Start from your focus. Aggressive saver? Pick 50/50 — half to live on, half saved and invested. Charity and paying off debt your priority? Pick 70/20/10 — 70% covers needs and wants together (all your spending), 20% goes to saving (investing lives in that 20%), and a protected 10% goes to extra debt payoff and giving/donations. Everyone else: 50/30/20 is the recommended standard — half your pay for needs, 30% for wants, 20% saved. Not sure of your focus? Use the wheel at the top: pick a focus, spin, and it lands on your rule. The best rule is the one you can actually hit for three months in a row — you can always tighten later."],
+ ["What counts as a need, and what counts as a want?",
+  "A need is something you must pay to live and work: rent, basic groceries, utilities, transport to work, insurance, and minimum debt payments. A want makes life better but is optional: eating out, concerts, new sneakers, extra subscriptions, trips. The grey area is real — a car can be a need, but the premium trim is a want. When in doubt, ask: “If I lost my income tomorrow, would I still have to pay this?” If yes, it’s a need."],
+ ["My rent alone is over 50% of my pay. Is this even possible for me?",
+  "Yes — but probably not with 50/30/20 right now, and that’s not a discipline failure. In expensive cities, rent alone can break the needs target. Start with 70/20/10, protect even a small savings transfer, and treat housing as the long game: a roommate, a move at renewal, or negotiating a raise changes the math more than skipping coffee ever will. The rule is a direction to move in, not a test you pass or fail this month."],
+ ["Where do debt payments go?",
+  "Minimum payments are a Need — you have to pay them or your credit and balances get worse. Anything extra you pay above the minimum counts under Save & Invest in 50/30/20 and 50/50, because it’s building your net worth just like saving does. In 70/20/10, extra debt payoff has its own bucket: the 10% is for extra debt payoff and giving/donations, while saving (including investing) is the 20%. If minimums alone are crushing your needs number, that’s a signal the debt itself is the first problem to attack — pay extra toward the highest-interest balance first."],
+ ["I have nothing left to save. Where do I start?",
+  "Start smaller than feels serious: $25, or 2% of your pay, moved automatically on payday into a separate savings account. The amount matters less than the system — automatic, on payday, out of your main account. Then raise it by a little each month or every raise. Almost everyone finds the first $50–$100 by auditing subscriptions and eating out for one month. Small and automatic beats big and someday. And check your work plan first — if there’s an employer match you’re not capturing, that’s found money before you cut anything."],
+ ["Does saving through a 401(k) or 403(b) at work count toward my target?",
+  "Yes — every dollar of it, including your employer’s match. That money comes out of your paycheck before take-home pay, so it never shows up in your bank account, which is exactly why people underrate it: they look at what they save from take-home pay and think they’re behind when they’re not. Enter your monthly contribution and the match in the “Saving through work” section and this tool counts both toward your Save & Invest target. Tell it how your match works — for example, 50% of the first 6% you put in — and it recommends the exact amount to contribute: at minimum, enough to capture the full match, and it flags any free money you’re leaving on the table. It’s an instant return on money you were already earning — no budget trim beats free money."],
+ ["Should I use my salary or my take-home pay?",
+  "Always take-home pay — what actually lands in your account after tax and payroll deductions. Budgeting off your salary makes every target look easier than it is and the month never adds up. If you’re paid every two weeks, take one check, multiply by 26, and divide by 12 to get your monthly number. Irregular income? Budget off your lowest typical month and treat good months as a bonus to save."],
+ ["How do I handle months where my income changes?",
+  "Build the budget on your floor — your lowest normal month — and cover needs first. In better months, follow a simple order with the extra: savings transfer first, then extra debt, then wants. That way a slow month never puts bills on a credit card, and good months quietly move you ahead instead of disappearing."]
+];
+var faqEl=document.getElementById("faq");
+FAQS.forEach(function(f, idx){
+  var item=document.createElement("div"); item.className="faq-item"+(idx===0?" open":"");
+  item.innerHTML='<button type="button" class="faq-q" aria-expanded="'+(idx===0)+'"><span>'+f[0]+'</span><span class="chev" aria-hidden="true">▾</span></button><div class="faq-a">'+f[1]+'</div>';
+  item.querySelector(".faq-q").addEventListener("click", function(){
+    var open=item.classList.toggle("open"); this.setAttribute("aria-expanded", open);
+  });
+  faqEl.appendChild(item);
+});
+
+// Ask form -> mailto (no server; opens the visitor's email app addressed to the creator)
+document.getElementById("askForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  var name=document.getElementById("askName").value.trim();
+  var email=document.getElementById("askEmail").value.trim();
+  var topic=document.getElementById("askTopic").value;
+  var q=document.getElementById("askQ").value.trim();
+  if(!name||!email||!q) return;
+  var subject="Budget Builder question — "+topic;
+  var body="Name: "+name+"\nReply to: "+email+"\nTopic: "+topic+"\n\nMy question:\n"+q+"\n\n— Sent from Budget Builder";
+  window.location.href="mailto:po2223@stern.nyu.edu?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+  var s=document.getElementById("askSuccess");
+  s.style.display="block";
+  s.textContent="Your email app should open with your question ready to send to Pat. Just hit send there — replies go to "+email+". Didn’t open? Email po2223@stern.nyu.edu directly.";
+});
+
+// ---- GOALS: experiences & items first, amounts optional ----
+var goals=[];
+function escGoal(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function renderGoals(){
+  var list=document.getElementById("goalsList"); if(!list) return; list.innerHTML="";
+  var expCount=0, itemCount=0;
+  goals.forEach(function(g,idx){
+    if(g.type==="Experience") expCount++; else if(g.type==="Item") itemCount++;
+    var div=document.createElement("div"); div.className="goal-card";
+    var meta=[];
+    if(g.who) meta.push(escGoal(g.who));
+    if(g.note) meta.push(escGoal(g.note));
+    div.innerHTML='<div class="goal-card-top"><div style="flex:1;min-width:200px"><b style="font-size:1.05rem">'+escGoal(g.name)+'</b>'
+      +'<div class="goal-badges">'
+      +(idx===0?'<span class="goal-badge first">#1 — start here</span>':'')
+      +'<span class="goal-badge type">'+escGoal(g.type)+'</span>'
+      +'<span class="goal-badge">'+escGoal(g.when)+'</span>'
+      +'</div>'
+      +(meta.length?'<div class="goal-meta" style="margin-top:8px">'+meta.join(" · ")+'</div>':'')
+      +(g.amount>0?'<div class="goal-cost">Rough idea: '+fmt(g.amount)+' — just a guide, not a target.</div>':'')
+      +'</div>'
+      +'<div style="display:flex;gap:12px;align-items:center">'
+      +(idx>0?'<button type="button" class="small-note" data-first-goal="'+idx+'" style="background:none;border:none;cursor:pointer;text-decoration:underline;color:var(--muted)">Make #1</button>':'')
+      +'<button type="button" class="small-note" data-remove-goal="'+idx+'" style="background:none;border:none;cursor:pointer;text-decoration:underline;color:var(--muted)">Remove</button>'
+      +'</div></div>';
+    list.appendChild(div);
+  });
+  list.querySelectorAll("[data-remove-goal]").forEach(function(b){ b.addEventListener("click",function(){ goals.splice(parseInt(this.getAttribute("data-remove-goal"),10),1); renderGoals(); }); });
+  list.querySelectorAll("[data-first-goal]").forEach(function(b){ b.addEventListener("click",function(){ var i=parseInt(this.getAttribute("data-first-goal"),10); var g=goals.splice(i,1)[0]; goals.unshift(g); renderGoals(); }); });
+  var sum=document.getElementById("goalsSummary"); if(!sum) return;
+  if(!goals.length){ sum.className="verdict warn"; sum.textContent="Nothing on your list yet — tap an idea above or type the experience or thing at the top of your mind. No price tag needed."; return; }
+  var parts=[];
+  if(expCount) parts.push(expCount+(expCount===1?" experience":" experiences"));
+  if(itemCount) parts.push(itemCount+(itemCount===1?" item":" items"));
+  var mixCount=goals.length-expCount-itemCount;
+  if(mixCount) parts.push(mixCount+(mixCount===1?" mix of both":" mixes of both"));
+  sum.className="verdict good";
+  sum.textContent="Your list: "+goals.length+(goals.length===1?" goal":" goals")+" — "+parts.join(", ")+". Your #1 is “"+goals[0].name+"” — that’s the one your budget makes room for first. The rest stay on the list with no deadline pressure and no dollar target attached.";
+}
+document.querySelectorAll(".idea-chip").forEach(function(chip){
+  chip.addEventListener("click",function(){
+    document.getElementById("goalName").value=chip.getAttribute("data-idea");
+    document.getElementById("goalType").value=chip.getAttribute("data-type");
+    document.getElementById("goalName").focus();
+  });
+});
+document.getElementById("addGoalBtn").addEventListener("click",function(){
+  var name=document.getElementById("goalName").value.trim();
+  if(!name) { document.getElementById("goalName").focus(); return; }
+  goals.push({
+    name:name,
+    type:document.getElementById("goalType").value,
+    when:document.getElementById("goalWhen").value,
+    who:document.getElementById("goalWho").value.trim(),
+    note:document.getElementById("goalNote").value.trim(),
+    amount:num("goalAmount")
+  });
+  document.getElementById("goalName").value="";
+  document.getElementById("goalWho").value="";
+  document.getElementById("goalNote").value="";
+  document.getElementById("goalAmount").value="";
+  renderGoals();
+});
+// seed with everyday experiences & items — examples, no amounts attached
+goals.push({name:"Weekend getaway",type:"Experience",when:"In the next few months",who:"",note:"Drive somewhere new, back by Sunday",amount:0});
+goals.push({name:"New sneakers",type:"Item",when:"No rush — just on my list",who:"",note:"",amount:0});
+
+// ---- AFFORDABILITY PRESETS (estimates) ----
+var PRESETS={
+  "50000":{gross:50000,takeHome:3250,label:"$50,000"},
+  "100000":{gross:100000,takeHome:6400,label:"$100,000"},
+  "150000":{gross:150000,takeHome:9100,label:"$150,000"}
+};
+var currentPreset="50000";
+function renderAfford(){
+  var p=PRESETS[currentPreset]; var th=p.takeHome;
+  var rentMax=Math.round(th*0.30); var rentStretch=Math.round(th*0.35);
+  var rule=RULES[currentRule];
+  var boxes=rule.buckets.map(function(b){ return '<div class="afford-box"><span>'+b.label+' target ('+b.pct+'%)</span><b>'+fmt(th*b.pct/100)+' / mo</b><span>On '+fmt(th)+' take-home</span></div>'; }).join("");
+  document.getElementById("affordDisplay").innerHTML=
+    '<div class="afford-grid"><div class="afford-box"><span>Estimated take-home</span><b>'+fmt(th)+' / mo</b><span>'+fmt(th*12)+' / year from '+fmt(p.gross)+' salary (estimate)</span></div>'
+    +'<div class="afford-box"><span>Rent you can afford</span><b>Up to '+fmt(rentMax)+'</b><span>30% rule. Stretch max '+fmt(rentStretch)+' (35%) — above that, saving gets very hard.</span></div>'
+    +'<div class="afford-box"><span>Car + transport guide</span><b>Keep under '+fmt(th*0.15)+'</b><span>Payment + insurance + gas combined ≈ 15% of take-home.</span></div></div>'
+    +'<p class="small-note" style="margin-top:12px">Split on the <b>'+rule.name+'</b> rule you picked at the top:</p><div class="afford-grid">'+boxes+'</div>'
+    +'<p class="small-note" style="margin-top:10px">These are the fixed rule splits. In your own budget (Budget tab), 50/30/20 adjusts wants &amp; saving to your actual needs, so those real targets may differ from the ones here; in 50/50 and 70/20/10, needs &amp; wants combine into one bucket and these fixed splits are the targets. Reality check at '+p.label+': in high-rent cities the 30% rent rule is the first thing that breaks — if rent takes 40%+, use the 70/20/10 rule — 70% for all spending, 20% saving, 10% debt &amp; giving — instead of forcing 50/30/20. Estimates assume a single filer, no state-specific tax — your real take-home depends on state, benefits, and retirement contributions.</p>';
+}
+document.querySelectorAll(".preset-btn").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    document.querySelectorAll(".preset-btn").forEach(function(b){b.setAttribute("aria-pressed","false");});
+    btn.setAttribute("aria-pressed","true"); currentPreset=btn.getAttribute("data-salary"); renderAfford();
+  });
+});
+document.getElementById("usePresetBtn").addEventListener("click",function(){
+  document.getElementById("income").value=PRESETS[currentPreset].takeHome; render(); renderGoals(); window.scrollTo({top:0,behavior:"smooth"});
+});
+renderAfford();
+
+// ---- BILLS ----
+var DEFAULT_BILLS=[
+  {name:"Rent",amount:1450,due:1,fee:50},
+  {name:"Phone",amount:85,due:15,fee:35},
+  {name:"Credit card minimum",amount:95,due:22,fee:29},
+  {name:"Utilities",amount:210,due:28,fee:25}
+];
+var bills=DEFAULT_BILLS.slice();
+function daysUntilDue(dueDay){
+  var now=new Date(); var today=now.getDate();
+  var thisMonth=new Date(now.getFullYear(),now.getMonth(),Math.min(dueDay,28));
+  var target;
+  if(dueDay>=today){ target=new Date(now.getFullYear(),now.getMonth(),dueDay); }
+  else { target=new Date(now.getFullYear(),now.getMonth()+1,dueDay); }
+  var diff=Math.ceil((target-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/(1000*60*60*24));
+  return diff;
+}
+function renderBills(){
+  var wrap=document.getElementById("billsList"); wrap.innerHTML="";
+  bills.forEach(function(b,idx){
+    var row=document.createElement("div"); row.className="bill-row";
+    row.innerHTML='<input type="text" value="'+b.name.replace(/"/g,"&quot;")+'" data-bill="'+idx+'" data-field="name" aria-label="Bill name">'
+      +'<div class="money"><input type="number" min="0" step="1" value="'+b.amount+'" data-bill="'+idx+'" data-field="amount" aria-label="Amount"></div>'
+      +'<input type="number" min="1" max="31" step="1" value="'+b.due+'" data-bill="'+idx+'" data-field="due" aria-label="Due day">'
+      +'<div class="money"><input type="number" min="0" step="1" value="'+b.fee+'" data-bill="'+idx+'" data-field="fee" aria-label="Late fee"></div>'
+      +'<button type="button" class="icon-btn" data-remove-bill="'+idx+'" aria-label="Remove bill">×</button>';
+    wrap.appendChild(row);
+  });
+  wrap.querySelectorAll("input[data-bill]").forEach(function(inp){
+    inp.addEventListener("input",function(){
+      var i=parseInt(this.getAttribute("data-bill"),10); var f=this.getAttribute("data-field");
+      if(f==="name") bills[i].name=this.value; else bills[i][f]=parseFloat(this.value)||0;
+      renderBillsSummary();
+    });
+  });
+  wrap.querySelectorAll("[data-remove-bill]").forEach(function(btn){ btn.addEventListener("click",function(){ bills.splice(parseInt(this.getAttribute("data-remove-bill"),10),1); renderBills(); }); });
+  renderBillsSummary();
+}
+function renderBillsSummary(){
+  var el=document.getElementById("billsSummary"); if(!el) return;
+  if(!bills.length){ el.innerHTML='<div class="verdict warn" style="margin-top:14px">No bills listed — add your rent, phone, cards, and subscriptions so nothing sneaks up on you.</div>'; return; }
+  var sorted=bills.slice().sort(function(a,b){ return daysUntilDue(a.due)-daysUntilDue(b.due); });
+  var total=bills.reduce(function(s,b){return s+(b.amount||0);},0);
+  var feeRisk=bills.reduce(function(s,b){return s+(b.fee||0);},0);
+  var next=sorted[0]; var d=daysUntilDue(next.due);
+  var badgeCls=d<=5?"due-soon":(d<=10?"due-mid":"due-ok");
+  var badgeTxt=d===0?"Due today":(d===1?"Due tomorrow":"Due in "+d+" days");
+  var rows=sorted.map(function(b){ var dd=daysUntilDue(b.due); var cls=dd<=5?"due-soon":(dd<=10?"due-mid":"due-ok"); var txt=dd===0?"Today":(dd===1?"Tomorrow":"In "+dd+"d · the "+b.due+"th"); return '<div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line)"><span><b>'+ (b.name||"Bill") +'</b> <span class="goal-meta">'+fmt(b.amount||0)+' · late fee '+fmt(b.fee||0)+'</span></span><span class="due-badge '+cls+'">'+txt+'</span></div>'; }).join("");
+  el.innerHTML='<div class="verdict '+(d<=5?"bad":"warn")+'" style="margin-top:14px">Next up: <b>'+(next.name||"Bill")+'</b> — '+fmt(next.amount||0)+' <span class="due-badge '+badgeCls+'">'+badgeTxt+'</span><br><span style="font-weight:400">Your listed bills total '+fmt(total)+'/month. Paying all of them late once would cost about '+fmt(feeRisk)+' in fees alone — that’s money your goals could have had.</span></div><div style="margin-top:6px">'+rows+'</div>';
+}
+document.getElementById("addBillBtn").addEventListener("click",function(){ bills.push({name:"New bill",amount:50,due:15,fee:25}); renderBills(); });
+document.getElementById("resetBillsBtn").addEventListener("click",function(){ bills=DEFAULT_BILLS.slice(); renderBills(); });
+renderBills();
+
+// ---- CARD GUIDE ----
+var CARD_RECS={
+  groceries:{t:"Use a grocery rewards card",s:"Groceries are usually your biggest weekly card spend after rent. A card earning 3–6% back at supermarkets turns a $420 grocery month into roughly $13–$25 back — $150–$300 a year — for buying the same food. Pay it in full each month; one month of interest erases a year of grocery points."},
+  dining:{t:"Use a dining rewards card",s:"Look for 3–4% back on restaurants, takeout, and (often) delivery apps. If eating out is your biggest Want above, this is your highest-value category — but don’t let “I’m earning points” justify a bigger order. Points are a rebate, not a reason to spend."},
+  travel:{t:"Use a travel rewards card — booked direct",s:"Travel cards typically earn the most (3–5x) on flights and hotels booked directly with the airline/hotel, plus no foreign transaction fees abroad. Book through the card’s travel portal only if the price matches booking direct — points are worthless if the fare costs more."},
+  gas:{t:"Use a gas / transit rewards card",s:"Look for 3–4% back on gas and transit. If you commute daily, this quiet category adds up. Warehouse-club gas cards can beat standard cards if you already fill up there."},
+  online:{t:"Use your best online-shopping card",s:"Some cards pay a bonus (often 3%+) for online retail, others pay a flat rate. Check whether your flat 2% card beats a store card — store cards lure you with a one-time discount, then charge very high interest if you carry a balance."},
+  everyday:{t:"Use a flat-rate cash-back card",s:"For everything without a bonus category, one simple flat-rate card — around 2% back on all purchases — is the move. It beats juggling five cards and missing payments. Two cards cover most people: one bonus card for your top category, one flat card for the rest."}
+};
+function renderCardRec(){
+  var v=document.getElementById("spendCat").value; var r=CARD_RECS[v];
+  document.getElementById("cardRec").innerHTML='<div class="verdict good"><b>'+r.t+'</b><br><span style="font-weight:400">'+r.s+'</span></div>';
+}
+document.getElementById("spendCat").addEventListener("change",renderCardRec);
+renderCardRec();
+
+// ---- STEP 2: THE PLAN (what you should spend, from pay + rule alone) ----
+function renderPlan(){
+  var el=document.getElementById("planBody"); if(!el) return;
+  var income=num("income"); var rule=RULES[currentRule];
+  var nameEl=document.getElementById("planRuleName"); if(nameEl) nameEl.textContent=rule.name;
+  if(income<=0){
+    el.innerHTML='<p class="hint">Enter your take-home pay in Step one and your plan appears here — exactly what you should spend on each part of your budget, in dollars.</p>';
+    return;
+  }
+  var bar=rule.buckets.map(function(b){ return '<div class="seg '+b.cls+'" style="width:'+b.pct+'%"></div>'; }).join("");
+  var rows=rule.buckets.map(function(b){
+    return '<div class="plan-row"><span><span class="dot" style="background:'+b.color+'"></span><b>'+b.label+'</b></span><span class="plan-pct">'+b.pct+'% of pay</span><span class="plan-amt">'+fmt(income*b.pct/100)+' <small>/ mo</small></span></div>';
+  }).join("");
+  el.innerHTML='<div class="bar-wrap"><div class="bar-label"><span>Your plan on '+fmt(income)+' take-home</span><span>'+rule.name+'</span></div><div class="bar" role="img" aria-label="Bar showing your planned budget split">'+bar+'</div></div>'
+    + rows
+    + (currentRule==="503020"
+      ? '<p class="hint">These are your starting targets from the rule. In the last step, your wants and saving targets also <strong>adjust to your actual needs</strong> — if rent and bills run high, wants and saving shrink to fit what is really left after needs, so the plan stays honest. The bucket cards there show both numbers.</p>'
+      : currentRule==="5050"
+      ? '<p class="hint">These are your targets from the rule — and they stay fixed in the last step. Needs and wants aren&rsquo;t separate here: together they are your Living half ('+fmt(income*0.5)+'). The other half — <strong>'+fmt(income*0.5)+' to Save &amp; Invest</strong> — is the target you&rsquo;re judged against below, no matter how high your needs run.</p>'
+      : '<p class="hint">These are your targets from the rule — and they stay fixed in the last step. Needs and wants aren&rsquo;t separate here: together they are your one Spending bucket ('+fmt(income*0.7)+'). Saving ('+fmt(income*0.2)+') and Debt &amp; Giving ('+fmt(income*0.1)+') keep their full targets below, no matter how high spending runs.</p>');
+}
+
+// ---- SHARED HELPERS for health score, what-if, challenges ----
+function fv(id){ var e=document.getElementById("f-"+id); return e?(parseFloat(e.value)||0):0; }
+function loanPmt(P, apr, months){ var r=apr/100/12; if(r<=0) return P/months; return P*r/(1-Math.pow(1+r,-months)); }
+function cardPayoff(balance, apr, pay){
+  var r=apr/100/12; if(pay<=balance*r) return {months:999, interest:balance};
+  var bal=balance, months=0, interest=0;
+  while(bal>0 && months<1200){ var i=bal*r; interest+=i; bal=bal+i-pay; months++; }
+  return {months:months, interest:interest};
+}
+function fvMonthly(pmt, apr, years){ var r=apr/100/12, n=years*12; if(r<=0) return pmt*n; return pmt*((Math.pow(1+r,n)-1)/r); }
+function budgetCtx(){
+  var t=window.__totals||{needs:0,wants:0,save:0};
+  var income=window.__income||0;
+  var work=num("workContrib")+num("workMatch");
+  var saveManual=Math.max(0, t.save-work);
+  return { income:income, needs:t.needs, wants:t.wants, save:t.save, saveManual:saveManual, work:work,
+    ef:num("efBalance"), unalloc: income-(t.needs+t.wants+saveManual), minDebt: fv("mindebt"),
+    adjSave: (window.__adj && window.__adj.amt) ? (window.__adj.amt.save||0) : 0 };
+}
+function fmtSigned(d){ return (d<0?"−":"+")+fmt(Math.abs(d)); }
+
+// ---- FINANCIAL HEALTH SCORE ----
+function renderHealth(){
+  var parts=document.getElementById("healthParts"); if(!parts) return;
+  var tips=document.getElementById("healthTips");
+  var numEl=document.getElementById("healthNum"), bandEl=document.getElementById("healthBand"), arc=document.getElementById("healthArc");
+  var c=budgetCtx();
+  if(c.income<=0){
+    numEl.textContent="–"; bandEl.textContent="Add your take-home pay above";
+    arc.style.strokeDashoffset="465";
+    parts.innerHTML='<p class="hint">Enter your take-home pay and spending in the steps above and your score appears here — emergency cushion, debt load, and whether the budget holds up, each scored out of 100.</p>';
+    tips.innerHTML='<li><b>Start with step one</b><span>Your score is built from the same numbers as the rest of this tab, so it updates the second your budget does.</span></li>';
+    return;
+  }
+  // 1) Emergency cushion: months of needs covered
+  var months = c.needs>0 ? c.ef/c.needs : (c.ef>0 ? 6 : 0);
+  var eScore;
+  if(months>=6) eScore=100; else if(months>=3) eScore=80+(months-3)/3*20; else if(months>=1) eScore=55+(months-1)/2*25; else if(months>0) eScore=20+months*35; else eScore=5;
+  // 2) Debt burden: minimum payments as a share of pay
+  var debtPct = c.minDebt/c.income*100;
+  var dScore;
+  if(c.minDebt<=0) dScore=100; else if(debtPct<=5) dScore=92; else if(debtPct<=10) dScore=75; else if(debtPct<=15) dScore=55; else if(debtPct<=20) dScore=35; else dScore=15;
+  // 3) Does the budget hold up: assigned vs income, saving vs adjusted target
+  var allocated=c.needs+c.wants+c.saveManual;
+  var hScore;
+  if(allocated>c.income+1) hScore=12;
+  else if(c.adjSave>0){ var ratio=c.save/c.adjSave; hScore= ratio>=1?100 : ratio>=0.75?85 : ratio>=0.5?68 : ratio>0?45 : 22; }
+  else hScore=40;
+  var total=Math.round(eScore*0.35 + dScore*0.30 + hScore*0.35);
+  var band, color;
+  if(total>=80){ band="Strong — this budget can take a hit"; color="var(--green)"; }
+  else if(total>=60){ band="Solid — a few soft spots to shore up"; color="var(--teal)"; }
+  else if(total>=40){ band="Getting there — real gaps, all fixable"; color="var(--gold)"; }
+  else { band="Fragile — start with the first fix below"; color="var(--coral)"; }
+  numEl.textContent=total; bandEl.textContent=band;
+  arc.style.stroke=color;
+  arc.style.strokeDashoffset=String(465*(1-total/100));
+  function partRow(name, score, note){
+    var col= score>=70?"var(--green)": score>=45?"var(--gold)":"var(--coral)";
+    return '<div class="health-part"><div class="hp-top"><b>'+name+'</b><span>'+Math.round(score)+' / 100</span></div>'
+      +'<div class="hp-bar"><i style="width:'+Math.round(score)+'%;background:'+col+'"></i></div>'
+      +'<div class="hp-note">'+note+'</div></div>';
+  }
+  var eNote = c.needs>0
+    ? fmt(c.ef)+' saved covers <strong>'+(months>=10?Math.round(months):months.toFixed(1))+' months</strong> of your '+fmt(c.needs)+' in monthly needs. One month is the starter goal; 3–6 months is the sturdy zone.'
+    : 'Enter your needs above and this shows how many months your savings would carry them.';
+  var dNote = c.minDebt>0
+    ? 'Minimum payments take <strong>'+fmt(c.minDebt)+'/mo — '+Math.round(debtPct)+'% of your take-home</strong>. Under 10% is manageable; past 15–20% the minimums alone start running the budget.'
+    : 'No debt payments in your budget — nothing is dragging this part down. Keep it that way: new minimums are the fastest way to sink a score.';
+  var hNote;
+  if(allocated>c.income+1) hNote='You&rsquo;ve assigned <strong>'+fmt(allocated-c.income)+' more than you take home</strong> — the month doesn&rsquo;t add up yet, no matter what the rule says.';
+  else if(c.adjSave>0 && c.save>=c.adjSave) hNote='Every dollar is assigned, nothing overshoots your pay, and saving hits your target of '+fmt(c.adjSave)+'. This is what “holds up” looks like.';
+  else if(c.adjSave>0) hNote='The month fits inside your pay, but saving is <strong>'+fmt(Math.max(0,c.adjSave-c.save))+' short</strong> of your target of '+fmt(c.adjSave)+'.';
+  else hNote='Your needs take the whole check, so there&rsquo;s nothing left to judge saving against — the fix starts with needs or income, not willpower.';
+  parts.innerHTML = partRow("Emergency cushion", eScore, eNote) + partRow("Debt burden", dScore, dNote) + partRow("Budget holds up", hScore, hNote);
+  // Practical ways to improve — weakest parts first, in dollars
+  var fixes=[];
+  if(eScore<85){
+    if(c.save>0 && c.needs>c.ef) fixes.push({s:eScore, t:"Grow the cushion to one month of needs: "+fmt(c.needs), s2:"You&rsquo;re at "+fmt(c.ef)+". At your current "+fmt(c.save)+"/mo saving pace you&rsquo;d get there in about "+Math.max(1,Math.ceil((c.needs-c.ef)/c.save))+" months. A separate savings account you don&rsquo;t see every day is what makes this stick."});
+    else if(c.needs>c.ef) fixes.push({s:eScore, t:"Open the cushion with a starter $500", s2:"You have "+fmt(c.ef)+" set aside. The first $500 is the hardest and the most valuable — it turns most surprise bills from debt into a errand. Automate even $25 a payday toward it."});
+    else fixes.push({s:eScore, t:"Push the cushion toward 3 months of needs: "+fmt(c.needs*3), s2:"You&rsquo;ve cleared one month ("+fmt(c.ef)+"). Three months is where a job loss stops being an emergency and becomes an inconvenience."});
+  }
+  if(dScore<85 && c.minDebt>0){
+    fixes.push({s:dScore, t:"Attack the highest-interest balance first", s2:"Minimums are "+fmt(c.minDebt)+"/mo ("+Math.round(debtPct)+"% of pay). Every extra dollar above the minimum on your most expensive balance is a guaranteed return equal to its interest rate — no investment promises that. Extra payoff lives in the Save &amp; Invest lines above."});
+  }
+  if(hScore<85){
+    if(allocated>c.income+1) fixes.push({s:hScore, t:"Close the "+fmt(allocated-c.income)+" overage first", s2:"Nothing else on this page matters until assigned spending fits inside your pay. Start with wants — pausing "+fmt(allocated-c.income)+" there this month keeps the gap off a credit card."});
+    else fixes.push({s:hScore, t:"Close the saving gap: "+fmt(Math.max(0,c.adjSave-c.save))+"/mo", s2:"Move that amount to savings automatically on payday, before spending starts. Money moved first survives; money “left over” at month end almost never exists."});
+  }
+  fixes.sort(function(a,b){ return a.s-b.s; });
+  if(!fixes.length) fixes.push({t:"Keep the system boring", s2:"All three parts are strong. The risk now isn&rsquo;t the plan — it&rsquo;s drift. Re-run your numbers whenever pay, rent, or a payment changes, and let raises raise your saving before they raise your spending."});
+  tips.innerHTML = fixes.slice(0,3).map(function(f,i){ return '<li><b>'+(i+1)+'. '+f.t+'</b><span>'+f.s2+'</span></li>'; }).join("");
+}
+var efEl=document.getElementById("efBalance");
+if(efEl) efEl.addEventListener("input", function(){ render(); });
+
+// ---- WHAT-IF SIMULATOR ----
+var whatIf={rent:false, car:false, save:false};
+var CAR_COST=Math.round(loanPmt(35000,7,60))+120; // ≈ $693 payment + $120 insurance = $813
+document.querySelectorAll(".whatif-btn").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    var k=btn.getAttribute("data-wi");
+    whatIf[k]=!whatIf[k];
+    btn.setAttribute("aria-pressed", whatIf[k]?"true":"false");
+    renderWhatIf();
+  });
+});
+function renderWhatIf(){
+  var out=document.getElementById("whatIfOut"); if(!out) return;
+  var c=budgetCtx();
+  if(c.income<=0){ out.innerHTML='<p class="hint" style="margin-top:14px">Enter your take-home pay in step one and the simulator runs on your real numbers.</p>'; return; }
+  var active=whatIf.rent||whatIf.car||whatIf.save;
+  var dNeeds=(whatIf.rent?300:0)+(whatIf.car?CAR_COST:0);
+  var dSave=whatIf.save?200:0;
+  var leftB=c.unalloc;
+  var leftP=c.income-((c.needs+dNeeds)+c.wants+(c.saveManual+dSave));
+  var saveB=c.save, saveP=c.save+dSave;
+  var rateB=saveB/c.income*100, rateP=saveP/c.income*100;
+  function row(label, now, after, deltaTxt, cls){
+    return '<div class="wi-row"><span>'+label+'</span><b>'+now+'</b><b>'+after+'</b><span class="wi-delta '+cls+'">'+deltaTxt+'</span></div>';
+  }
+  function dCls(d){ return d>0.5?"up": d<-0.5?"down":"flat"; }
+  var html='<div class="wi-table"><div class="wi-row head"><span>Your month</span><span>Now</span><span>What-if</span><span>Change</span></div>'
+    + row("Left unassigned at month end", fmt(leftB), fmt(leftP), (leftP-leftB===0?"—":fmtSigned(leftP-leftB)), dCls(leftP-leftB))
+    + row("Saved per month (work plan included)", fmt(saveB), fmt(saveP), (dSave===0?"—":fmtSigned(dSave)), dCls(dSave))
+    + row("Savings rate", Math.round(rateB)+"% of pay", Math.round(rateP)+"% of pay", (Math.abs(rateP-rateB)<0.5?"—":((rateP-rateB>0?"+":"−")+Math.abs(rateP-rateB).toFixed(1).replace(/\.0$/,"")+" pts")), dCls(rateP-rateB))
+    + '</div>';
+  if(!active){
+    html+='<div class="hint" style="margin-top:12px">That&rsquo;s your budget as it stands. Flip a switch above — rent hike, the car, extra saving, or any mix — and this table shows exactly what it does to your month before you commit to it in real life.</div>';
+  } else if(leftP<-0.5){
+    html+='<div class="verdict bad">That breaks the month: you&rsquo;d be <strong>'+fmt(-leftP)+' short</strong>. The budget only holds if something else gives — about '+fmt(-leftP)+' from wants, a smaller version of the purchase, or more income. Better to learn it here than on a statement.</div>';
+  } else {
+    var bits=[];
+    if(whatIf.car) bits.push("the car adds "+fmt(CAR_COST)+"/mo to needs — payment and insurance together, every month for five years");
+    if(whatIf.rent) bits.push("rent eats another $300 of every check");
+    if(whatIf.save) bits.push("saving "+fmt(200)+" more a month is about "+fmt(fvMonthly(200,7,5))+" in five years at a 7% average return");
+    html+='<div class="verdict good">Your budget still holds — '+fmt(leftP)+' left unassigned at month end. What changed: '+bits.join("; ")+'.</div>';
+  }
+  out.innerHTML=html;
+}
+
+// ---- CHALLENGES: Money Kit life cards, judged against your real budget ----
+var CHALLENGES=[
+  { id:"jobloss", tag:"Income shock", tagCls:"", title:"The job-loss card",
+    story:function(c){ return "You&rsquo;re laid off with no warning. Your last check is already in the bank, and the next one is a month away at best — but rent, bills, and groceries don&rsquo;t pause. One month, "+fmt(c.income)+" of income, gone."; },
+    hit:function(c){ return "The hit: cover "+fmt(c.needs)+" of needs this month with no paycheck coming."; },
+    choices:[
+      { label:"Live on your emergency savings", detail:"Cover the month from what you&rsquo;ve saved up. Wants pause until you&rsquo;re working again.", flag:"emergency",
+        judge:function(c){
+          if(c.needs<=0) return {level:"warn", smart:false, text:"<b>Can&rsquo;t judge this one yet.</b> Enter your needs in the Budget tab — this play only works if your savings can actually carry a month of them."};
+          if(c.ef>=c.needs) return {level:"good", smart:true, text:"<b>Smart play.</b> This is exactly what the cushion is for. Your "+fmt(c.ef)+" covers the full month of needs ("+fmt(c.needs)+") with "+fmt(c.ef-c.needs)+" to spare — no debt, no interest, no panic. When paychecks restart, rebuilding the cushion is job one."};
+          if(c.ef>0) return {level:"warn", smart:false, text:"<b>Half a shield.</b> Your "+fmt(c.ef)+" covers about "+Math.round(c.ef/c.needs*100)+"% of the month&rsquo;s needs ("+fmt(c.needs)+"). The other "+fmt(c.needs-c.ef)+" has to come from somewhere — cutting wants to zero and calling lenders early (Tips &amp; Help tab) beats reaching for a card."};
+          return {level:"bad", smart:false, text:"<b>Nothing to fall back on.</b> With $0 set aside, a month with no income means borrowed money at the worst possible moment. This is why the Budget tab pushes a starter cushion so hard — even $500 completely changes this card."};
+        } },
+      { label:"Cut wants to zero and stretch every dollar", detail:"All fun spending stops. Wants money and this month&rsquo;s saving redirect straight to needs.",
+        judge:function(c){
+          var pool=c.wants+c.save;
+          if(c.needs>0 && pool>=c.needs*0.6) return {level:"good", smart:true, text:"<b>Smart play.</b> Pausing wants ("+fmt(c.wants)+") and redirecting saving ("+fmt(c.save)+") puts "+fmt(pool)+" toward needs — real breathing room without borrowing a cent. A rough month, but you exit it with no new debt."};
+          return {level:"warn", smart:false, text:"<b>It helps — it&rsquo;s just not enough alone.</b> Cutting wants ("+fmt(c.wants)+") and pausing saving ("+fmt(c.save)+") frees "+fmt(pool)+" against "+fmt(c.needs)+" of needs. You&rsquo;d still need savings or an early call to your lenders for the rest. In real life, plays combine."};
+        } },
+      { label:"Put the month on credit cards", detail:"Charge the needs now, figure it out once you&rsquo;re working again.",
+        judge:function(c){
+          var bal=Math.max(c.needs,1), pay=Math.max(25, bal*0.03), p=cardPayoff(bal,24,pay);
+          return {level:"bad", smart:false, text:"<b>The expensive way out.</b> Charging "+fmt(bal)+" at about 24% APR and paying roughly "+fmt(pay)+"/mo takes around "+p.months+" months to clear and adds about "+fmt(p.interest)+" in interest — you&rsquo;d still be paying for this jobless month long after you&rsquo;re back at work. Cards are the last resort, not the plan."};
+        } }
+    ]},
+  { id:"bonus", tag:"Money in", tagCls:"money-in", title:"The bonus card",
+    story:function(){ return "Good news: $1,500 lands in your account — a tax refund, a side-gig payout, a birthday check from family. Windfalls are where budgets are quietly won or lost: money with no job assigned tends to evaporate."; },
+    hit:function(){ return "The decision: give the $1,500 a job before it disappears."; },
+    choices:[
+      { label:"Split it — $1,000 to future you, $500 to enjoy now", detail:"Most of it goes to savings or debt. A real chunk is guilt-free fun money.",
+        judge:function(){ return {level:"good", smart:true, text:"<b>Smart play.</b> This is the sustainable version of a windfall: future you gets $1,000 — most of a starter emergency cushion in one shot — and present you gets $500 with zero guilt attached. Plans that allow some fun are the plans people actually keep."}; } },
+      { label:"Throw all $1,500 at your highest-interest debt", detail:"Every dollar goes to the balance that&rsquo;s costing you the most.", flag:"debt",
+        judge:function(c){
+          if(c.minDebt>0) return {level:"good", smart:true, text:"<b>Smart play.</b> On a balance at about 24% APR, paying off $1,500 saves roughly $360 a year in interest — a guaranteed return no savings account can match. Your "+fmt(c.minDebt)+"/mo in minimum payments says you&rsquo;re carrying balances; shrinking the priciest one first is the fastest way out."};
+          return {level:"warn", smart:false, text:"<b>Good instinct, wrong target.</b> Your budget shows no debt payments at all — if you truly carry no balances, this $1,500 does more in savings, where it becomes your emergency cushion. Debt payoff only wins when there&rsquo;s expensive debt to kill."};
+        } },
+      { label:"Treat yourself — the whole $1,500", detail:"New gear, big nights out, the works. You earned it, right?",
+        judge:function(){ return {level:"warn", smart:false, text:"<b>The evaporation play.</b> It feels great for a weekend — and in a month you won&rsquo;t be able to say where it went. Parked in investments at a 7% average return instead, that same $1,500 could grow to about "+fmt(1500*Math.pow(1.07,10))+" in 10 years. Enjoying <em>some</em> of a windfall is smart. Enjoying all of it is how windfalls disappear."}; } }
+    ]},
+  { id:"repair", tag:"Surprise bill", tagCls:"", title:"The breakdown card",
+    story:function(){ return "Your car dies on a Tuesday. The shop says $850, and you need the car to get to work — this isn&rsquo;t optional spending. The bill is due when you pick the car up."; },
+    hit:function(){ return "The hit: $850, due this week."; },
+    choices:[
+      { label:"Pay cash from your emergency savings", detail:"Then rebuild the cushion with a set amount every payday.", flag:"emergency",
+        judge:function(c){
+          if(c.ef>=850) return {level:"good", smart:true, text:"<b>Smart play.</b> Your "+fmt(c.ef)+" cushion swallows the $850 and still leaves "+fmt(c.ef-850)+". No interest, no payment plan, no stress spiral — this is the entire reason the cushion exists. Rebuild it at "+fmt(Math.max(50,Math.round(c.save/2)))+"/mo and it&rsquo;s whole again in a few months."};
+          if(c.ef>0) return {level:"warn", smart:false, text:"<b>Close, but short.</b> Your cushion covers "+fmt(c.ef)+" of the $850 — the remaining "+fmt(850-c.ef)+" still needs a home. Cash for most of it plus a small, fast payoff plan beats putting the whole bill on a card."};
+          return {level:"bad", smart:false, text:"<b>This is the card the cushion is built for.</b> With $0 saved, an $850 repair becomes debt whether you want it to or not. After this month, even $25 a payday into a separate account means the next breakdown is an errand, not a crisis."};
+        } },
+      { label:"Cover it by pausing wants for a month", detail:"Eating out, shopping, and fun money all redirect to the repair bill.",
+        judge:function(c){
+          if(c.wants>=850) return {level:"good", smart:true, text:"<b>Smart play.</b> Your wants run "+fmt(c.wants)+"/mo — one paused month covers the whole repair in cash, savings untouched. It&rsquo;s not a fun month, but it&rsquo;s exactly the trade a flexible budget is built to make."};
+          if(c.wants>=425) return {level:"warn", smart:false, text:"<b>Halfway there.</b> Pausing wants frees "+fmt(c.wants)+" — about "+Math.round(c.wants/850*100)+"% of the bill. Pair it with a small dip into savings and the repair is covered without a card. Alone, it leaves "+fmt(850-c.wants)+" to borrow."};
+          return {level:"warn", smart:false, text:"<b>Not enough slack here.</b> Your wants are only "+fmt(c.wants)+"/mo, so there isn&rsquo;t $850 of fun to pause. That&rsquo;s not a failure — it means this bill has to come from savings or a careful, short payoff plan instead."};
+        } },
+      { label:"Put it on a credit card and pay the minimum", detail:"$25 a month until it&rsquo;s gone. Simple, right?",
+        judge:function(){
+          var p=cardPayoff(850,24,25);
+          return {level:"bad", smart:false, text:"<b>The $850 repair that costs "+fmt(850+p.interest)+".</b> At about 24% APR, paying $25/mo takes roughly "+p.months+" months — nearly five years — and adds about "+fmt(p.interest)+" in interest on top of the repair. The minimum payment is designed to keep you paying, not to get you out."};
+        } }
+    ]},
+  { id:"cardbill", tag:"Surprise bill", tagCls:"", title:"The statement card",
+    story:function(){ return "Your credit card statement lands: $620 — a month of small swipes that quietly added up. The full balance is due in three weeks. The minimum payment is just $25."; },
+    hit:function(){ return "The hit: $620 due. What you pay now decides what this month of spending really costs."; },
+    choices:[
+      { label:"Pay it in full before the due date", detail:"No interest, no trailing balance — the month costs exactly $620.", flag:"debt",
+        judge:function(c){
+          if(c.unalloc>=620) return {level:"good", smart:true, text:"<b>Smart play.</b> You have "+fmt(c.unalloc)+" unassigned in this month&rsquo;s budget, so paying in full costs you nothing but a click — and the card goes back to being a tool instead of a loan. This is the only way credit card points are ever actually worth it."};
+          if(c.ef>=620) return {level:"good", smart:true, text:"<b>Smart play.</b> Your month&rsquo;s budget is fully assigned, but your "+fmt(c.ef)+" cushion can clear it — paying 24% APR interest would cost far more than briefly dipping into savings. Refill the cushion next payday and the card never becomes a loan."};
+          return {level:"warn", smart:false, text:"<b>Right goal, tight math.</b> Paying in full is the goal — but your budget has no unassigned room and no cushion to pull from, so $620 has to be freed by trimming this month&rsquo;s wants or pausing saving once. Do that before reaching for the minimum."};
+        } },
+      { label:"Pay half now, half next month", detail:"$310 today, $310 with the next check.",
+        judge:function(){ return {level:"warn", smart:false, text:"<b>A bridge, not a strategy.</b> Carrying $310 for one month at about 24% APR costs roughly $6–$12 in interest — cheap as a one-time bridge. The danger is rhythm: “half now, half later” every month quietly becomes a permanent balance that never reaches zero."}; } },
+      { label:"Pay just the $25 minimum", detail:"Keep your cash. Let the rest ride.",
+        judge:function(){
+          var p=cardPayoff(620,24,25);
+          return {level:"bad", smart:false, text:"<b>The minimum is a trap with good manners.</b> Paying $25/mo on $620 at about 24% APR takes roughly "+p.months+" months and adds about "+fmt(p.interest)+" in interest — you&rsquo;d pay nearly 40% extra for things you already used up. Meanwhile next month&rsquo;s swipes pile onto a balance that never clears."};
+        } }
+    ]},
+  { id:"rentup", tag:"Slow squeeze", tagCls:"squeeze", title:"The rent-hike card",
+    story:function(){ return "Renewal letter: rent goes up $200 a month, starting in 60 days. Same apartment, same job, same life — your budget just got $2,400 a year tighter."; },
+    hit:function(){ return "The hit: +$200 every single month. Your answer has to be monthly too."; },
+    choices:[
+      { label:"Trim $200 from wants — permanently", detail:"Find it across eating out, shopping, and subscriptions, and keep it trimmed.",
+        judge:function(c){
+          if(c.wants>=200) return {level:"good", smart:true, text:"<b>Smart play.</b> Your wants run "+fmt(c.wants)+"/mo, so $200 is findable without touching needs or saving — a subscription audit plus one fewer takeout order a week usually gets there. Your saving rate survives the rent hike intact, and that&rsquo;s the whole game."};
+          if(c.wants>0) return {level:"warn", smart:false, text:"<b>Part of the answer.</b> All your wants together are only "+fmt(c.wants)+"/mo — trimming every fun dollar still leaves you "+fmt(200-c.wants)+" short, and a budget with zero fun doesn&rsquo;t survive contact with real life. Trim what you can, then look at saving or income for the rest."};
+          return {level:"warn", smart:false, text:"<b>Nothing to trim.</b> With no wants in your budget, there&rsquo;s no $200 hiding here — the answer has to come from saving less for now, more income, or a housing change at the next renewal."};
+        } },
+      { label:"Cut saving by $200 a month", detail:"Keep life exactly the same. Future you absorbs the rent hike.",
+        judge:function(c){
+          if(c.save>=200) return {level:"warn", smart:false, text:"<b>It works — and it&rsquo;s expensive.</b> Your saving drops from "+fmt(c.save)+" to "+fmt(c.save-200)+"/mo. Over five years at a 7% average return, that&rsquo;s about "+fmt(fvMonthly(200,7,5))+" less wealth. Sometimes it&rsquo;s the right short-term call — just know the price, and set a date to restore it."};
+          return {level:"bad", smart:false, text:"<b>There&rsquo;s nothing to cut.</b> You&rsquo;re saving "+fmt(c.save)+"/mo — less than the hike itself. Absorbing a $200 rent increase here isn&rsquo;t possible; the money has to come from wants, income, or a different home."};
+        } },
+      { label:"Ignore it — it&rsquo;ll work out", detail:"Change nothing. Hope the month absorbs it somehow.",
+        judge:function(){ return {level:"bad", smart:false, text:"<b>Hope is not a line item.</b> A $200 monthly hole doesn&rsquo;t stay $200 — it becomes about $2,400 on credit cards within a year, plus a few hundred in interest, and every month&rsquo;s budget starts already behind. Sixty days of warning is a gift: use it."}; } }
+    ]},
+  { id:"raise", tag:"Money in", tagCls:"money-in", title:"The raise card",
+    story:function(){ return "You got the raise: +$300 a month, every month, starting next check. This is the rarest card in the deck — and the easiest to waste, because spending expands to fill new income without you ever deciding it should."; },
+    hit:function(){ return "The decision: assign the $300 before lifestyle creep assigns it for you."; },
+    choices:[
+      { label:"Bank the whole raise", detail:"Saving goes up $300 on payday. Your lifestyle never sees the money.",
+        judge:function(){ return {level:"good", smart:true, text:"<b>Smart play.</b> Saving a raise you never lived on is the painless wealth move — your life feels identical, but $300/mo invested at a 7% average return is about "+fmt(fvMonthly(300,7,5))+" in five years. This is how people quietly get ahead: income rises, lifestyle doesn&rsquo;t."}; } },
+      { label:"Split it — $150 saved, $150 enjoyed", detail:"Half builds wealth. Half makes life better right now, on purpose.",
+        judge:function(){ return {level:"good", smart:true, text:"<b>Smart play.</b> The balanced version: $150/mo invested is still about "+fmt(fvMonthly(150,7,5))+" in five years at a 7% average return, and the other $150 is enjoyed deliberately instead of leaking away. Sustainable beats perfect — this is a raise plan you&rsquo;ll still be running next year."}; } },
+      { label:"Upgrade the lifestyle", detail:"Nicer place, nicer car, nicer everything. The raise funds all of it.",
+        judge:function(){ return {level:"warn", smart:false, text:"<b>Lifestyle creep, dealt face-up.</b> In five years, the saved version of this raise is worth about "+fmt(fvMonthly(300,7,5))+". The upgraded version buys things worth roughly $0 by then — and the higher bills stay even if the job doesn&rsquo;t. Enjoying a raise is fine; pre-spending all of it, forever, is the trap."}; } }
+    ]}
+];
+var BADGES=[
+  { id:"first", name:"First Card Played", desc:"Finish any challenge card.", test:function(s){ return s.done>=1; } },
+  { id:"cool", name:"Cool Head", desc:"Make 3 smart, sustainable plays.", test:function(s){ return s.smart>=3; } },
+  { id:"streak3", name:"On a Streak", desc:"Make 3 smart plays in a row.", test:function(s){ return s.best>=3; } },
+  { id:"emergency", name:"Emergency Ready", desc:"Handle a surprise using savings, not debt.", test:function(s){ return !!s.flags.emergency; } },
+  { id:"debt", name:"Debt Smart", desc:"Put a windfall or a bill payment to work against debt the smart way.", test:function(s){ return !!s.flags.debt; } },
+  { id:"fulldeck", name:"Full Deck", desc:"Play all six life cards.", test:function(s){ return s.done>=CHALLENGES.length; } }
+];
+var chalState={ results:{}, streak:0, best:0, smart:0, flags:{} };
+function chalSummary(){
+  return { done:Object.keys(chalState.results).length, smart:chalState.smart, streak:chalState.streak, best:chalState.best, flags:chalState.flags };
+}
+function renderChalProgress(){
+  var s=chalSummary();
+  var set=function(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; };
+  set("statPlayed", s.done+" / "+CHALLENGES.length);
+  set("statSmart", s.smart);
+  set("statStreak", s.streak);
+  set("statBest", s.best);
+  var grid=document.getElementById("badgeGrid"); if(!grid) return;
+  grid.innerHTML=BADGES.map(function(b){
+    var earned=b.test(s);
+    return '<div class="badge'+(earned?" earned":"")+'"><b>'+b.name+'</b><span>'+b.desc+'</span><div class="badge-state">'+(earned?"Badge earned":"Not yet")+'</div></div>';
+  }).join("");
+}
+function renderChallenges(){
+  var list=document.getElementById("challengeList"); if(!list) return;
+  var c=budgetCtx();
+  list.innerHTML="";
+  CHALLENGES.forEach(function(ch){
+    var res=chalState.results[ch.id];
+    var card=document.createElement("div"); card.className="chal-card";
+    var storyTxt=typeof ch.story==="function"?ch.story(c):ch.story;
+    var hitTxt=typeof ch.hit==="function"?ch.hit(c):ch.hit;
+    var html='<span class="chal-tag '+ch.tagCls+'">'+ch.tag+'</span><h3>'+ch.title+'</h3>'
+      +'<p class="chal-story">'+storyTxt+'</p><p class="chal-hit">'+hitTxt+'</p><div class="chal-choices">';
+    ch.choices.forEach(function(choice, ci){
+      html+='<button type="button" class="chal-choice'+(res && res.choice===ci?" picked":"")+'" data-chal="'+ch.id+'" data-choice="'+ci+'"'+(res?" disabled":"")+'>'
+        +'<b>'+choice.label+'</b><span>'+choice.detail+'</span></button>';
+    });
+    html+='</div>';
+    if(res){
+      html+='<div class="chal-outcome '+res.level+'" role="status">'+res.text+'</div>'
+        +'<div class="chal-done">'+(res.smart?"Smart play — streak and badges updated above":"Card played — the outcome above is the lesson")+'</div>';
+    }
+    card.innerHTML=html;
+    list.appendChild(card);
+  });
+  list.querySelectorAll(".chal-choice").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var ch=CHALLENGES.filter(function(x){ return x.id===btn.getAttribute("data-chal"); })[0];
+      var ci=parseInt(btn.getAttribute("data-choice"),10);
+      var choice=ch.choices[ci];
+      var out=choice.judge(budgetCtx());
+      chalState.results[ch.id]={ choice:ci, level:out.level, smart:!!out.smart, text:out.text };
+      if(out.smart){
+        chalState.smart++; chalState.streak++; if(chalState.streak>chalState.best) chalState.best=chalState.streak;
+        if(choice.flag) chalState.flags[choice.flag]=true;
+      } else { chalState.streak=0; }
+      renderChallenges(); renderChalProgress();
+    });
+  });
+  renderChalProgress();
+}
+var resetChalBtn=document.getElementById("resetChalBtn");
+if(resetChalBtn) resetChalBtn.addEventListener("click", function(){
+  chalState={ results:{}, streak:0, best:0, smart:0, flags:{} };
+  renderChallenges();
+});
+
+// ---- TABS ----
+function activateTab(panelId, focus){
+  document.querySelectorAll(".tab-btn").forEach(function(b){
+    var on=b.getAttribute("data-tab")===panelId;
+    b.setAttribute("aria-selected", on?"true":"false");
+    if(on && focus) b.focus();
+  });
+  document.querySelectorAll(".tab-panel").forEach(function(p){
+    var on=p.id===panelId;
+    p.classList.toggle("active", on);
+    if(on) p.removeAttribute("hidden"); else p.setAttribute("hidden","");
+  });
+  var nav=document.querySelector(".tabs-nav");
+  if(nav){ var y=nav.getBoundingClientRect().top+window.pageYOffset-8; window.scrollTo({top:y, behavior:"smooth"}); }
+}
+document.querySelectorAll(".tab-btn").forEach(function(btn, idx, all){
+  btn.addEventListener("click", function(){ activateTab(btn.getAttribute("data-tab"), false); });
+  btn.addEventListener("keydown", function(e){
+    var next=null;
+    if(e.key==="ArrowRight") next=all[(idx+1)%all.length];
+    if(e.key==="ArrowLeft") next=all[(idx-1+all.length)%all.length];
+    if(next){ e.preventDefault(); activateTab(next.getAttribute("data-tab"), true); }
+  });
+});
+// “Use this take-home” should land on the Budget tab where the budget lives
+var _useBtn=document.getElementById("usePresetBtn");
+if(_useBtn){ _useBtn.addEventListener("click", function(){ activateTab("panel-budget", false); }); }
+
+// Keep new sections in sync when rule/income changes: wrap render
+var _origRender=render;
+render=function(){ _origRender(); renderGoals(); renderAfford(); renderPlan(); renderHealth(); renderWhatIf(); renderChallenges(); };
+renderGoals();
+
+// Init with example
+loadValues(EXAMPLE);
+</script>
+</body>
+</html>
