@@ -364,8 +364,6 @@ textarea{resize:vertical;min-height:120px}
 .tracker i{height:10px;border-radius:999px;background:var(--surface2)}
 .tracker i.on{background:var(--teal)}
 .tracker i.today{background:var(--gold);outline:2px solid var(--ink)}
-.ci-entry{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px;background:var(--bg)}
-.ci-entry-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .link-btn{background:none;border:none;cursor:pointer;text-decoration:underline;color:var(--green);font:inherit;font-weight:700;padding:0;min-height:0}
 @media (max-width:640px){ .pd-bill-row{grid-template-columns:1fr 104px auto} .c100-row{grid-template-columns:auto 1fr} .c100-row .money{grid-column:2} .tracker{grid-template-columns:repeat(10,1fr)} }
 @media (prefers-reduced-motion: reduce){ *{transition:none !important;scroll-behavior:auto !important} }
@@ -428,7 +426,6 @@ textarea{resize:vertical;min-height:120px}
     <button type="button" class="tab-btn" role="tab" id="tab-payday" aria-controls="panel-payday" aria-selected="false" data-tab="panel-payday">Payday<small>Can I make it to payday?</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-goals" aria-controls="panel-goals" aria-selected="false" data-tab="panel-goals">Goals &amp; Afford It<small>Experiences &amp; things you want</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-bills" aria-controls="panel-bills" aria-selected="false" data-tab="panel-bills">Bills &amp; Cards<small>Calendar · paydays · points</small></button>
-    <button type="button" class="tab-btn" role="tab" id="tab-checkin" aria-controls="panel-checkin" aria-selected="false" data-tab="panel-checkin">Weekly Check-In<small>Your 2-minute money review</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-help" aria-controls="panel-help" aria-selected="false" data-tab="panel-help">Tips &amp; Help<small>Tight months, FAQ &amp; ask</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-challenges" aria-controls="panel-challenges" aria-selected="false" data-tab="panel-challenges">Challenges<small>Life cards · badges &amp; streaks</small></button>
   </nav>
@@ -755,30 +752,6 @@ textarea{resize:vertical;min-height:120px}
 
   </div><!-- /panel-bills -->
 
-  <div id="panel-checkin" class="tab-panel" role="tabpanel" aria-labelledby="tab-checkin" hidden>
-  <!-- WEEKLY MONEY CHECK-IN -->
-  <section class="section" aria-labelledby="checkin-h">
-    <div class="section-head"><h2 id="checkin-h">Weekly Money Check-In</h2><p class="sub" style="font-size:1rem;margin-top:8px">Two minutes, once a week. Four numbers and one honest adjustment — that is the whole review. Budgets do not fail in the planning; they drift in the weeks nobody looks. This is the looking.</p></div>
-    <div class="card" style="margin-top:16px">
-      <span class="label">This week</span>
-      <h3 id="ciWeek" style="font-size:1.35rem;margin-top:6px">This week</h3>
-      <p class="sub">Fill in the week you are in right now. Saving it again for the same week just updates that week&rsquo;s entry.</p>
-      <div class="goal-form">
-        <div><label for="ciIn">Money that came in this week</label><div class="money"><input id="ciIn" type="number" inputmode="decimal" min="0" step="10" placeholder="0"></div><p class="small-note" style="margin-top:6px">Paychecks, side money, anything that landed.</p></div>
-        <div><label for="ciSpent">Money that went out this week</label><div class="money"><input id="ciSpent" type="number" inputmode="decimal" min="0" step="10" placeholder="0"></div><p class="small-note" style="margin-top:6px">Everything — bills, food, fun. A close guess beats skipping the week.</p></div>
-        <div><label for="ciBills">Bills due next week</label><div class="money"><input id="ciBills" type="number" inputmode="decimal" min="0" step="10" placeholder="0"></div><p class="small-note" style="margin-top:6px" id="ciBillsHint">Add bills in the Bills tab and this line will show what is coming due.</p></div>
-        <div><label for="ciAdjust">One adjustment for next week</label><input id="ciAdjust" type="text" placeholder="e.g. Cook twice instead of ordering in"><p class="small-note" style="margin-top:6px">Just one. Small and specific beats big and vague.</p></div>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center"><button type="button" class="btn btn-green" id="ciSave">Save this week&rsquo;s check-in →</button><span class="small-note" id="ciSavedMsg" role="status"></span></div>
-      <div id="ciSummary" aria-live="polite"></div>
-      <p class="hint"><strong>Where this lives:</strong> your check-ins save on this device only — in this browser, on this phone or computer. Nothing is sent anywhere, and there is no account, so clearing your browser data or switching devices starts the history over. This page also cannot send reminders — no tool on a page like this can — so the habit is the reminder: same day each week, open this tab, two minutes.</p>
-    </div>
-    <div class="card" aria-labelledby="ci-history-h">
-      <h3 id="ci-history-h">Past check-ins</h3>
-      <div id="ciHistory"></div>
-    </div>
-  </section>
-  </div><!-- /panel-checkin -->
 
   <div id="panel-help" class="tab-panel" role="tabpanel" aria-labelledby="tab-help" hidden>
   <!-- TIGHT-MONTH TIPS -->
@@ -911,7 +884,7 @@ textarea{resize:vertical;min-height:120px}
   </div><!-- /panel-challenges -->
 
   <footer class="footer">
-    <p><strong>Budget Builder</strong> — a Money, Made Simple tool. The rule is free everywhere. What matters is seeing <em>your</em> numbers and the exact moves to change them. Your budget, bills, and goals are never stored or sent anywhere. The $100 Challenge and Weekly Check-In save their progress on this device only, in your browser — nothing leaves your phone or computer — and the question form only sends when you tap send.</p>
+    <p><strong>Budget Builder</strong> — a Money, Made Simple tool. The rule is free everywhere. What matters is seeing <em>your</em> numbers and the exact moves to change them. Your budget, bills, and goals are never stored or sent anywhere. The $100 Challenge saves its progress on this device only, in your browser — nothing leaves your phone or computer — and the question form only sends when you tap send.</p>
   </footer>
 </div>
 
@@ -2337,10 +2310,10 @@ renderGoals=function(){ _origRenderGoals(); renderNudges(); };
 
 // Keep new sections in sync when rule/income changes: wrap render
 var _origRender=render;
-render=function(){ _origRender(); renderGoals(); renderAfford(); renderPlan(); renderHealth(); renderWhatIf(); renderWealth(); renderChallenges(); renderMaxedOut(); renderBills(); renderNudges(); renderAffordIt(); renderCheckinHint(); };
+render=function(){ _origRender(); renderGoals(); renderAfford(); renderPlan(); renderHealth(); renderWhatIf(); renderWealth(); renderChallenges(); renderMaxedOut(); renderBills(); renderNudges(); renderAffordIt(); };
 renderGoals();
 
-// ---- ON-DEVICE STORAGE (challenge + check-in only; nothing is ever sent) ----
+// ---- ON-DEVICE STORAGE (challenge only; nothing is ever sent) ----
 function storeGet(k){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):null; }catch(e){ return null; } }
 function storeSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 function storeDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
@@ -2614,96 +2587,6 @@ if(_c100Reset) _c100Reset.addEventListener("click", function(){
 var _c100Draw=document.getElementById("c100Draw");
 if(_c100Draw) _c100Draw.addEventListener("click", function(){ c100SurpriseIdx++; renderC100Surprise(); });
 renderC100();
-
-// ---- WEEKLY MONEY CHECK-IN (history saves on this device only) ----
-var CI_KEY="nad-weekly-checkins-v1";
-var ciList=storeGet(CI_KEY);
-if(!Array.isArray(ciList)) ciList=[];
-var ciBillsDueNext7=0;
-function weekStartOf(d){
-  var x=new Date(d.getFullYear(), d.getMonth(), d.getDate());
-  var off=(x.getDay()+6)%7; // Monday = start of week
-  x.setDate(x.getDate()-off);
-  return x;
-}
-function weekLabel(ws){
-  var end=new Date(ws.getFullYear(), ws.getMonth(), ws.getDate()+6);
-  var sameYear=ws.getFullYear()===end.getFullYear();
-  return "Week of "+ws.toLocaleDateString("en-US",{weekday:"short", month:"short", day:"numeric"})+" – "+end.toLocaleDateString("en-US",{weekday:"short", month:"short", day:"numeric"})+(sameYear?", "+end.getFullYear():"");
-}
-function renderCheckinWeek(){
-  var el=document.getElementById("ciWeek"); if(!el) return;
-  el.textContent=weekLabel(weekStartOf(new Date()));
-}
-function renderCheckinHint(){
-  var el=document.getElementById("ciBillsHint"); if(!el) return;
-  var total=0, count=0;
-  if(typeof bills!=="undefined"){
-    bills.forEach(function(b){ if(daysUntilDue(b.due)<=7){ total+=(b.amount||0); count++; } });
-  }
-  ciBillsDueNext7=total;
-  if(count>0){
-    el.innerHTML='From your Bills calendar: <b>'+count+(count===1?" bill":" bills")+' — '+fmt(total)+'</b> — come due in the next 7 days. <button type="button" class="link-btn" id="ciUseBills">Use '+fmt(total)+'</button>';
-    var btn=document.getElementById("ciUseBills");
-    if(btn) btn.addEventListener("click", function(){ document.getElementById("ciBills").value=ciBillsDueNext7; });
-  } else {
-    el.textContent="No bills on your Bills calendar come due in the next 7 days — enter next week\u2019s bills here by hand if you track them elsewhere.";
-  }
-}
-function renderCiHistory(){
-  var el=document.getElementById("ciHistory"); if(!el) return;
-  if(!ciList.length){
-    el.innerHTML='<p class="hint">No check-ins yet. Your first one takes two minutes — fill in the four lines above and save it, and your history starts here.</p>';
-    return;
-  }
-  el.innerHTML=ciList.map(function(e){
-    var net=(e.in||0)-(e.spent||0);
-    return '<div class="ci-entry"><div class="ci-entry-top"><b>'+escGoal(e.label)+'</b><span class="due-badge '+(net>=0?"due-ok":"due-soon")+'">'+(net>=0?"+"+fmt(net)+" kept":fmt(-net)+" over")+'</span></div>'
-      +'<div class="goal-meta" style="margin-top:6px">Came in '+fmt(e.in||0)+' · Went out '+fmt(e.spent||0)+' · Bills due next week '+fmt(e.bills||0)+'</div>'
-      +(e.adjust?'<div style="margin-top:6px"><b>One adjustment:</b> '+escGoal(e.adjust)+'</div>':'')
-      +'</div>';
-  }).join("");
-}
-function renderCiSummary(entry){
-  var el=document.getElementById("ciSummary"); if(!el) return;
-  if(!entry){ el.innerHTML=""; return; }
-  var net=entry.in-entry.spent;
-  var billsNote = entry.bills>0
-    ? (net>=entry.bills ? " Next week&rsquo;s "+fmt(entry.bills)+" in bills is already covered by what this week kept." : " Next week&rsquo;s bills are "+fmt(entry.bills)+" and this week kept "+fmt(Math.max(0,net))+" — so "+fmt(entry.bills-Math.max(0,net))+" still has to come from next week&rsquo;s money. Worth knowing on Monday, not on the due date.")
-    : "";
-  el.innerHTML='<div class="verdict '+(net>=0?"good":"bad")+'" style="margin-top:16px">'
-    +(net>=0
-      ? "<b>This week kept "+fmt(net)+".</b> More came in ("+fmt(entry.in)+") than went out ("+fmt(entry.spent)+"). That is a week that moves you forward."
-      : "<b>This week ran "+fmt(-net)+" over.</b> More went out ("+fmt(entry.spent)+") than came in ("+fmt(entry.in)+"). One week like this is life; the check-in exists so it does not quietly become four.")
-    + billsNote
-    +(entry.adjust ? "<br><span style='font-weight:400'>Your one adjustment for next week: <b>"+escGoal(entry.adjust)+"</b>. One is enough — do that one.</span>" : "")
-    +'</div>';
-}
-var _ciSave=document.getElementById("ciSave");
-if(_ciSave) _ciSave.addEventListener("click", function(){
-  var ws=weekStartOf(new Date());
-  var entry={
-    weekStart: fmtISODate(ws),
-    label: weekLabel(ws),
-    in: num("ciIn"),
-    spent: num("ciSpent"),
-    bills: num("ciBills"),
-    adjust: document.getElementById("ciAdjust").value.trim(),
-    savedAt: new Date().toISOString()
-  };
-  var found=-1;
-  ciList.forEach(function(e,i){ if(e.weekStart===entry.weekStart) found=i; });
-  if(found>=0) ciList[found]=entry; else ciList.unshift(entry);
-  ciList.sort(function(a,b){ return a.weekStart<b.weekStart?1:-1; });
-  storeSet(CI_KEY, ciList);
-  var msg=document.getElementById("ciSavedMsg");
-  if(msg) msg.textContent = found>=0 ? "Updated — this week\u2019s check-in is saved on this device." : "Saved on this device. See you next week.";
-  renderCiHistory();
-  renderCiSummary(entry);
-});
-renderCheckinWeek();
-renderCheckinHint();
-renderCiHistory();
 
 // Init with example
 loadValues(EXAMPLE);
