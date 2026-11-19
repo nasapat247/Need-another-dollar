@@ -283,6 +283,91 @@ textarea{resize:vertical;min-height:120px}
 @media (max-width:640px){ .health-grid{grid-template-columns:1fr} .whatif-toggles{grid-template-columns:1fr} .chal-stats{grid-template-columns:1fr 1fr} .badge-grid{grid-template-columns:1fr} .wi-row{grid-template-columns:1fr 1fr} .wi-row.head{display:none} }
 @media (max-width:640px){ .focus-row{grid-template-columns:1fr} .wheel-wrap{grid-template-columns:1fr} }
 @media (max-width:860px){ .hero-grid,.layout,.ask-grid{grid-template-columns:1fr} .sticky{position:static} .rules{grid-template-columns:1fr} .row{grid-template-columns:1fr 118px} .preset-row,.afford-grid{grid-template-columns:1fr} .goal-row{grid-template-columns:1fr 1fr} .bill-head{display:none} .bill-row{grid-template-columns:1fr 1fr} .card-guide-grid,.tips-grid{grid-template-columns:1fr} .tabs-nav{flex-wrap:wrap} .tab-btn{flex:1 1 42%} }
+.maxed{border:2px solid var(--coral)}
+.maxed-banner{background:var(--coral-soft);border-radius:14px;padding:16px;margin-top:14px}
+.maxed-over{font-family:"Baloo 2","Public Sans",sans-serif;font-weight:800;font-size:1.55rem;line-height:1.15;color:var(--coral)}
+.still-over{font-weight:800;font-size:1.08rem;margin-top:10px}
+.still-over.bad{color:var(--coral)} .still-over.ok{color:var(--green)}
+.survival{margin-top:14px;background:var(--surface2);border-radius:12px;padding:12px 14px;font-size:.95rem}
+.cut-tier{margin-top:20px;border-top:1px solid var(--line);padding-top:14px}
+.cut-tier h4{font-size:1.05rem}
+.cut-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.cut-info{flex:1;min-width:0}
+.dontcut{font-size:.76rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--coral-soft);color:var(--coral);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.switch{flex:0 0 auto;width:54px;height:32px;min-height:32px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);position:relative;cursor:pointer;padding:0}
+.switch .knob{position:absolute;top:50%;left:3px;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--surface);border:1.5px solid var(--line);transition:left .18s ease,background .18s ease}
+.switch.on{background:var(--green);border-color:var(--green)}
+.switch.on .knob{left:25px;background:#fff}
+.switch:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.debt-list{display:grid;gap:8px;margin-top:10px}
+.debt-row{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.debt-main{flex:1;min-width:0}
+.debt-tag{display:inline-block;font-size:.74rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:var(--teal-soft);color:var(--teal);padding:3px 8px;border-radius:999px;white-space:nowrap;margin-left:4px}
+.debt-side{display:flex;align-items:center;gap:10px}
+.debt-date{font-weight:800;white-space:nowrap;font-size:.92rem}
+.debt-form{display:grid;grid-template-columns:1.3fr .9fr .6fr .9fr auto;gap:8px;align-items:end;margin-top:14px}
+.debt-form label{font-weight:700;font-size:.88rem;display:block;margin-bottom:6px}
+@media (max-width:640px){ .debt-form{grid-template-columns:1fr 1fr} .debt-row{flex-direction:column;align-items:flex-start} }
+.sched-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.sched-btn{appearance:none;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:11px 12px;cursor:pointer;color:var(--ink);font:inherit}
+.sched-btn b{display:block;font-size:.98rem}
+.sched-btn span{font-size:.82rem;color:var(--muted);display:block;margin-top:2px;line-height:1.35}
+.sched-btn[aria-pressed="true"]{border-color:var(--green);background:var(--green-soft)}
+.sched-btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.cal-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-top:6px}
+.cal-dow{font-size:.72rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:center;padding:2px 0}
+.cal-cell{min-height:88px;border:1px solid var(--line);border-radius:10px;padding:5px;background:var(--bg);display:flex;flex-direction:column;gap:3px;align-items:flex-start;min-width:0}
+.cal-cell.dim{opacity:.38}
+.cal-cell.today{border:2px solid var(--ink)}
+.cal-daynum{font-size:.8rem;font-weight:800}
+.cal-pay{font-size:.66rem;font-weight:800;color:var(--green);background:var(--green-soft);border-radius:6px;padding:2px 5px;line-height:1.3}
+.cal-chip{appearance:none;width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:7px;padding:3px 5px;font:inherit;font-size:.7rem;font-weight:700;color:var(--ink);text-align:left;cursor:pointer;line-height:1.25;min-height:0;overflow:hidden}
+.cal-chip small{display:block;font-weight:600;color:var(--muted);font-size:.64rem}
+.cal-chip.sel{border-color:var(--ink);background:var(--gold-soft)}
+.cal-chip:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+.bill-editor{margin-top:14px;border:1.5px solid var(--ink);border-radius:14px;padding:14px 16px;background:var(--bg)}
+.be-grid{display:grid;grid-template-columns:1.3fr .9fr .8fr .9fr;gap:10px;margin-top:10px}
+.be-grid label{font-weight:700;font-size:.88rem;display:block;margin-bottom:6px}
+.rec-group{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px;background:var(--bg)}
+.rec-group.over{border-color:var(--coral);background:var(--coral-soft)}
+.rec-group-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.rec-line{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid var(--line);font-size:.94rem}
+.rec-warn{margin-top:8px;font-weight:700;color:var(--coral);font-size:.94rem}
+@media (max-width:640px){ .sched-row{grid-template-columns:1fr 1fr} .cal-cell{min-height:62px;padding:3px} .cal-chip{font-size:.6rem;padding:2px 3px} .cal-chip small{font-size:.56rem} .cal-pay{font-size:.56rem} .be-grid{grid-template-columns:1fr 1fr} }
+.next-nudge{position:relative;background:var(--green-soft);border:2px solid var(--green);border-radius:var(--radius);padding:18px 20px;margin-top:16px;box-shadow:var(--shadow)}
+.next-nudge .nudge-kicker{font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green)}
+.next-nudge h3{font-size:1.3rem;margin-top:4px;padding-right:44px}
+.next-nudge p{margin:6px 0 14px;max-width:560px}
+.nudge-x{position:absolute;top:10px;right:10px;width:38px;height:38px;min-height:38px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.2rem;font-weight:800;line-height:1;cursor:pointer;padding:0}
+.nudge-x:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wealth-table{margin-top:14px;display:grid;gap:8px}
+.wrow{display:grid;grid-template-columns:1.15fr .8fr .85fr .65fr;gap:10px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.wrow.head{background:none;border:none;padding:0 14px;font-size:.76rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.wrow b{font-size:1.05rem;white-space:nowrap}
+.w-gain{font-weight:800;color:var(--green);white-space:nowrap}
+.mile-row{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.mile-row b{font-size:1.05rem}
+.mile-date{font-weight:800;text-align:right}
+.mile-date small{display:block;font-weight:600;color:var(--muted);font-size:.84rem;margin-top:2px}
+@media (max-width:640px){ .wrow{grid-template-columns:1fr 1fr} .wrow.head{display:none} .mile-row{flex-direction:column;gap:2px} .mile-date{text-align:left} }
+.pd-bill-row{display:grid;grid-template-columns:1fr 120px auto;gap:8px;align-items:center;margin-top:8px}
+.bv-tag{font-family:"Baloo 2","Public Sans",sans-serif;font-weight:800;font-size:1.6rem;line-height:1.1}
+.bv-yes{color:var(--green)} .bv-notyet{color:#8A6200} .bv-no{color:var(--coral)}
+@media (prefers-color-scheme: dark){ .bv-notyet{color:var(--gold)} }
+.c100-row{display:grid;grid-template-columns:auto 1fr 118px;gap:10px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
+.c100-check{width:26px;height:26px;accent-color:var(--green);cursor:pointer}
+.c100-row.done .c100-name b{color:var(--muted)}
+.c100-name b{display:block}
+.c100-name span{font-size:.86rem;color:var(--muted)}
+.tracker{display:grid;grid-template-columns:repeat(15,1fr);gap:4px;margin-top:10px}
+.tracker i{height:10px;border-radius:999px;background:var(--surface2)}
+.tracker i.on{background:var(--teal)}
+.tracker i.today{background:var(--gold);outline:2px solid var(--ink)}
+.ci-entry{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px;background:var(--bg)}
+.ci-entry-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.link-btn{background:none;border:none;cursor:pointer;text-decoration:underline;color:var(--green);font:inherit;font-weight:700;padding:0;min-height:0}
+@media (max-width:640px){ .pd-bill-row{grid-template-columns:1fr 104px auto} .c100-row{grid-template-columns:auto 1fr} .c100-row .money{grid-column:2} .tracker{grid-template-columns:repeat(10,1fr)} }
 @media (prefers-reduced-motion: reduce){ *{transition:none !important;scroll-behavior:auto !important} }
 </style>
 </head>
@@ -340,8 +425,10 @@ textarea{resize:vertical;min-height:120px}
 
   <nav class="tabs-nav" role="tablist" aria-label="Budget Builder sections">
     <button type="button" class="tab-btn" role="tab" id="tab-budget" aria-controls="panel-budget" aria-selected="true" data-tab="panel-budget">Your Budget<small>Pay → plan → actual → over/under</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-payday" aria-controls="panel-payday" aria-selected="false" data-tab="panel-payday">Payday<small>Can I make it to payday?</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-goals" aria-controls="panel-goals" aria-selected="false" data-tab="panel-goals">Goals &amp; Afford It<small>Experiences &amp; things you want</small></button>
-    <button type="button" class="tab-btn" role="tab" id="tab-bills" aria-controls="panel-bills" aria-selected="false" data-tab="panel-bills">Bills &amp; Cards<small>Due dates + points guide</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-bills" aria-controls="panel-bills" aria-selected="false" data-tab="panel-bills">Bills &amp; Cards<small>Calendar · paydays · points</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-checkin" aria-controls="panel-checkin" aria-selected="false" data-tab="panel-checkin">Weekly Check-In<small>Your 2-minute money review</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-help" aria-controls="panel-help" aria-selected="false" data-tab="panel-help">Tips &amp; Help<small>Tight months, FAQ &amp; ask</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-challenges" aria-controls="panel-challenges" aria-selected="false" data-tab="panel-challenges">Challenges<small>Life cards · badges &amp; streaks</small></button>
   </nav>
@@ -429,6 +516,19 @@ textarea{resize:vertical;min-height:120px}
         <div id="buckets"></div>
         <div class="unalloc" id="unalloc"></div>
         <div class="verdict warn" id="verdict"></div>
+        <div class="next-nudge" id="nudge-budget" hidden>
+          <button type="button" class="nudge-x" data-nudge-dismiss="budget" aria-label="Dismiss this suggestion">×</button>
+          <span class="nudge-kicker">What&rsquo;s next?</span>
+          <h3>Put your bills on the calendar</h3>
+          <p>Your budget&rsquo;s set. Now line every bill up against the days you actually get paid, so nothing sneaks up on you mid-month.</p>
+          <button type="button" class="btn btn-green" data-nudge-go="panel-bills">Open the Bills calendar →</button>
+        </div>
+      </section>
+
+      <section class="card maxed" id="maxedPanel" hidden aria-labelledby="maxed-h">
+        <h3 id="maxed-h">Maxed Out mode — triage for a month that doesn&rsquo;t fit</h3>
+        <p class="sub">This panel only appears when your spending passes your pay. Work it top to bottom: cut wants first, trim the needs that can flex, negotiate the ones that can&rsquo;t — and aim every freed dollar at your smallest debt.</p>
+        <div id="maxedBody"></div>
       </section>
 
       <section class="card" aria-labelledby="health-h">
@@ -478,10 +578,66 @@ textarea{resize:vertical;min-height:120px}
         </div>
         <div id="whatIfOut" aria-live="polite"></div>
       </section>
+
+      <div class="step-arrow" aria-hidden="true">↓</div>
+
+      <section class="card" aria-labelledby="wealth-h">
+        <h3 id="wealth-h">Your Plan to Wealth</h3>
+        <p class="sub">Not a grade — a map. This is built from the saving in your budget above, and it looks forward: what that monthly habit could grow to if the money is invested, when you&rsquo;d pass the big milestones, and what one extra $100 a month would change. Change any number in your budget and the plan updates with it.</p>
+        <div class="field" style="max-width:240px;margin-top:14px">
+          <label for="wealthAge">Your age</label>
+          <input id="wealthAge" type="number" inputmode="numeric" min="1" max="100" step="1" value="25">
+          <p class="small-note" style="margin-top:6px">So the “by age 65” numbers below are real for you, not a guess.</p>
+        </div>
+        <div id="wealthBody" aria-live="polite"></div>
+      </section>
   </main>
   </div><!-- /panel-budget -->
 
+  <div id="panel-payday" class="tab-panel" role="tabpanel" aria-labelledby="tab-payday" hidden>
+  <!-- CAN I MAKE IT TO PAYDAY? -->
+  <section class="section" aria-labelledby="payday-h">
+    <div class="section-head"><h2 id="payday-h">Can I make it to payday?</h2><p class="sub" style="font-size:1rem;margin-top:8px">The stretch between now and your next check is where budgets quietly break. Put in what you have, when the next check lands, and the must-pay bills in between — this shows what is actually safe to spend, and a simple per-day number to live by until payday.</p></div>
+    <div class="card" style="margin-top:16px">
+      <div class="goal-form" style="margin-top:0">
+        <div><label for="pdMoney">Money you have available right now</label><div class="money"><input id="pdMoney" type="number" inputmode="decimal" min="0" step="10" value="420"></div><p class="small-note" style="margin-top:6px">Checking account, cash — everything you could spend today.</p></div>
+        <div><label for="pdDate">Next payday</label><input id="pdDate" type="date"><p class="small-note" style="margin-top:6px">The day the next check actually lands in your account.</p></div>
+      </div>
+      <div class="group" style="margin-top:20px">
+        <div class="group-head"><h4>Essential bills due before payday</h4><span class="group-total" id="pdBillsTotal">$0</span></div>
+        <p class="sub" style="margin-top:6px">Only the must-pays that land before that check — rent, a card minimum, the electric bill. If a bill is due after payday, leave it off.</p>
+        <div id="pdBillsList"></div>
+        <div style="margin-top:12px"><button type="button" class="btn btn-ghost" id="pdAddBill">+ Add a bill</button></div>
+      </div>
+      <div id="pdOut" aria-live="polite"></div>
+      <p class="hint"><strong>Read this first:</strong> this estimate is only as good as what you put in. It counts the money, payday, and bills you entered above — if a bill or a regular spend is missing, the “safe to spend” number will look better than real life. When in doubt, add the bill. Leaving a little extra untouched is the conservative move, and it is what the per-day guide is built for.</p>
+    </div>
+  </section>
+  </div><!-- /panel-payday -->
+
   <div id="panel-goals" class="tab-panel" role="tabpanel" aria-labelledby="tab-goals" hidden>
+  <!-- CAN I ACTUALLY AFFORD IT? -->
+  <section class="section" aria-labelledby="affordit-h">
+    <div class="section-head"><h2 id="affordit-h">Can I actually afford it?</h2><p class="sub" style="font-size:1rem;margin-top:8px">One purchase, one straight answer. Pick what you are eyeing, put in what it costs up front and what it adds every month, and this checks it against the real numbers in your Budget tab — your essentials, your leftover cash, and your #1 goal below.</p></div>
+    <div class="card" style="margin-top:16px">
+      <div class="goal-form" style="margin-top:0">
+        <div><label for="afType">What are you buying?</label>
+          <select id="afType">
+            <option value="concert">Concert or game tickets</option>
+            <option value="trip">A trip</option>
+            <option value="shoes">Shoes / sneakers</option>
+            <option value="car">A car</option>
+            <option value="other">My own thing</option>
+          </select></div>
+        <div><label for="afName">Name it <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input id="afName" type="text" placeholder="e.g. Floor seats, the Poconos trip, a used sedan"></div>
+        <div><label for="afUpfront">Cost up front</label><div class="money"><input id="afUpfront" type="number" inputmode="decimal" min="0" step="10" value="350"></div><p class="small-note" style="margin-top:6px">What leaves your account on day one — ticket price, down payment, the full cost if it is a one-time buy.</p></div>
+        <div><label for="afMonthly">Added cost every month</label><div class="money"><input id="afMonthly" type="number" inputmode="decimal" min="0" step="10" value="0"></div><p class="small-note" style="margin-top:6px">A car payment, higher insurance, a payment plan. Leave it at $0 for a one-time purchase.</p></div>
+      </div>
+      <div id="afOut" aria-live="polite"></div>
+      <p class="hint">The verdict runs on your Budget tab numbers — take-home pay, needs, wants, saving, and what you have saved up. Change anything there and this answer updates with it. Nothing here is saved or sent anywhere.</p>
+    </div>
+  </section>
+
   <!-- GOALS -->
   <section class="section" aria-labelledby="goals-h">
     <div class="section-head"><h2 id="goals-h">Your goals — experiences &amp; things, not just numbers</h2><p class="sub" style="font-size:1rem;margin-top:8px">Start with what you actually want — a trip, a night out, a thing you&rsquo;ve been eyeing. You don&rsquo;t need a price tag to put it on the list. Name it first; worry about what it costs later, only if that helps.</p></div>
@@ -519,6 +675,13 @@ textarea{resize:vertical;min-height:120px}
       <div id="goalsSummary" class="verdict warn" style="margin-top:16px"></div>
       <p class="hint"><strong>Why no price required?</strong> The Budget tab already handles the money — how much you can set aside each month. This tab is about direction: what that saving is <em>for</em>. A list that starts with experiences and things you&rsquo;ll actually enjoy is easier to stick to than a list of dollar targets.</p>
     </div>
+    <div class="next-nudge" id="nudge-goals" hidden>
+      <button type="button" class="nudge-x" data-nudge-dismiss="goals" aria-label="Dismiss this suggestion">×</button>
+      <span class="nudge-kicker">What&rsquo;s next?</span>
+      <h3>Test your budget</h3>
+      <p>You&rsquo;ve got something to save for. Now see how your budget holds up when life deals a card — a car breakdown, a surprise bonus, a lost shift.</p>
+      <button type="button" class="btn btn-green" data-nudge-go="panel-challenges">Try the Challenges →</button>
+    </div>
   </section>
 
   <!-- AFFORDABILITY PRESETS -->
@@ -540,13 +703,36 @@ textarea{resize:vertical;min-height:120px}
   <div id="panel-bills" class="tab-panel" role="tabpanel" aria-labelledby="tab-bills" hidden>
   <!-- BILLS & REMINDERS -->
   <section class="section" aria-labelledby="bills-h">
-    <div class="section-head"><h2 id="bills-h">Bills, due dates &amp; late fees</h2><p class="sub" style="font-size:1rem;margin-top:8px">A website can’t text you a reminder — but this list shows what’s due next, how soon, and what a late payment would cost you. Check it on payday and you’ll never pay a dumb fee again.</p></div>
+    <div class="section-head"><h2 id="bills-h">Your bills, on the calendar</h2><p class="sub" style="font-size:1rem;margin-top:8px">Put every bill on the calendar, lined up with the days you actually get paid. Paydays are marked in green, each bill sits on its due date, and the panel underneath splits your bills across your paychecks — and warns you when one check can&rsquo;t cover its share.</p></div>
     <div class="card" style="margin-top:16px">
-      <div class="bill-head"><span>Bill</span><span>Amount</span><span>Due day</span><span>Late fee if late</span><span></span></div>
-      <div id="billsList"></div>
+      <span class="label">How do you get paid?</span>
+      <div class="sched-row" role="group" aria-label="Pay schedule">
+        <button type="button" class="sched-btn" data-sched="semimonthly" aria-pressed="true"><b>Twice a month</b><span>On the 1st &amp; 15th — the most common setup</span></button>
+        <button type="button" class="sched-btn" data-sched="biweekly" aria-pressed="false"><b>Every 2 weeks</b><span>Same weekday, every other week</span></button>
+        <button type="button" class="sched-btn" data-sched="weekly" aria-pressed="false"><b>Weekly</b><span>Same weekday, every week</span></button>
+        <button type="button" class="sched-btn" data-sched="monthly" aria-pressed="false"><b>Monthly</b><span>One check a month</span></button>
+      </div>
+      <div id="schedExtra" style="margin-top:10px"></div>
+      <div class="cal-nav">
+        <button type="button" class="btn btn-ghost" id="calPrev" aria-label="Previous month">← Prev</button>
+        <h3 id="calLabel" style="font-size:1.3rem">Month</h3>
+        <button type="button" class="btn btn-ghost" id="calNext" aria-label="Next month">Next →</button>
+      </div>
+      <div class="cal-grid" id="calDow" aria-hidden="true"></div>
+      <div class="cal-grid" id="calGrid" aria-label="Bill calendar"></div>
+      <p class="small-note" style="margin-top:10px"><span class="cal-pay" style="display:inline-block">Payday</span> marks the days money lands (amounts use the take-home pay from the Budget tab). Tap any bill chip to edit its amount, due date, or late fee.</p>
+      <div id="billEditor"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button type="button" class="btn btn-ghost" id="addBillBtn">+ Add a bill</button><button type="button" class="btn btn-ghost" id="resetBillsBtn">Reset examples</button></div>
+      <div id="billRecs"></div>
       <div id="billsSummary"></div>
       <div class="hint"><strong>Pay on time, every time — the system:</strong> 1) Turn on autopay for at least the minimum on every card. 2) Pay 2 days <em>before</em> the due date — weekends and processing delays cause “on-time” payments to post late. 3) Put due dates on your calendar with a 3-day warning. 4) If you do get hit, call and ask for a one-time courtesy waiver — first-time late fees are waived more often than people think. One $30 late fee is a week of groceries.</div>
+    </div>
+    <div class="next-nudge" id="nudge-bills" hidden>
+      <button type="button" class="nudge-x" data-nudge-dismiss="bills" aria-label="Dismiss this suggestion">×</button>
+      <span class="nudge-kicker">What&rsquo;s next?</span>
+      <h3>Set something to save for</h3>
+      <p>Your bills are on the calendar. Now give your saving a target — a trip, a thing, a night out — so the plan has a point.</p>
+      <button type="button" class="btn btn-green" data-nudge-go="panel-goals">Go to Goals →</button>
     </div>
   </section>
 
@@ -568,6 +754,31 @@ textarea{resize:vertical;min-height:120px}
   </section>
 
   </div><!-- /panel-bills -->
+
+  <div id="panel-checkin" class="tab-panel" role="tabpanel" aria-labelledby="tab-checkin" hidden>
+  <!-- WEEKLY MONEY CHECK-IN -->
+  <section class="section" aria-labelledby="checkin-h">
+    <div class="section-head"><h2 id="checkin-h">Weekly Money Check-In</h2><p class="sub" style="font-size:1rem;margin-top:8px">Two minutes, once a week. Four numbers and one honest adjustment — that is the whole review. Budgets do not fail in the planning; they drift in the weeks nobody looks. This is the looking.</p></div>
+    <div class="card" style="margin-top:16px">
+      <span class="label">This week</span>
+      <h3 id="ciWeek" style="font-size:1.35rem;margin-top:6px">This week</h3>
+      <p class="sub">Fill in the week you are in right now. Saving it again for the same week just updates that week&rsquo;s entry.</p>
+      <div class="goal-form">
+        <div><label for="ciIn">Money that came in this week</label><div class="money"><input id="ciIn" type="number" inputmode="decimal" min="0" step="10" placeholder="0"></div><p class="small-note" style="margin-top:6px">Paychecks, side money, anything that landed.</p></div>
+        <div><label for="ciSpent">Money that went out this week</label><div class="money"><input id="ciSpent" type="number" inputmode="decimal" min="0" step="10" placeholder="0"></div><p class="small-note" style="margin-top:6px">Everything — bills, food, fun. A close guess beats skipping the week.</p></div>
+        <div><label for="ciBills">Bills due next week</label><div class="money"><input id="ciBills" type="number" inputmode="decimal" min="0" step="10" placeholder="0"></div><p class="small-note" style="margin-top:6px" id="ciBillsHint">Add bills in the Bills tab and this line will show what is coming due.</p></div>
+        <div><label for="ciAdjust">One adjustment for next week</label><input id="ciAdjust" type="text" placeholder="e.g. Cook twice instead of ordering in"><p class="small-note" style="margin-top:6px">Just one. Small and specific beats big and vague.</p></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center"><button type="button" class="btn btn-green" id="ciSave">Save this week&rsquo;s check-in →</button><span class="small-note" id="ciSavedMsg" role="status"></span></div>
+      <div id="ciSummary" aria-live="polite"></div>
+      <p class="hint"><strong>Where this lives:</strong> your check-ins save on this device only — in this browser, on this phone or computer. Nothing is sent anywhere, and there is no account, so clearing your browser data or switching devices starts the history over. This page also cannot send reminders — no tool on a page like this can — so the habit is the reminder: same day each week, open this tab, two minutes.</p>
+    </div>
+    <div class="card" aria-labelledby="ci-history-h">
+      <h3 id="ci-history-h">Past check-ins</h3>
+      <div id="ciHistory"></div>
+    </div>
+  </section>
+  </div><!-- /panel-checkin -->
 
   <div id="panel-help" class="tab-panel" role="tabpanel" aria-labelledby="tab-help" hidden>
   <!-- TIGHT-MONTH TIPS -->
@@ -668,6 +879,31 @@ textarea{resize:vertical;min-height:120px}
       <div style="margin-top:12px"><button type="button" class="btn btn-ghost" id="resetChalBtn">Start the deck over</button></div>
     </div>
 
+    <div class="card" style="margin-top:16px" aria-labelledby="c100-h">
+      <span class="label">New · 30 days</span>
+      <h3 id="c100-h" style="font-size:1.35rem;margin-top:6px">The $100 Money Challenge</h3>
+      <p class="sub" style="margin-top:6px">Thirty days to find $100 — and actually keep it. Not earn more, not win it: keep money that was already leaking out. Pick actions from the list, check each one off when it is done, and put in the dollars it kept. The total below is real money that stays in your account instead of drifting away.</p>
+      <div id="c100Status" style="margin-top:14px"></div>
+      <div class="chal-stats" style="grid-template-columns:repeat(3,1fr)">
+        <div class="chal-stat"><b id="c100Total">$0</b><span>Kept so far</span></div>
+        <div class="chal-stat"><b id="c100Left">$100</b><span>Still to find</span></div>
+        <div class="chal-stat"><b id="c100Day">—</b><span>Day of 30</span></div>
+      </div>
+      <div class="progress" role="img" aria-label="Progress toward $100"><i id="c100Bar" style="width:0%"></i></div>
+      <p class="small-note" id="c100Pct" style="margin-top:6px">0% of the way to $100.</p>
+      <span class="label" style="display:block;margin-top:18px">Your 30 days</span>
+      <div class="tracker" id="c100Tracker" aria-hidden="true"></div>
+      <p class="small-note" id="c100TrackerNote" style="margin-top:6px">Each block is one day. Gold is today.</p>
+      <span class="label" style="display:block;margin-top:18px">Pick your moves — check them off as you do them</span>
+      <div id="c100List"></div>
+      <div class="smart-note" id="c100Surprise" style="margin-top:16px"></div>
+      <div style="margin-top:10px"><button type="button" class="btn btn-ghost" id="c100Draw">Draw another surprise</button></div>
+      <p class="hint" style="margin-top:16px"><strong>Where this lives:</strong> your challenge progress saves on this device only — in this browser, on this phone or computer — so it is still here when you come back. Nothing is sent anywhere, and there is no account, so clearing your browser data or switching devices starts the challenge over.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><button type="button" class="btn btn-green" id="c100Start">Start the 30 days</button><button type="button" class="btn btn-ghost" id="c100Reset">Start over</button></div>
+    </div>
+
+    <h3 style="margin-top:24px">The deck — six life cards</h3>
+    <p class="sub">This is the part you play. Six cards, any order — each one judged against the numbers in your Budget tab, and your progress above updates as you go.</p>
     <div id="challengeList"></div>
     <p class="hint" style="margin-top:14px">Playing with the example numbers? Load your own pay and spending in the Budget tab first — every card re-judges itself against your real numbers, so a play that&rsquo;s smart on the example budget might not be smart on yours.</p>
   </section>
@@ -675,7 +911,7 @@ textarea{resize:vertical;min-height:120px}
   </div><!-- /panel-challenges -->
 
   <footer class="footer">
-    <p><strong>Budget Builder</strong> — a Money, Made Simple tool. The rule is free everywhere. What matters is seeing <em>your</em> numbers and the exact moves to change them. This page stores nothing and sends nothing unless you tap send in the question form.</p>
+    <p><strong>Budget Builder</strong> — a Money, Made Simple tool. The rule is free everywhere. What matters is seeing <em>your</em> numbers and the exact moves to change them. Your budget, bills, and goals are never stored or sent anywhere. The $100 Challenge and Weekly Check-In save their progress on this device only, in your browser — nothing leaves your phone or computer — and the question form only sends when you tap send.</p>
   </footer>
 </div>
 
@@ -1282,7 +1518,7 @@ document.getElementById("usePresetBtn").addEventListener("click",function(){
 });
 renderAfford();
 
-// ---- BILLS ----
+// ---- BILLS & CALENDAR ----
 var DEFAULT_BILLS=[
   {name:"Rent",amount:1450,due:1,fee:50},
   {name:"Phone",amount:85,due:15,fee:35},
@@ -1292,33 +1528,184 @@ var DEFAULT_BILLS=[
 var bills=DEFAULT_BILLS.slice();
 function daysUntilDue(dueDay){
   var now=new Date(); var today=now.getDate();
-  var thisMonth=new Date(now.getFullYear(),now.getMonth(),Math.min(dueDay,28));
   var target;
   if(dueDay>=today){ target=new Date(now.getFullYear(),now.getMonth(),dueDay); }
   else { target=new Date(now.getFullYear(),now.getMonth()+1,dueDay); }
   var diff=Math.ceil((target-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/(1000*60*60*24));
   return diff;
 }
-function renderBills(){
-  var wrap=document.getElementById("billsList"); wrap.innerHTML="";
-  bills.forEach(function(b,idx){
-    var row=document.createElement("div"); row.className="bill-row";
-    row.innerHTML='<input type="text" value="'+b.name.replace(/"/g,"&quot;")+'" data-bill="'+idx+'" data-field="name" aria-label="Bill name">'
-      +'<div class="money"><input type="number" min="0" step="1" value="'+b.amount+'" data-bill="'+idx+'" data-field="amount" aria-label="Amount"></div>'
-      +'<input type="number" min="1" max="31" step="1" value="'+b.due+'" data-bill="'+idx+'" data-field="due" aria-label="Due day">'
-      +'<div class="money"><input type="number" min="0" step="1" value="'+b.fee+'" data-bill="'+idx+'" data-field="fee" aria-label="Late fee"></div>'
-      +'<button type="button" class="icon-btn" data-remove-bill="'+idx+'" aria-label="Remove bill">×</button>';
-    wrap.appendChild(row);
-  });
-  wrap.querySelectorAll("input[data-bill]").forEach(function(inp){
-    inp.addEventListener("input",function(){
-      var i=parseInt(this.getAttribute("data-bill"),10); var f=this.getAttribute("data-field");
-      if(f==="name") bills[i].name=this.value; else bills[i][f]=parseFloat(this.value)||0;
-      renderBillsSummary();
+var MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var DOWS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var paySchedule="semimonthly";
+var payDayMonthly=1;
+var _calNow=new Date();
+var calY=_calNow.getFullYear(), calM=_calNow.getMonth();
+var selectedBill=-1;
+function fmtISODate(d){ return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
+function parseISODate(s){ var p=(s||"").split("-"); if(p.length<3) return new Date(); return new Date(+p[0],+p[1]-1,+p[2]); }
+var payAnchorISO=(function(){ var d=new Date(); d.setHours(0,0,0,0); var add=(5-d.getDay()+7)%7; d.setDate(d.getDate()+add); return fmtISODate(d); })();
+function daysInMonth(y,m){ return new Date(y,m+1,0).getDate(); }
+function ordinalSuffix(n){ if(n%10===1&&n%100!==11) return "st"; if(n%10===2&&n%100!==12) return "nd"; if(n%10===3&&n%100!==13) return "rd"; return "th"; }
+function paycheckAmount(){
+  var inc=num("income"); if(inc<=0) return 0;
+  if(paySchedule==="semimonthly") return inc/2;
+  if(paySchedule==="monthly") return inc;
+  if(paySchedule==="biweekly") return inc*12/26;
+  return inc*12/52;
+}
+function paydaysInMonth(y,m){
+  var dim=daysInMonth(y,m), out=[];
+  if(paySchedule==="semimonthly"){ out.push(new Date(y,m,1)); out.push(new Date(y,m,Math.min(15,dim))); }
+  else if(paySchedule==="monthly"){ out.push(new Date(y,m,Math.min(Math.max(1,payDayMonthly),dim))); }
+  else{
+    var step=paySchedule==="weekly"?7:14;
+    var a=parseISODate(payAnchorISO); a.setHours(0,0,0,0);
+    var first=new Date(y,m,1), last=new Date(y,m,dim);
+    var diff=Math.round((first.getTime()-a.getTime())/86400000);
+    var k=Math.ceil(diff/step);
+    var d=new Date(a.getTime()); d.setDate(d.getDate()+k*step);
+    while(d<=last){ out.push(new Date(d.getTime())); d.setDate(d.getDate()+step); }
+  }
+  return out;
+}
+function renderSchedExtra(){
+  var el=document.getElementById("schedExtra"); if(!el) return;
+  if(paySchedule==="biweekly"||paySchedule==="weekly"){
+    el.innerHTML='<div class="field" style="max-width:280px"><label for="payAnchor">Next payday</label><input type="date" id="payAnchor" value="'+payAnchorISO+'"></div><p class="small-note" style="margin-top:6px">Paydays repeat every '+(paySchedule==="weekly"?"7":"14")+' days from this date — set it to your most recent or next payday and the calendar fills in the rest.</p>';
+    document.getElementById("payAnchor").addEventListener("change",function(){ if(this.value){ payAnchorISO=this.value; renderBills(); } });
+  } else if(paySchedule==="monthly"){
+    el.innerHTML='<div class="field" style="max-width:220px"><label for="payDayMonthlyInput">Payday — day of the month</label><input type="number" id="payDayMonthlyInput" min="1" max="31" step="1" value="'+payDayMonthly+'"></div>';
+    document.getElementById("payDayMonthlyInput").addEventListener("input",function(){ var v=parseInt(this.value,10); if(v>=1&&v<=31){ payDayMonthly=v; renderCalendar(); renderBillRecs(); } });
+  } else {
+    el.innerHTML='<p class="small-note">Paydays land on the 1st and 15th. Bills due before the 15th ride the 1st check; bills due on or after the 15th ride the 15th check.</p>';
+  }
+}
+function renderCalendar(){
+  var label=document.getElementById("calLabel"); if(!label) return;
+  label.textContent=MONTHS[calM]+" "+calY;
+  var dow=document.getElementById("calDow");
+  if(dow) dow.innerHTML=DOWS.map(function(d){ return '<div class="cal-dow">'+d+'</div>'; }).join("");
+  var grid=document.getElementById("calGrid"); if(!grid) return;
+  var dim=daysInMonth(calY,calM);
+  var firstDow=new Date(calY,calM,1).getDay();
+  var prevDim=daysInMonth(calY,calM-1);
+  var paySet={}; paydaysInMonth(calY,calM).forEach(function(d){ paySet[d.getDate()]=true; });
+  var checkAmt=paycheckAmount();
+  var today=new Date();
+  var html="";
+  for(var i=0;i<firstDow;i++){ html+='<div class="cal-cell dim"><span class="cal-daynum">'+(prevDim-firstDow+1+i)+'</span></div>'; }
+  for(var day=1; day<=dim; day++){
+    var isToday = today.getFullYear()===calY && today.getMonth()===calM && today.getDate()===day;
+    html+='<div class="cal-cell'+(isToday?" today":"")+'"><span class="cal-daynum">'+day+(isToday?" · today":"")+'</span>';
+    if(paySet[day]) html+='<span class="cal-pay">Payday'+(checkAmt>0?" "+fmt(checkAmt):"")+'</span>';
+    bills.forEach(function(b,idx){
+      var dueDay=Math.min(Math.max(1,b.due||1), dim);
+      if(dueDay===day){
+        html+='<button type="button" class="cal-chip'+(idx===selectedBill?" sel":"")+'" data-chip="'+idx+'" aria-label="Edit bill '+(b.name||"Bill")+'">'+escGoal(b.name||"Bill")+'<small>'+fmt(b.amount||0)+'</small></button>';
+      }
+    });
+    html+='</div>';
+  }
+  var trail=(7-((firstDow+dim)%7))%7;
+  for(var t=0;t<trail;t++){ html+='<div class="cal-cell dim"><span class="cal-daynum">'+(t+1)+'</span></div>'; }
+  grid.innerHTML=html;
+  grid.querySelectorAll("[data-chip]").forEach(function(chip){
+    chip.addEventListener("click",function(){
+      selectedBill=parseInt(this.getAttribute("data-chip"),10);
+      renderCalendar(); renderBillEditor();
+      var ed=document.getElementById("billEditor"); if(ed) ed.scrollIntoView({behavior:"smooth",block:"nearest"});
     });
   });
-  wrap.querySelectorAll("[data-remove-bill]").forEach(function(btn){ btn.addEventListener("click",function(){ bills.splice(parseInt(this.getAttribute("data-remove-bill"),10),1); renderBills(); }); });
+}
+function renderBillEditor(){
+  var el=document.getElementById("billEditor"); if(!el) return;
+  if(selectedBill<0 || !bills[selectedBill]){
+    el.innerHTML='<p class="hint" style="margin-top:12px">Tap a bill on the calendar to edit its amount, due date, or late fee — or add a new one with the button below.</p>';
+    return;
+  }
+  var b=bills[selectedBill];
+  el.innerHTML='<div class="bill-editor"><h4>Editing: '+escGoal(b.name||"Bill")+'</h4>'
+    +'<div class="be-grid">'
+    +'<div><label for="beName">Bill name</label><input type="text" id="beName" value="'+escGoal(b.name||"")+'"></div>'
+    +'<div><label for="beAmount">Amount</label><div class="money"><input type="number" id="beAmount" min="0" step="1" value="'+(b.amount||0)+'"></div></div>'
+    +'<div><label for="beDue">Due day (1–31)</label><input type="number" id="beDue" min="1" max="31" step="1" value="'+(b.due||1)+'"></div>'
+    +'<div><label for="beFee">Late fee if late</label><div class="money"><input type="number" id="beFee" min="0" step="1" value="'+(b.fee||0)+'"></div></div>'
+    +'</div>'
+    +'<p class="small-note" style="margin-top:8px">Late-fee risk: paying this one late costs '+fmt(b.fee||0)+' — and a late card payment can also trigger a penalty APR. The pay-on-time system below is how you avoid both.</p>'
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px"><button type="button" class="btn btn-green" id="beDone">Done</button><button type="button" class="btn btn-ghost" id="beRemove">Remove this bill</button></div></div>';
+  function sync(){ renderCalendar(); renderBillRecs(); renderBillsSummary(); }
+  document.getElementById("beName").addEventListener("input",function(){ bills[selectedBill].name=this.value; sync(); });
+  document.getElementById("beAmount").addEventListener("input",function(){ bills[selectedBill].amount=parseFloat(this.value)||0; sync(); });
+  document.getElementById("beDue").addEventListener("input",function(){ var v=parseInt(this.value,10); if(v>=1&&v<=31){ bills[selectedBill].due=v; sync(); } });
+  document.getElementById("beFee").addEventListener("input",function(){ bills[selectedBill].fee=parseFloat(this.value)||0; sync(); });
+  document.getElementById("beDone").addEventListener("click",function(){ selectedBill=-1; renderCalendar(); renderBillEditor(); });
+  document.getElementById("beRemove").addEventListener("click",function(){ bills.splice(selectedBill,1); selectedBill=-1; renderBills(); });
+}
+function renderBillRecs(){
+  var el=document.getElementById("billRecs"); if(!el) return;
+  if(!bills.length){ el.innerHTML=""; return; }
+  var dim=daysInMonth(calY,calM);
+  var win=[];
+  [-1,0,1].forEach(function(off){ var d=new Date(calY,calM+off,1); paydaysInMonth(d.getFullYear(),d.getMonth()).forEach(function(p){ win.push(p); }); });
+  win.sort(function(a,b){ return a-b; });
+  var groups={}, order=[];
+  bills.forEach(function(b,idx){
+    var dueDay=Math.min(Math.max(1,b.due||1),dim);
+    var bd=new Date(calY,calM,dueDay);
+    var gov=null;
+    win.forEach(function(p){ if(p<=bd) gov=p; });
+    if(!gov) gov=win[0];
+    var key=fmtISODate(gov);
+    if(!groups[key]){ groups[key]={date:gov, items:[], total:0}; order.push(key); }
+    groups[key].items.push({b:b, idx:idx, dueDay:dueDay});
+    groups[key].total+=(b.amount||0);
+  });
+  order.sort();
+  var checkAmt=paycheckAmount();
+  var html='<h3 style="margin-top:22px">Which paycheck covers which bill</h3><p class="sub">Built from your pay schedule for '+MONTHS[calM]+'. A bill rides the paycheck that lands on or just before its due date — that&rsquo;s the check the money has to come out of.</p>';
+  order.forEach(function(key){
+    var g=groups[key];
+    var dstr=g.date.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});
+    var over = checkAmt>0 && g.total>checkAmt;
+    html+='<div class="rec-group'+(over?" over":"")+'"><div class="rec-group-top"><b>Paycheck · '+dstr+'</b><span><b>'+fmt(g.total)+'</b>'+(checkAmt>0?' of ≈'+fmt(checkAmt)+' check':'')+'</span></div>'
+      + g.items.map(function(it){ return '<div class="rec-line"><span>'+escGoal(it.b.name||"Bill")+' — due the '+it.dueDay+ordinalSuffix(it.dueDay)+'</span><span>'+fmt(it.b.amount||0)+'</span></div>'; }).join("")
+      + (over? '<div class="rec-warn">⚠ These bills total '+fmt(g.total)+' — more than this paycheck ('+fmt(checkAmt)+'). This check runs dry before the next one lands unless a bill moves or money is set aside from the check before.</div>' : '')
+      + '</div>';
+  });
+  if(checkAmt<=0) html+='<p class="hint">Add your take-home pay in the Budget tab and this panel will check each paycheck against the bills riding it.</p>';
+  if(order.length>=2){
+    var gs=order.map(function(k){ return groups[k]; });
+    var maxG=gs[0], minG=gs[0];
+    gs.forEach(function(g){ if(g.total>maxG.total) maxG=g; if(g.total<minG.total) minG=g; });
+    var imbalanced = (maxG.total-minG.total)>75 && (checkAmt<=0 || maxG.total>checkAmt || maxG.total>minG.total*1.5);
+    if(maxG!==minG && imbalanced){
+      var cand=maxG.items[0];
+      maxG.items.forEach(function(it){ if((it.b.amount||0)>(cand.b.amount||0)) cand=it; });
+      var suggDay=null;
+      if(minG.date.getFullYear()===calY && minG.date.getMonth()===calM){
+        suggDay=Math.min(minG.date.getDate()+1, dim);
+        if(suggDay===cand.dueDay) suggDay=Math.min(suggDay+1, dim);
+      }
+      var targetStr=minG.date.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});
+      html+='<div class="smart-note"><b>Balance it:</b> move <b>'+escGoal(cand.b.name||"Bill")+'</b> ('+fmt(cand.b.amount||0)+', due the '+cand.dueDay+ordinalSuffix(cand.dueDay)+') to the other half of the month. Ask the biller to move its due date'+(suggDay?' to around the <b>'+suggDay+ordinalSuffix(suggDay)+'</b>':'')+' so it rides the '+targetStr+' paycheck instead. That takes '+fmt(cand.b.amount||0)+' off the loaded check ('+fmt(maxG.total)+' → '+fmt(maxG.total-(cand.b.amount||0))+') and evens the month out. Most billers allow a due-date change once or twice a year, free — see Tip 1 in the Tips &amp; Help tab.'
+        + (suggDay? '<div style="margin-top:10px"><button type="button" class="btn btn-ghost" data-move-bill="'+cand.idx+'" data-move-day="'+suggDay+'">Move it to the '+suggDay+ordinalSuffix(suggDay)+' on the calendar</button></div>' : '')
+        + '</div>';
+    }
+  }
+  el.innerHTML=html;
+  el.querySelectorAll("[data-move-bill]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var i=parseInt(this.getAttribute("data-move-bill"),10);
+      bills[i].due=parseInt(this.getAttribute("data-move-day"),10);
+      renderBills();
+    });
+  });
+}
+function renderBills(){
+  renderCalendar();
+  renderBillRecs();
   renderBillsSummary();
+  renderBillEditor();
 }
 function renderBillsSummary(){
   var el=document.getElementById("billsSummary"); if(!el) return;
@@ -1332,8 +1719,18 @@ function renderBillsSummary(){
   var rows=sorted.map(function(b){ var dd=daysUntilDue(b.due); var cls=dd<=5?"due-soon":(dd<=10?"due-mid":"due-ok"); var txt=dd===0?"Today":(dd===1?"Tomorrow":"In "+dd+"d · the "+b.due+"th"); return '<div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line)"><span><b>'+ (b.name||"Bill") +'</b> <span class="goal-meta">'+fmt(b.amount||0)+' · late fee '+fmt(b.fee||0)+'</span></span><span class="due-badge '+cls+'">'+txt+'</span></div>'; }).join("");
   el.innerHTML='<div class="verdict '+(d<=5?"bad":"warn")+'" style="margin-top:14px">Next up: <b>'+(next.name||"Bill")+'</b> — '+fmt(next.amount||0)+' <span class="due-badge '+badgeCls+'">'+badgeTxt+'</span><br><span style="font-weight:400">Your listed bills total '+fmt(total)+'/month. Paying all of them late once would cost about '+fmt(feeRisk)+' in fees alone — that’s money your goals could have had.</span></div><div style="margin-top:6px">'+rows+'</div>';
 }
-document.getElementById("addBillBtn").addEventListener("click",function(){ bills.push({name:"New bill",amount:50,due:15,fee:25}); renderBills(); });
-document.getElementById("resetBillsBtn").addEventListener("click",function(){ bills=DEFAULT_BILLS.slice(); renderBills(); });
+document.querySelectorAll(".sched-btn").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    paySchedule=btn.getAttribute("data-sched");
+    document.querySelectorAll(".sched-btn").forEach(function(b){ b.setAttribute("aria-pressed", b===btn?"true":"false"); });
+    renderSchedExtra(); renderBills();
+  });
+});
+document.getElementById("calPrev").addEventListener("click",function(){ calM--; if(calM<0){ calM=11; calY--; } renderCalendar(); renderBillRecs(); });
+document.getElementById("calNext").addEventListener("click",function(){ calM++; if(calM>11){ calM=0; calY++; } renderCalendar(); renderBillRecs(); });
+document.getElementById("addBillBtn").addEventListener("click",function(){ bills.push({name:"New bill",amount:50,due:15,fee:25}); selectedBill=bills.length-1; renderBills(); var ed=document.getElementById("billEditor"); if(ed) ed.scrollIntoView({behavior:"smooth",block:"nearest"}); });
+document.getElementById("resetBillsBtn").addEventListener("click",function(){ bills=DEFAULT_BILLS.slice(); selectedBill=-1; renderBills(); });
+renderSchedExtra();
 renderBills();
 
 // ---- CARD GUIDE ----
@@ -1515,6 +1912,74 @@ function renderWhatIf(){
   out.innerHTML=html;
 }
 
+// ---- YOUR PLAN TO WEALTH: what the user's real monthly saving grows to ----
+var WEALTH_RATE = 7; // % per year — a long-run average assumption, an estimate, never a promise
+var MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+function monthsToWealth(pmt, target){
+  var r = WEALTH_RATE/100/12;
+  if(pmt<=0) return Infinity;
+  return Math.ceil(Math.log(1 + target*r/pmt) / Math.log(1+r));
+}
+function wealthDate(months){
+  var d = new Date(); d.setDate(1); d.setMonth(d.getMonth()+months);
+  return MONTH_NAMES[d.getMonth()]+" "+d.getFullYear();
+}
+function spanText(months){
+  if(months<24) return "about "+months+" month"+(months===1?"":"s");
+  var y = Math.round(months/12*10)/10;
+  return "about "+(y%1===0 ? String(y|0) : String(y))+" years";
+}
+function renderWealth(){
+  var body = document.getElementById("wealthBody"); if(!body) return;
+  var c = budgetCtx();
+  var ageEl = document.getElementById("wealthAge");
+  var age = 25;
+  if(ageEl && ageEl.value!==""){ var a=parseInt(ageEl.value,10); if(!isNaN(a)) age=Math.min(100, Math.max(1, a)); }
+  var save = c.save;
+  if(c.income<=0){
+    body.innerHTML = '<p class="hint" style="margin-top:14px">Enter your take-home pay in step one and your plan builds itself here — from the saving in your real budget, not an example.</p>';
+    return;
+  }
+  if(save<=0){
+    body.innerHTML = '<div class="verdict warn" style="margin-top:14px"><b>Nothing is going to saving yet — so there&rsquo;s nothing to grow.</b> That&rsquo;s the most common starting point there is, not a failure. The moves in step six above are how the first $50 or $100 a month gets freed up. The moment a saving number lands in your budget, this plan draws itself from that number.</div>';
+    return;
+  }
+  var yrs65 = Math.max(0, 65-age), months65 = yrs65*12;
+  var horizons = [ {label:"In 1 year", years:1}, {label:"In 5 years", years:5}, {label:"In 10 years", years:10} ];
+  if(yrs65>0) horizons.push({ label:"By age 65 — "+yrs65+" year"+(yrs65===1?"":"s")+" from now", years:yrs65 });
+  var rows = horizons.map(function(h){
+    var now = fvMonthly(save, WEALTH_RATE, h.years), plus = fvMonthly(save+100, WEALTH_RATE, h.years);
+    return '<div class="wrow"><span>'+h.label+'</span><b>'+fmt(now)+'</b><b>'+fmt(plus)+'</b><span class="w-gain">+'+fmt(plus-now)+'</span></div>';
+  }).join("");
+  var html = '<p style="margin-top:16px;font-size:1.02rem">You&rsquo;re putting away <b>'+fmt(save)+' a month</b>'
+    + (c.work>0 ? ' — that includes '+fmt(c.work)+' a month through work, employer match counted' : '')
+    + '. If that money is invested and grows at <b>7% a year</b> on average, here&rsquo;s where it lands:</p>'
+    + '<div class="wealth-table"><div class="wrow head"><span>When</span><span>Your pace</span><span>With +$100/mo</span><span>Extra</span></div>'+rows+'</div>';
+  if(yrs65<=0) html += '<p class="small-note" style="margin-top:8px">You&rsquo;re 65 or past, so there&rsquo;s no “by age 65” row — the 10-year line above is your long view.</p>';
+  var targets = [10000, 50000, 100000, 250000];
+  var miles = targets.map(function(t){
+    var m = monthsToWealth(save, t), mp = monthsToWealth(save+100, t);
+    var main, plus = "";
+    if(m>720){
+      main = '<span style="color:var(--coral)">Not at this pace</span><small>More than 60 years out — the monthly amount is the lever</small>';
+    } else {
+      main = wealthDate(m)+'<small>'+spanText(m)+(yrs65>0 && m>months65 ? ' · after you turn 65' : '')+'</small>';
+    }
+    if(mp<=720 && mp<m) plus = '<small>With +$100/mo: '+wealthDate(mp)+' ('+spanText(mp)+')</small>';
+    else if(mp>720 && m>720) plus = '<small>Still out of reach with +$100/mo</small>';
+    return '<div class="mile-row"><span><b>'+fmt(t)+'</b> <span style="color:var(--muted)">saved &amp; invested</span></span><span class="mile-date">'+main+plus+'</span></div>';
+  }).join("");
+  html += '<h4 style="margin-top:22px;font-size:1.05rem">Your milestones — when you get there at this pace</h4><div>'+miles+'</div>';
+  if(yrs65>0){
+    var gain65 = fvMonthly(save+100, WEALTH_RATE, yrs65) - fvMonthly(save, WEALTH_RATE, yrs65);
+    html += '<div class="verdict good">The +$100 lever, in one line: one extra $100 a month — about $25 a week — adds <b>'+fmt(gain65)+' by age 65</b>. Same habit, slightly bigger, very different ending.</div>';
+  }
+  html += '<p class="hint"><strong>Read this first:</strong> these numbers are <strong>estimates, not a guarantee</strong>. They assume a steady 7% a year, every year. Real investing bounces around — some years up a lot, some years down — and nobody can promise a return. They also assume you keep saving the same amount every month and don&rsquo;t pull money out. Use this as a map of what the habit can do, not a promise of what it will do.</p>';
+  body.innerHTML = html;
+}
+var _wealthAgeEl = document.getElementById("wealthAge");
+if(_wealthAgeEl) _wealthAgeEl.addEventListener("input", renderWealth);
+
 // ---- CHALLENGES: Money Kit life cards, judged against your real budget ----
 var CHALLENGES=[
   { id:"jobloss", tag:"Income shock", tagCls:"", title:"The job-loss card",
@@ -1694,6 +2159,129 @@ if(resetChalBtn) resetChalBtn.addEventListener("click", function(){
   renderChallenges();
 });
 
+// ---- MAXED OUT MODE ----
+var cutState={};
+var debts=[
+  {name:"Store card", balance:640, apr:24.99, min:25},
+  {name:"Credit card", balance:2150, apr:21.99, min:60}
+];
+var ITEM_LABELS={};
+GROUPS.forEach(function(g){ g.items.forEach(function(it){ ITEM_LABELS[it[0]]=it[1]; }); });
+var TIER_OF={ subs:"wants", eatingout:"wants", entertainment:"wants", shopping:"wants", travel:"wants", otherwants:"wants", utilities:"flex", groceries:"flex", transport:"flex", insurance:"flex", otherneeds:"flex", rent:"fixed", mindebt:"fixed" };
+var CUT_PCT={ eatingout:1, entertainment:1, shopping:1, subs:1, travel:1, otherwants:1, utilities:0.25, groceries:0.15, transport:0.2, insurance:0.15, otherneeds:0.3 };
+var CUT_WHY={ eatingout:"Pause it for a month", entertainment:"Pause it for a month", shopping:"Pause it for a month", subs:"Cancel or pause it — every one you forgot about counts", travel:"Move the trip, not the debt", otherwants:"Pause it for a month", utilities:"Trim it — thermostat, shorter showers, a cheaper phone plan", groceries:"Trim it — shop with a list, store brands, no extras", transport:"Trim it — fewer rides, carpool, transit days", insurance:"Shop it around — fresh quotes are free", otherneeds:"Trim whatever isn&rsquo;t essential this month" };
+var FIXED_WHY={ rent:"Don&rsquo;t skip rent — that&rsquo;s eviction risk, not a cut. The moves: a roommate, negotiating at renewal, or a cheaper place when the lease ends.", mindebt:"Never skip a minimum — that&rsquo;s a late fee plus a credit hit. Call the lender before the due date and ask about a hardship plan or moving the due date." };
+function snowballSim(extra){
+  var ds=debts.map(function(d,i){ return {orig:i, name:d.name, bal0:d.balance||0, bal:d.balance||0, apr:d.apr||0, min:d.min||0}; }).filter(function(d){ return d.bal>0; }).sort(function(a,b){ return a.bal-b.bal; });
+  var payoff={}; var freedMin=0; var month=0; var remaining=ds.slice();
+  while(remaining.length && month<1200){
+    month++;
+    remaining.forEach(function(d){ d.bal += d.bal*(d.apr/100/12); });
+    remaining.forEach(function(d){ var p=Math.min(d.min, d.bal); d.bal-=p; });
+    var pool=extra+freedMin;
+    for(var j=0;j<remaining.length && pool>0;j++){ var dd=remaining[j]; if(dd.bal>0){ var p2=Math.min(pool, dd.bal); dd.bal-=p2; pool-=p2; } }
+    var still=[];
+    remaining.forEach(function(d){ if(d.bal<=0.01){ payoff[d.orig]=month; freedMin+=d.min; } else still.push(d); });
+    remaining=still;
+  }
+  remaining.forEach(function(d){ payoff[d.orig]=null; });
+  return { order:ds, payoff:payoff, done:remaining.length===0, months:month };
+}
+function payoffLabel(months){
+  if(months==null) return "Won&rsquo;t clear at this pace";
+  var d=new Date(); var t=new Date(d.getFullYear(), d.getMonth()+months, 1);
+  return "Paid off by "+t.toLocaleDateString("en-US",{month:"short", year:"numeric"});
+}
+function renderMaxedOut(){
+  var panel=document.getElementById("maxedPanel"); if(!panel) return;
+  var body=document.getElementById("maxedBody"); if(!body) return;
+  var income=num("income");
+  var allocated=groupTotal("needs")+groupTotal("wants")+groupTotal("save");
+  var over=allocated-income;
+  if(income<=0 || over<=1){ panel.hidden=true; body.innerHTML=""; return; }
+  panel.hidden=false;
+  var lines=[];
+  Object.keys(TIER_OF).forEach(function(id){
+    var amt=fv(id); if(amt<=0) return;
+    var tier=TIER_OF[id];
+    var cut=0;
+    if(tier!=="fixed"){ cut=Math.max(1, Math.round(amt*(CUT_PCT[id]||0))); if(cut>amt) cut=amt; }
+    lines.push({id:id, label:ITEM_LABELS[id]||id, amt:amt, tier:tier, cut:cut});
+  });
+  var freed=0;
+  lines.forEach(function(l){ if(l.tier!=="fixed" && cutState[l.id]) freed+=l.cut; });
+  var still=over-freed;
+  var survival=fv("rent")+fv("groceries")+fv("transport")+fv("mindebt");
+  var html="";
+  html+='<div class="maxed-banner"><div class="maxed-over">You&rsquo;re '+fmt(over)+' over your pay</div>'
+    +'<p style="margin:6px 0 0">You&rsquo;ve assigned '+fmt(allocated)+' against '+fmt(income)+' coming in. Flip the cuts on below — top of the list first — and watch the gap close in real time.</p>'
+    +'<div class="still-over '+(still<=0?"ok":"bad")+'">'+(still<=0 ? "✓ Covered — your cuts bring this month back inside your pay"+(still<0?", with "+fmt(-still)+" to spare.":".") : "Still over by "+fmt(still))+'</div></div>';
+  html+='<div class="survival"><b>Survival budget — the bare minimum:</b> rent '+fmt(fv("rent"))+' + groceries '+fmt(fv("groceries"))+' + transport '+fmt(fv("transport"))+' + minimum payments '+fmt(fv("mindebt"))+' = <b>'+fmt(survival)+'/mo</b>, against '+fmt(income)+' of pay. '
+    + (survival<=income ? 'Your pay covers the basics — everything above this line is where the fight is.' : 'Even the bare minimum is '+fmt(survival-income)+' more than your pay. That&rsquo;s bigger than a budgeting fix — the Tips &amp; Help tab has the calls to make (move due dates, defer a payment, forbearance) while income or housing changes.')+'</div>';
+  var tiers=[
+    {key:"wants", title:"Cut first — wants &amp; subscriptions", note:"Fun and flexible. Pausing these hurts the least and frees money today."},
+    {key:"flex", title:"Cut next — needs with wiggle room", note:"You still need these — so the cut is a trim, not a delete."},
+    {key:"fixed", title:"Last — fixed needs: don&rsquo;t cut, negotiate", note:"Skipping these costs fees, credit, or your home. The move is a phone call, not a cut."}
+  ];
+  tiers.forEach(function(t){
+    var tl=lines.filter(function(l){ return l.tier===t.key; });
+    if(!tl.length) return;
+    tl.sort(function(a,b){ return (b.cut-a.cut) || (b.amt-a.amt); });
+    html+='<div class="cut-tier"><h4>'+t.title+'</h4><p class="small-note" style="margin-top:2px">'+t.note+'</p>';
+    tl.forEach(function(l){
+      if(l.tier==="fixed"){
+        html+='<div class="cut-row"><div class="cut-info"><b>'+l.label+'</b> <span class="goal-meta">'+fmt(l.amt)+'/mo</span><div class="small-note">'+FIXED_WHY[l.id]+'</div></div><span class="dontcut">Don&rsquo;t cut</span></div>';
+      } else {
+        var on=!!cutState[l.id];
+        html+='<div class="cut-row"><div class="cut-info"><b>'+l.label+'</b> <span class="goal-meta">'+fmt(l.amt)+'/mo</span><div class="small-note">'+CUT_WHY[l.id]+' — frees '+fmt(l.cut)+'/mo</div></div>'
+          +'<button type="button" class="switch'+(on?" on":"")+'" role="switch" aria-checked="'+(on?"true":"false")+'" data-cut="'+l.id+'" aria-label="Toggle cut: '+l.label+'"><span class="knob"></span></button></div>';
+      }
+    });
+    html+='</div>';
+  });
+  var sb=snowballSim(freed);
+  var totBal=debts.reduce(function(s,d){ return s+(d.balance||0); },0);
+  var totMin=debts.reduce(function(s,d){ return s+(d.min||0); },0);
+  html+='<div class="cut-tier"><h4>Your debts — smallest first (the snowball)</h4>'
+    +'<p class="small-note" style="margin-top:2px">List every card and loan. They line up smallest balance first: knock out the little one for a quick win, then its freed minimum rolls into the next. '+(freed>0 ? 'The <b>'+fmt(freed)+'/mo</b> freed by your cuts above flows to debt #1 first — watch its payoff date move as you flip cuts.' : 'Flip some cuts on above and every freed dollar flows to debt #1 first.')+' Two example debts are loaded — replace them with yours.</p>';
+  if(!debts.length){
+    html+='<p class="hint">No debts listed yet — add your first one below and it takes its place in line.</p>';
+  } else {
+    html+='<div class="debt-list">';
+    sb.order.forEach(function(d, rank){
+      html+='<div class="debt-row"><div class="debt-main"><b>#'+(rank+1)+' · '+escGoal(d.name||"Debt")+'</b>'+(rank===0&&freed>0?'<span class="debt-tag">Gets the extra '+fmt(freed)+'/mo</span>':'')+'<div class="small-note">Balance '+fmt(d.bal0)+' · '+(d.apr||0)+'% APR · minimum '+fmt(d.min)+'/mo</div></div><div class="debt-side"><span class="debt-date">'+payoffLabel(sb.payoff[d.orig])+'</span><button type="button" class="icon-btn" data-rm-debt="'+d.orig+'" aria-label="Remove debt '+(d.name||"")+'">×</button></div></div>';
+    });
+    html+='</div><p class="small-note" style="margin-top:8px">Total owed: <b>'+fmt(totBal)+'</b> · minimums: <b>'+fmt(totMin)+'/mo</b>'+(sb.done ? ' · At this pace you&rsquo;re <b>debt-free by '+payoffLabel(sb.months).replace("Paid off by ","")+'</b>.' : ' · At this pace at least one balance never clears — its payment doesn&rsquo;t beat the interest. More freed dollars aimed at #1 is the fix.')+'</p>';
+  }
+  html+='<div class="debt-form">'
+    +'<div><label for="debtName">Debt name</label><input type="text" id="debtName" placeholder="e.g. Store card"></div>'
+    +'<div><label for="debtBal">Balance</label><div class="money"><input type="number" id="debtBal" min="0" step="10" placeholder="0"></div></div>'
+    +'<div><label for="debtApr">APR %</label><input type="number" id="debtApr" min="0" step="0.1" placeholder="0"></div>'
+    +'<div><label for="debtMin">Minimum /mo</label><div class="money"><input type="number" id="debtMin" min="0" step="5" placeholder="0"></div></div>'
+    +'<button type="button" class="btn btn-green" id="addDebtBtn">Add debt</button></div></div>';
+  body.innerHTML=html;
+  body.querySelectorAll("[data-cut]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var id=this.getAttribute("data-cut");
+      cutState[id]=!cutState[id];
+      renderMaxedOut();
+      var t=body.querySelector('[data-cut="'+id+'"]'); if(t) t.focus();
+    });
+  });
+  body.querySelectorAll("[data-rm-debt]").forEach(function(btn){
+    btn.addEventListener("click",function(){ debts.splice(parseInt(this.getAttribute("data-rm-debt"),10),1); renderMaxedOut(); });
+  });
+  var addBtn=document.getElementById("addDebtBtn");
+  if(addBtn) addBtn.addEventListener("click",function(){
+    var nameEl=document.getElementById("debtName");
+    var name=nameEl.value.trim();
+    var bal=num("debtBal");
+    if(!name || bal<=0){ nameEl.focus(); return; }
+    debts.push({name:name, balance:bal, apr:num("debtApr"), min:num("debtMin")});
+    renderMaxedOut();
+  });
+}
+
 // ---- TABS ----
 function activateTab(panelId, focus){
   document.querySelectorAll(".tab-btn").forEach(function(b){
@@ -1722,10 +2310,400 @@ document.querySelectorAll(".tab-btn").forEach(function(btn, idx, all){
 var _useBtn=document.getElementById("usePresetBtn");
 if(_useBtn){ _useBtn.addEventListener("click", function(){ activateTab("panel-budget", false); }); }
 
+// ---- NEXT-STEP NUDGES (suggestions only — tabs are never locked) ----
+var nudgesDismissed={};
+function renderNudges(){
+  var nb=document.getElementById("nudge-budget");
+  if(nb) nb.hidden = !!nudgesDismissed.budget || num("income")<=0;
+  var nbl=document.getElementById("nudge-bills");
+  if(nbl) nbl.hidden = !!nudgesDismissed.bills || bills.length===0;
+  var ng=document.getElementById("nudge-goals");
+  if(ng) ng.hidden = !!nudgesDismissed.goals || goals.length===0;
+}
+document.querySelectorAll("[data-nudge-dismiss]").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    nudgesDismissed[this.getAttribute("data-nudge-dismiss")]=true;
+    renderNudges();
+  });
+});
+document.querySelectorAll("[data-nudge-go]").forEach(function(btn){
+  btn.addEventListener("click", function(){ activateTab(this.getAttribute("data-nudge-go"), false); });
+});
+// Bill/goal edits re-render their own tab directly — keep the nudges in sync there too
+var _origRenderBills=renderBills;
+renderBills=function(){ _origRenderBills(); renderNudges(); };
+var _origRenderGoals=renderGoals;
+renderGoals=function(){ _origRenderGoals(); renderNudges(); };
+
 // Keep new sections in sync when rule/income changes: wrap render
 var _origRender=render;
-render=function(){ _origRender(); renderGoals(); renderAfford(); renderPlan(); renderHealth(); renderWhatIf(); renderChallenges(); };
+render=function(){ _origRender(); renderGoals(); renderAfford(); renderPlan(); renderHealth(); renderWhatIf(); renderWealth(); renderChallenges(); renderMaxedOut(); renderBills(); renderNudges(); renderAffordIt(); renderCheckinHint(); };
 renderGoals();
+
+// ---- ON-DEVICE STORAGE (challenge + check-in only; nothing is ever sent) ----
+function storeGet(k){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):null; }catch(e){ return null; } }
+function storeSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function storeDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
+function todayMid(){ var d=new Date(); d.setHours(0,0,0,0); return d; }
+
+// ---- CAN I MAKE IT TO PAYDAY? ----
+var pdBills=[
+  {name:"Groceries until payday", amount:120},
+  {name:"Gas & transit", amount:45},
+  {name:"Phone bill", amount:60}
+];
+function renderPdBills(){
+  var list=document.getElementById("pdBillsList"); if(!list) return;
+  list.innerHTML="";
+  pdBills.forEach(function(b, idx){
+    var row=document.createElement("div"); row.className="pd-bill-row";
+    row.innerHTML='<input type="text" data-pd-name="'+idx+'" value="'+escGoal(b.name||"")+'" aria-label="Bill name" placeholder="Bill name">'
+      +'<div class="money"><input type="number" data-pd-amt="'+idx+'" min="0" step="5" value="'+(b.amount||0)+'" aria-label="Bill amount"></div>'
+      +'<button type="button" class="icon-btn" data-pd-rm="'+idx+'" aria-label="Remove this bill">×</button>';
+    list.appendChild(row);
+  });
+  list.querySelectorAll("[data-pd-name]").forEach(function(inp){
+    inp.addEventListener("input", function(){ pdBills[parseInt(this.getAttribute("data-pd-name"),10)].name=this.value; });
+  });
+  list.querySelectorAll("[data-pd-amt]").forEach(function(inp){
+    inp.addEventListener("input", function(){ pdBills[parseInt(this.getAttribute("data-pd-amt"),10)].amount=parseFloat(this.value)||0; renderPayday(); });
+  });
+  list.querySelectorAll("[data-pd-rm]").forEach(function(btn){
+    btn.addEventListener("click", function(){ pdBills.splice(parseInt(this.getAttribute("data-pd-rm"),10),1); renderPdBills(); renderPayday(); });
+  });
+}
+function renderPayday(){
+  var out=document.getElementById("pdOut"); if(!out) return;
+  var money=num("pdMoney");
+  var totalEl=document.getElementById("pdBillsTotal");
+  var billsTotal=pdBills.reduce(function(s,b){ return s+(b.amount||0); },0);
+  if(totalEl) totalEl.textContent=fmt(billsTotal);
+  var dateEl=document.getElementById("pdDate");
+  var payStr=dateEl?dateEl.value:"";
+  var days=null;
+  if(payStr){
+    var pay=parseISODate(payStr); pay.setHours(0,0,0,0);
+    days=Math.round((pay.getTime()-todayMid().getTime())/86400000);
+  }
+  var left=money-billsTotal;
+  var boxes='<div class="afford-grid">'
+    +'<div class="afford-box"><span>Money you have now</span><b>'+fmt(money)+'</b><span>Everything available today</span></div>'
+    +'<div class="afford-box"><span>Essential bills before payday</span><b>'+fmt(billsTotal)+'</b><span>'+pdBills.length+(pdBills.length===1?" bill":" bills")+' you listed above</span></div>'
+    +'<div class="afford-box"><span>Safe to spend</span><b>'+fmt(Math.max(0,left))+'</b><span>What is left once those bills are covered</span></div></div>';
+  var html=boxes;
+  if(days===null){
+    html+='<div class="verdict warn">Pick your next payday above and this turns into a per-day guide — exactly how much you can spend each day and still cover every bill.</div>';
+  } else if(days<0){
+    html+='<div class="verdict bad"><b>That payday date has already passed.</b> Pick the next date a check actually lands and the guide rebuilds itself.</div>';
+  } else if(left<0){
+    html+='<div class="verdict bad"><b>Shortfall: you are '+fmt(-left)+' short.</b> The bills due before payday ('+fmt(billsTotal)+') are more than the money you have ('+fmt(money)+'). Nothing here is safe to spend yet — the moves are in the Tips &amp; Help tab: move a due date to after payday, call a lender before a payment is due, and pause every want until the check lands.</div>';
+  } else if(days===0){
+    html+='<div class="verdict good"><b>Payday is today.</b> Your bills before it total '+fmt(billsTotal)+' against '+fmt(money)+' on hand, so you make it — with '+fmt(left)+' to spare once the check lands.</div>';
+  } else {
+    var daily=left/days;
+    html+='<div class="verdict good"><b>You make it to payday.</b> After the '+fmt(billsTotal)+' in bills, '+fmt(left)+' is safe to spend over the next '+days+(days===1?" day":" days")+'.<br><span style="font-weight:400">Your daily guide: <b>about '+fmt(daily)+' a day</b>. Stay at or under that and every bill above is covered when the check lands. Spend less on a day and the cushion grows — that is the conservative way to run this stretch.</span></div>';
+  }
+  out.innerHTML=html;
+}
+var _pdAdd=document.getElementById("pdAddBill");
+if(_pdAdd) _pdAdd.addEventListener("click", function(){ pdBills.push({name:"New bill", amount:50}); renderPdBills(); renderPayday(); });
+var _pdMoney=document.getElementById("pdMoney");
+if(_pdMoney) _pdMoney.addEventListener("input", renderPayday);
+var _pdDate=document.getElementById("pdDate");
+if(_pdDate){
+  var _def=new Date(); _def.setDate(_def.getDate()+7); _pdDate.value=fmtISODate(_def);
+  _pdDate.addEventListener("change", renderPayday);
+}
+renderPdBills();
+renderPayday();
+
+// ---- CAN I ACTUALLY AFFORD IT? (top of Goals tab; runs on Budget tab numbers) ----
+var AF_LABELS={ concert:"Concert or game tickets", trip:"A trip", shoes:"Shoes / sneakers", car:"A car", other:"Your thing" };
+function renderAffordIt(){
+  var out=document.getElementById("afOut"); if(!out) return;
+  var typeEl=document.getElementById("afType");
+  var type=typeEl?typeEl.value:"other";
+  var name=(document.getElementById("afName").value||"").trim() || AF_LABELS[type] || "This purchase";
+  var upfront=num("afUpfront"), monthly=num("afMonthly");
+  var c=budgetCtx();
+  if(c.income<=0){
+    out.innerHTML='<div class="verdict warn" style="margin-top:16px"><b>Add your budget first.</b> This verdict runs on the numbers in your Budget tab — enter your take-home pay and spending there, then come back and the answer builds itself from your real month.</div>';
+    return;
+  }
+  var leftMonthly=c.unalloc; // income − needs − wants − saving already assigned
+  var afterMonthly=leftMonthly-monthly;
+  var essentialsGap=c.needs-c.income;
+  var essentialsOk=essentialsGap<=0;
+  var canUpfrontNow = upfront<=0 || upfront <= c.ef + Math.max(0,leftMonthly);
+  var monthsToSave = upfront>0 && leftMonthly>0 ? Math.ceil(upfront/leftMonthly) : 0;
+  var verdict, cls, why;
+  if(!essentialsOk){
+    verdict="No — not yet, and not this way"; cls="bv-no";
+    why="Your essentials already take "+fmt(c.needs)+" against "+fmt(c.income)+" of take-home pay — they are "+fmt(essentialsGap)+" over before this purchase enters the picture. Adding "+(monthly>0?fmt(monthly)+"/mo and ":"")+fmt(upfront)+" up front puts the gap on a card. Close the essentials gap first (the moves in your Budget tab), then run this again.";
+  } else if(monthly>0 && afterMonthly<0 && monthly>leftMonthly+c.wants){
+    verdict="No"; cls="bv-no";
+    why="The monthly cost does not fit even if you cut every want. You have "+fmt(Math.max(0,leftMonthly))+" left in a month and "+fmt(c.wants)+" in total wants — together "+fmt(Math.max(0,leftMonthly)+c.wants)+" — and this adds "+fmt(monthly)+"/mo, every month. That is not a trim; that is a smaller purchase, a bigger down payment, or more income first.";
+  } else if(afterMonthly>=0 && canUpfrontNow){
+    verdict="Yes — it fits"; cls="bv-yes";
+    why=(upfront>0 ? "The "+fmt(upfront)+" up front is covered — you have "+fmt(c.ef)+" saved up"+(leftMonthly>0?" plus "+fmt(leftMonthly)+" unassigned this month":"")+". " : "There is no up-front cost to clear. ")
+      +(monthly>0 ? "The "+fmt(monthly)+"/mo fits inside the "+fmt(leftMonthly)+" you have left each month, leaving "+fmt(afterMonthly)+" still unassigned. " : "It adds nothing monthly, so your cash flow does not change after day one. ")
+      +"Your essentials ("+fmt(c.needs)+" of "+fmt(c.income)+" pay) stay covered either way.";
+  } else {
+    verdict="Not yet"; cls="bv-notyet";
+    var reasons=[];
+    if(monthly>0 && afterMonthly<0) reasons.push("the "+fmt(monthly)+"/mo is "+fmt(-afterMonthly)+" more than the "+fmt(Math.max(0,leftMonthly))+" you have left each month — trimming "+fmt(-afterMonthly)+" from wants ("+fmt(c.wants)+"/mo now) would make it fit");
+    if(!canUpfrontNow) reasons.push("the "+fmt(upfront)+" up front is more than your "+fmt(c.ef)+" saved plus this month&rsquo;s leftover"+(leftMonthly>0?" — saving your "+fmt(leftMonthly)+" monthly leftover gets you there in about "+monthsToSave+(monthsToSave===1?" month":" months"):" — and with nothing left over each month, there is no path to it yet; free up a monthly leftover first"));
+    why="Close, but not today: "+reasons.join("; ")+". Your essentials stay covered — this is a timing problem, not a never.";
+  }
+  var goalLine="";
+  if(typeof goals!=="undefined" && goals.length && goals[0]){
+    var g1=goals[0];
+    if(upfront>0 && c.save>0){
+      var delay=Math.max(1, Math.round(upfront/c.save));
+      goalLine='<div class="flag-meta" style="margin-top:8px"><strong>Against your #1 goal:</strong> your list below starts with &ldquo;'+escGoal(g1.name)+'&rdquo;. The '+fmt(upfront)+' up front is about '+delay+(delay===1?" month":" months")+' of your current '+fmt(c.save)+'/mo saving — buying this first pushes that goal back by roughly that much. That may be a trade worth making; just make it on purpose.</div>';
+    } else {
+      goalLine='<div class="flag-meta" style="margin-top:8px"><strong>Against your #1 goal:</strong> your list below starts with &ldquo;'+escGoal(g1.name)+'&rdquo;. This purchase does not pull from saving, so the goal&rsquo;s pace is untouched.</div>';
+    }
+  }
+  var essLine='<div class="flag-meta" style="margin-top:8px"><strong>Essentials check:</strong> needs take '+fmt(c.needs)+' of your '+fmt(c.income)+' take-home'
+    +(essentialsOk ? ' — covered, with '+fmt(c.income-c.needs)+' of room before wants and saving.' : ' — already '+fmt(essentialsGap)+' over your whole check.')
+    +(monthly>0 ? ' This purchase would add '+fmt(monthly)+'/mo on top of that.' : '')+'</div>';
+  out.innerHTML='<div class="verdict '+(cls==="bv-yes"?"good":cls==="bv-no"?"bad":"warn")+'" style="margin-top:16px">'
+    +'<span class="bv-tag '+cls+'">'+verdict+'</span>'
+    +'<div style="font-weight:400;margin-top:6px"><b>'+escGoal(name)+'.</b> '+why+'</div>'
+    +'<div class="afford-grid" style="margin-top:12px">'
+    +'<div class="afford-box"><span>Left each month now</span><b>'+fmt(leftMonthly)+'</b><span>After needs, wants &amp; saving in your budget</span></div>'
+    +'<div class="afford-box"><span>Left each month after this</span><b>'+fmt(afterMonthly)+'</b><span>'+(monthly>0?'With the '+fmt(monthly)+'/mo added':'No monthly cost added')+'</span></div>'
+    +'<div class="afford-box"><span>Up front vs. what you have saved</span><b>'+fmt(upfront)+' vs '+fmt(c.ef)+'</b><span>'+(upfront<=c.ef?'Covered by savings alone':upfront<=0?'Nothing due up front':'Not fully covered by savings yet')+'</span></div></div>'
+    + essLine + goalLine + '</div>';
+}
+["afType","afName","afUpfront","afMonthly"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el){ el.addEventListener("input", renderAffordIt); el.addEventListener("change", renderAffordIt); }
+});
+renderAffordIt();
+
+// ---- THE $100 MONEY CHALLENGE (progress saves on this device only) ----
+var C100_KEY="nad-100-challenge-v1";
+var C100_ACTIONS=[
+  {id:"cook", name:"Cook at home 5 times", hint:"Each home-cooked meal instead of takeout keeps roughly $12 in your pocket.", amt:60},
+  {id:"sub", name:"Cancel one subscription", hint:"The one you forgot you had counts double.", amt:15},
+  {id:"sell", name:"Sell one thing", hint:"Closet, shelf, or garage — list it this week and price it to move.", amt:40},
+  {id:"nospend", name:"One no-spend weekend", hint:"Free fun only — walks, the library, a home game night.", amt:50},
+  {id:"lunch", name:"Bring lunch to work 5 days", hint:"About $12 a day stays with you instead of going to the deli line.", amt:60},
+  {id:"coffee", name:"Skip bought coffee for a week", hint:"Make it at home for 7 straight days.", amt:25},
+  {id:"pantry", name:"Pantry week", hint:"Cook from what is already in the kitchen before buying more.", amt:40},
+  {id:"rides", name:"Walk, bike, or take transit instead of rides", hint:"Swap 3–4 rides over the month.", amt:30},
+  {id:"negotiate", name:"Call and negotiate one bill", hint:"Phone, internet, or insurance — ask what a better rate looks like.", amt:20},
+  {id:"returns", name:"Return something unopened", hint:"That thing still in the bag, receipt in the drawer.", amt:25}
+];
+var C100_SURPRISES=[
+  {t:"Surprise from the deck — the breakdown card", s:"In the life-card game, a car repair lands out of nowhere at $850. Every dollar you keep in this challenge is a dollar a surprise like that cannot put on a credit card."},
+  {t:"Surprise from the deck — the statement card", s:"A $620 card statement shows up in the game. A $100 cushion does not clear it — but it turns a panic payment into a plan."},
+  {t:"Surprise from the deck — the rent-hike card", s:"Rent jumps $200 a month in the game. The habits on this list — cooking at home, trimming subscriptions — are exactly the moves that absorb a hike."},
+  {t:"Surprise from the deck — the bonus card", s:"$1,500 lands unexpectedly in the game. People who finish this challenge tend to give a windfall a job fast instead of watching it evaporate."},
+  {t:"Surprise from the deck — the job-loss card", s:"A month with no paycheck, dealt face-up. $100 kept is the start of the cushion that makes that card survivable."},
+  {t:"Surprise from the deck — the raise card", s:"+$300 a month arrives in the game. This challenge is practice for the real skill: keeping new money before lifestyle creep spends it."}
+];
+var c100SurpriseIdx=Math.floor(Math.random()*C100_SURPRISES.length);
+var c100=storeGet(C100_KEY);
+if(!c100 || typeof c100!=="object") c100=null;
+if(c100 && !c100.items) c100.items={};
+function c100EnsureStart(){
+  if(!c100) c100={ start:fmtISODate(todayMid()), items:{} };
+  if(!c100.start) c100.start=fmtISODate(todayMid());
+}
+function c100Save(){ if(c100) storeSet(C100_KEY, c100); }
+function c100Total(){
+  if(!c100) return 0;
+  var t=0;
+  C100_ACTIONS.forEach(function(a){ var it=c100.items[a.id]; if(it && it.done) t+=(parseFloat(it.amt)||0); });
+  return t;
+}
+function c100DayNum(){
+  if(!c100 || !c100.start) return 0;
+  var s=parseISODate(c100.start); s.setHours(0,0,0,0);
+  return Math.floor((todayMid().getTime()-s.getTime())/86400000)+1;
+}
+function renderC100Surprise(){
+  var el=document.getElementById("c100Surprise"); if(!el) return;
+  var s=C100_SURPRISES[c100SurpriseIdx % C100_SURPRISES.length];
+  el.innerHTML="<b>"+s.t+":</b> "+s.s;
+}
+function updateC100Totals(){
+  var total=c100Total();
+  var set=function(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; };
+  set("c100Total", fmt(total));
+  set("c100Left", fmt(Math.max(0, 100-total)));
+  var day=c100DayNum();
+  set("c100Day", day>0 ? String(Math.min(day,30)) : "—");
+  var pct=Math.min(100, Math.round(total));
+  var bar=document.getElementById("c100Bar"); if(bar) bar.style.width=pct+"%";
+  var pctEl=document.getElementById("c100Pct");
+  if(pctEl) pctEl.textContent = total>=100
+    ? "Challenge complete — you found and kept "+fmt(total)+". That money is real. Give it a job: emergency cushion first is the usual winner."
+    : pct+"% of the way to $100 — "+fmt(Math.max(0,100-total))+" to go.";
+  var status=document.getElementById("c100Status");
+  if(status){
+    if(!c100 || !c100.start){
+      status.innerHTML='<div class="verdict warn" style="margin-top:0"><b>Not started yet.</b> Hit “Start the 30 days” below — or just check off your first action and day 1 starts itself.</div>';
+    } else if(day>30){
+      status.innerHTML='<div class="verdict '+(total>=100?"good":"warn")+'" style="margin-top:0"><b>Your 30 days are up.</b> You kept '+fmt(total)+' of the $100. '+(total>=100?"Challenge complete — run it again whenever you want a reset.":"Start over below and take another run at the full $100 with what you learned.")+'</div>';
+    } else {
+      status.innerHTML='<div class="verdict good" style="margin-top:0"><b>Day '+day+' of 30.</b> '+(30-day)+' days left after today. Small moves, checked off honestly — that is the whole game.</div>';
+    }
+  }
+  var tr=document.getElementById("c100Tracker");
+  if(tr){
+    var th="";
+    for(var i=1;i<=30;i++){
+      var cl = day>0 && i<day ? "on" : (day>0 && i===day && day<=30 ? "today" : "");
+      th+='<i class="'+cl+'"></i>';
+    }
+    tr.innerHTML=th;
+  }
+  var note=document.getElementById("c100TrackerNote");
+  if(note) note.textContent = day>0 ? "Each block is one day of the challenge — teal is done, gold is today (day "+Math.min(day,30)+" of 30)." : "Each block is one day. Start the challenge and today lights up gold.";
+  var startBtn=document.getElementById("c100Start");
+  if(startBtn) startBtn.style.display = (c100 && c100.start) ? "none" : "";
+}
+function renderC100(){
+  var list=document.getElementById("c100List"); if(!list) return;
+  list.innerHTML="";
+  C100_ACTIONS.forEach(function(a){
+    var it=(c100 && c100.items[a.id]) || {done:false, amt:a.amt};
+    var row=document.createElement("div"); row.className="c100-row"+(it.done?" done":"");
+    row.innerHTML='<input type="checkbox" class="c100-check" data-c100-check="'+a.id+'" '+(it.done?"checked":"")+' aria-label="Mark done: '+a.name+'">'
+      +'<div class="c100-name"><b>'+a.name+'</b><span>'+a.hint+'</span></div>'
+      +'<div class="money"><input type="number" data-c100-amt="'+a.id+'" min="0" step="1" value="'+(it.amt!=null?it.amt:a.amt)+'" aria-label="Dollars kept: '+a.name+'"></div>';
+    list.appendChild(row);
+  });
+  list.querySelectorAll("[data-c100-check]").forEach(function(box){
+    box.addEventListener("change", function(){
+      c100EnsureStart();
+      var id=this.getAttribute("data-c100-check");
+      if(!c100.items[id]){ var def=C100_ACTIONS.filter(function(x){return x.id===id;})[0]; c100.items[id]={done:false, amt:def?def.amt:0}; }
+      c100.items[id].done=this.checked;
+      var amtEl=list.querySelector('[data-c100-amt="'+id+'"]');
+      if(amtEl) c100.items[id].amt=parseFloat(amtEl.value)||0;
+      c100Save();
+      var row=this.closest(".c100-row"); if(row) row.classList.toggle("done", this.checked);
+      updateC100Totals();
+    });
+  });
+  list.querySelectorAll("[data-c100-amt]").forEach(function(inp){
+    inp.addEventListener("input", function(){
+      c100EnsureStart();
+      var id=this.getAttribute("data-c100-amt");
+      if(!c100.items[id]) c100.items[id]={done:false, amt:0};
+      c100.items[id].amt=parseFloat(this.value)||0;
+      c100Save(); updateC100Totals();
+    });
+  });
+  renderC100Surprise();
+  updateC100Totals();
+}
+var _c100Start=document.getElementById("c100Start");
+if(_c100Start) _c100Start.addEventListener("click", function(){ c100EnsureStart(); c100Save(); updateC100Totals(); });
+var _c100Reset=document.getElementById("c100Reset");
+if(_c100Reset) _c100Reset.addEventListener("click", function(){
+  c100=null; storeDel(C100_KEY);
+  c100SurpriseIdx=Math.floor(Math.random()*C100_SURPRISES.length);
+  renderC100();
+});
+var _c100Draw=document.getElementById("c100Draw");
+if(_c100Draw) _c100Draw.addEventListener("click", function(){ c100SurpriseIdx++; renderC100Surprise(); });
+renderC100();
+
+// ---- WEEKLY MONEY CHECK-IN (history saves on this device only) ----
+var CI_KEY="nad-weekly-checkins-v1";
+var ciList=storeGet(CI_KEY);
+if(!Array.isArray(ciList)) ciList=[];
+var ciBillsDueNext7=0;
+function weekStartOf(d){
+  var x=new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  var off=(x.getDay()+6)%7; // Monday = start of week
+  x.setDate(x.getDate()-off);
+  return x;
+}
+function weekLabel(ws){
+  var end=new Date(ws.getFullYear(), ws.getMonth(), ws.getDate()+6);
+  var sameYear=ws.getFullYear()===end.getFullYear();
+  return "Week of "+ws.toLocaleDateString("en-US",{weekday:"short", month:"short", day:"numeric"})+" – "+end.toLocaleDateString("en-US",{weekday:"short", month:"short", day:"numeric"})+(sameYear?", "+end.getFullYear():"");
+}
+function renderCheckinWeek(){
+  var el=document.getElementById("ciWeek"); if(!el) return;
+  el.textContent=weekLabel(weekStartOf(new Date()));
+}
+function renderCheckinHint(){
+  var el=document.getElementById("ciBillsHint"); if(!el) return;
+  var total=0, count=0;
+  if(typeof bills!=="undefined"){
+    bills.forEach(function(b){ if(daysUntilDue(b.due)<=7){ total+=(b.amount||0); count++; } });
+  }
+  ciBillsDueNext7=total;
+  if(count>0){
+    el.innerHTML='From your Bills calendar: <b>'+count+(count===1?" bill":" bills")+' — '+fmt(total)+'</b> — come due in the next 7 days. <button type="button" class="link-btn" id="ciUseBills">Use '+fmt(total)+'</button>';
+    var btn=document.getElementById("ciUseBills");
+    if(btn) btn.addEventListener("click", function(){ document.getElementById("ciBills").value=ciBillsDueNext7; });
+  } else {
+    el.textContent="No bills on your Bills calendar come due in the next 7 days — enter next week\u2019s bills here by hand if you track them elsewhere.";
+  }
+}
+function renderCiHistory(){
+  var el=document.getElementById("ciHistory"); if(!el) return;
+  if(!ciList.length){
+    el.innerHTML='<p class="hint">No check-ins yet. Your first one takes two minutes — fill in the four lines above and save it, and your history starts here.</p>';
+    return;
+  }
+  el.innerHTML=ciList.map(function(e){
+    var net=(e.in||0)-(e.spent||0);
+    return '<div class="ci-entry"><div class="ci-entry-top"><b>'+escGoal(e.label)+'</b><span class="due-badge '+(net>=0?"due-ok":"due-soon")+'">'+(net>=0?"+"+fmt(net)+" kept":fmt(-net)+" over")+'</span></div>'
+      +'<div class="goal-meta" style="margin-top:6px">Came in '+fmt(e.in||0)+' · Went out '+fmt(e.spent||0)+' · Bills due next week '+fmt(e.bills||0)+'</div>'
+      +(e.adjust?'<div style="margin-top:6px"><b>One adjustment:</b> '+escGoal(e.adjust)+'</div>':'')
+      +'</div>';
+  }).join("");
+}
+function renderCiSummary(entry){
+  var el=document.getElementById("ciSummary"); if(!el) return;
+  if(!entry){ el.innerHTML=""; return; }
+  var net=entry.in-entry.spent;
+  var billsNote = entry.bills>0
+    ? (net>=entry.bills ? " Next week&rsquo;s "+fmt(entry.bills)+" in bills is already covered by what this week kept." : " Next week&rsquo;s bills are "+fmt(entry.bills)+" and this week kept "+fmt(Math.max(0,net))+" — so "+fmt(entry.bills-Math.max(0,net))+" still has to come from next week&rsquo;s money. Worth knowing on Monday, not on the due date.")
+    : "";
+  el.innerHTML='<div class="verdict '+(net>=0?"good":"bad")+'" style="margin-top:16px">'
+    +(net>=0
+      ? "<b>This week kept "+fmt(net)+".</b> More came in ("+fmt(entry.in)+") than went out ("+fmt(entry.spent)+"). That is a week that moves you forward."
+      : "<b>This week ran "+fmt(-net)+" over.</b> More went out ("+fmt(entry.spent)+") than came in ("+fmt(entry.in)+"). One week like this is life; the check-in exists so it does not quietly become four.")
+    + billsNote
+    +(entry.adjust ? "<br><span style='font-weight:400'>Your one adjustment for next week: <b>"+escGoal(entry.adjust)+"</b>. One is enough — do that one.</span>" : "")
+    +'</div>';
+}
+var _ciSave=document.getElementById("ciSave");
+if(_ciSave) _ciSave.addEventListener("click", function(){
+  var ws=weekStartOf(new Date());
+  var entry={
+    weekStart: fmtISODate(ws),
+    label: weekLabel(ws),
+    in: num("ciIn"),
+    spent: num("ciSpent"),
+    bills: num("ciBills"),
+    adjust: document.getElementById("ciAdjust").value.trim(),
+    savedAt: new Date().toISOString()
+  };
+  var found=-1;
+  ciList.forEach(function(e,i){ if(e.weekStart===entry.weekStart) found=i; });
+  if(found>=0) ciList[found]=entry; else ciList.unshift(entry);
+  ciList.sort(function(a,b){ return a.weekStart<b.weekStart?1:-1; });
+  storeSet(CI_KEY, ciList);
+  var msg=document.getElementById("ciSavedMsg");
+  if(msg) msg.textContent = found>=0 ? "Updated — this week\u2019s check-in is saved on this device." : "Saved on this device. See you next week.";
+  renderCiHistory();
+  renderCiSummary(entry);
+});
+renderCheckinWeek();
+renderCheckinHint();
+renderCiHistory();
 
 // Init with example
 loadValues(EXAMPLE);
