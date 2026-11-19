@@ -352,6 +352,12 @@ textarea{resize:vertical;min-height:120px}
 .mile-date small{display:block;font-weight:600;color:var(--muted);font-size:.84rem;margin-top:2px}
 @media (max-width:640px){ .wrow{grid-template-columns:1fr 1fr} .wrow.head{display:none} .mile-row{flex-direction:column;gap:2px} .mile-date{text-align:left} }
 .pd-bill-row{display:grid;grid-template-columns:1fr 120px auto;gap:8px;align-items:center;margin-top:8px}
+.car-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.car-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+@media (max-width:640px){ .car-grid,.car-grid3{grid-template-columns:1fr} }
+.car-big{font-family:"Baloo 2","Public Sans",sans-serif;font-weight:800;font-size:clamp(2.6rem,7vw,3.6rem);line-height:1}
+.car-split{display:flex;height:18px;border-radius:999px;overflow:hidden;background:var(--surface2);margin-top:10px}
+.car-split i{display:block;height:100%}
 .bv-tag{font-family:"Baloo 2","Public Sans",sans-serif;font-weight:800;font-size:1.6rem;line-height:1.1}
 .bv-yes{color:var(--green)} .bv-notyet{color:#8A6200} .bv-no{color:var(--coral)}
 @media (prefers-color-scheme: dark){ .bv-notyet{color:var(--gold)} }
@@ -425,6 +431,7 @@ textarea{resize:vertical;min-height:120px}
     <button type="button" class="tab-btn" role="tab" id="tab-budget" aria-controls="panel-budget" aria-selected="true" data-tab="panel-budget">Your Budget<small>Pay → plan → actual → over/under</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-payday" aria-controls="panel-payday" aria-selected="false" data-tab="panel-payday">Payday<small>Can I make it to payday?</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-goals" aria-controls="panel-goals" aria-selected="false" data-tab="panel-goals">Goals &amp; Afford It<small>Experiences &amp; things you want</small></button>
+    <button type="button" class="tab-btn" role="tab" id="tab-car" aria-controls="panel-car" aria-selected="false" data-tab="panel-car">True Car Cost<small>What a car really costs a month</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-bills" aria-controls="panel-bills" aria-selected="false" data-tab="panel-bills">Bills &amp; Cards<small>Calendar · paydays · points</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-help" aria-controls="panel-help" aria-selected="false" data-tab="panel-help">Tips &amp; Help<small>Tight months, FAQ &amp; ask</small></button>
     <button type="button" class="tab-btn" role="tab" id="tab-challenges" aria-controls="panel-challenges" aria-selected="false" data-tab="panel-challenges">Challenges<small>Life cards · badges &amp; streaks</small></button>
@@ -696,6 +703,48 @@ textarea{resize:vertical;min-height:120px}
   </section>
 
   </div><!-- /panel-goals -->
+
+  <div id="panel-car" class="tab-panel" role="tabpanel" aria-labelledby="tab-car" hidden>
+  <!-- TRUE CAR COST -->
+  <section class="section" aria-labelledby="car-h">
+    <div class="section-head"><h2 id="car-h">What does this car really cost me a month?</h2><p class="sub" style="font-size:1rem;margin-top:8px">The payment is only the start. Insurance, gas, and upkeep ride along every single month — this adds them all up into one honest number, then checks that number against the budget rule you picked at the top. Type in your own numbers; the payment is built from real average payments by credit band, not a dealer quote.</p></div>
+    <div class="card" style="margin-top:16px">
+      <div class="car-grid">
+        <div><label for="carPrice" style="font-weight:700;display:block;margin-bottom:6px">Car price</label><div class="money"><input id="carPrice" type="number" inputmode="decimal" min="0" step="100" value="25000"></div><p class="small-note" style="margin-top:6px">The out-the-door price you&rsquo;re looking at — taxes and fees included if you know them.</p></div>
+        <div><label for="carDown" style="font-weight:700;display:block;margin-bottom:6px">Down payment</label><div class="money"><input id="carDown" type="number" inputmode="decimal" min="0" step="50" value="0"></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="idea-chip" data-down="0">$0 down</button><button type="button" class="idea-chip" data-down="2500">$2,500 down</button></div>
+          <p class="small-note" style="margin-top:6px">Cash you put down up front. More down = less financed = a smaller payment.</p></div>
+      </div>
+
+      <div style="margin-top:20px"><span class="label" id="car-band-label">Your credit score band</span>
+        <div class="sched-row" role="group" aria-labelledby="car-band-label">
+          <button type="button" class="sched-btn" data-carband="0" aria-pressed="false"><b>781+</b><span>Excellent · $487/mo</span></button>
+          <button type="button" class="sched-btn" data-carband="1" aria-pressed="true"><b>661–780</b><span>Good · $517/mo</span></button>
+          <button type="button" class="sched-btn" data-carband="2" aria-pressed="false"><b>601–660</b><span>Fair · $581/mo</span></button>
+          <button type="button" class="sched-btn" data-carband="3" aria-pressed="false"><b>501–600</b><span>Rebuilding · $650/mo</span></button>
+        </div>
+        <p class="small-note" style="margin-top:8px">Payments shown are Experian&rsquo;s Q2 2026 average used-car payments on $25,000 financed over 60 months, by credit band. Pick your band — your price, down payment, and term below scale the payment from that average.</p>
+      </div>
+
+      <div style="margin-top:20px"><span class="label" id="car-term-label">Loan term</span>
+        <div class="sched-row" role="group" aria-labelledby="car-term-label" style="grid-template-columns:repeat(3,1fr)">
+          <button type="button" class="sched-btn" data-carterm="48" aria-pressed="false"><b>48 months</b><span>Higher payment, done sooner, less interest</span></button>
+          <button type="button" class="sched-btn" data-carterm="60" aria-pressed="true"><b>60 months</b><span>The standard — matches the averages above</span></button>
+          <button type="button" class="sched-btn" data-carterm="72" aria-pressed="false"><b>72 months</b><span>Lower payment, more interest, longer owed</span></button>
+        </div>
+      </div>
+
+      <div class="car-grid3">
+        <div><label for="carIns" style="font-weight:700;display:block;margin-bottom:6px">Insurance / month</label><div class="money"><input id="carIns" type="number" inputmode="decimal" min="0" step="5" value="200"></div><p class="small-note" style="margin-top:6px">Brooklyn rates run high — young drivers, street parking, and a financed car (which requires full coverage) all push quotes up. Type in a real quote if you have one; $200 is an example.</p></div>
+        <div><label for="carGas" style="font-weight:700;display:block;margin-bottom:6px">Gas / month</label><div class="money"><input id="carGas" type="number" inputmode="decimal" min="0" step="5" value="120"></div><p class="small-note" style="margin-top:6px">What you&rsquo;d actually spend at the pump in a normal month of your real driving.</p></div>
+        <div><label for="carMaint" style="font-weight:700;display:block;margin-bottom:6px">Maintenance &amp; repairs set-aside / month</label><div class="money"><input id="carMaint" type="number" inputmode="decimal" min="0" step="5" value="50"></div><p class="small-note" style="margin-top:6px">Oil, tires, brakes, and the repair that always comes. $50 is a starting point — an older, higher-mileage car needs more.</p></div>
+      </div>
+
+      <div id="carOut" aria-live="polite"></div>
+      <p class="hint" style="margin-top:16px"><strong>How the payment is figured:</strong> the credit-band payments above are Experian Q2 2026 used-car averages for $25,000 over 60 months. Any other price, down payment, or term is scaled from that band&rsquo;s average — an estimate to plan with, not a rate quote. Your actual payment depends on the lender, the car, and your full credit picture.</p>
+    </div>
+  </section>
+  </div><!-- /panel-car -->
 
   <div id="panel-bills" class="tab-panel" role="tabpanel" aria-labelledby="tab-bills" hidden>
   <!-- BILLS & REMINDERS -->
@@ -2310,7 +2359,7 @@ renderGoals=function(){ _origRenderGoals(); renderNudges(); };
 
 // Keep new sections in sync when rule/income changes: wrap render
 var _origRender=render;
-render=function(){ _origRender(); renderGoals(); renderAfford(); renderPlan(); renderHealth(); renderWhatIf(); renderWealth(); renderChallenges(); renderMaxedOut(); renderBills(); renderNudges(); renderAffordIt(); };
+render=function(){ _origRender(); renderGoals(); renderAfford(); renderPlan(); renderHealth(); renderWhatIf(); renderWealth(); renderChallenges(); renderMaxedOut(); renderBills(); renderNudges(); renderAffordIt(); renderCarCost(); };
 renderGoals();
 
 // ---- ON-DEVICE STORAGE (challenge only; nothing is ever sent) ----
@@ -2455,6 +2504,105 @@ function renderAffordIt(){
   if(el){ el.addEventListener("input", renderAffordIt); el.addEventListener("change", renderAffordIt); }
 });
 renderAffordIt();
+
+// ---- TRUE CAR COST (payment from Experian Q2 2026 band averages; runs on Budget tab numbers) ----
+var CAR_BANDS=[
+  {range:"781+", label:"Excellent", base:487},
+  {range:"661–780", label:"Good", base:517},
+  {range:"601–660", label:"Fair", base:581},
+  {range:"501–600", label:"Rebuilding", base:650}
+];
+var carBand=1, carTerm=60;
+function impliedApr(principal, payment, months){
+  // Solve the monthly rate whose amortized payment equals the band average,
+  // so the $25,000 / 60-month baseline returns the published payment exactly
+  // and other terms scale the financially correct way.
+  var lo=0, hi=0.05;
+  for(var i=0;i<60;i++){
+    var mid=(lo+hi)/2;
+    var p=principal*mid/(1-Math.pow(1+mid,-months));
+    if(p<payment) lo=mid; else hi=mid;
+  }
+  return ((lo+hi)/2)*12*100;
+}
+function renderCarCost(){
+  var out=document.getElementById("carOut"); if(!out) return;
+  var price=num("carPrice"), down=num("carDown"), ins=num("carIns"), gas=num("carGas"), maint=num("carMaint");
+  var band=CAR_BANDS[carBand];
+  var financed=Math.max(0, price-down);
+  var apr=impliedApr(25000, band.base, 60);
+  var pmt=financed>0 ? Math.round(loanPmt(financed, apr, carTerm)) : 0;
+  var running=ins+gas+maint;
+  var trueCost=pmt+running;
+  var pmtShare=trueCost>0 ? Math.round(pmt/trueCost*100) : 0;
+  var c=budgetCtx();
+  var rule=RULES[currentRule];
+
+  var html='<div style="margin-top:22px;border-top:1px solid var(--line);padding-top:18px">'
+    +'<span class="label">Your true monthly cost</span>'
+    +'<div class="car-big" style="margin-top:6px">'+fmt(trueCost)+'<span style="font-size:1.05rem;font-family:\'Public Sans\',sans-serif;font-weight:700;color:var(--muted)"> / month</span></div>'
+    +'<p class="sub" style="margin-top:6px">That is the real number — not the '+fmt(pmt)+' payment the dealer quotes you. Over the '+carTerm+'-month loan, owning and running this car costs about <b>'+fmt(trueCost*carTerm)+'</b> before any big repair the set-aside doesn&rsquo;t cover.</p>'
+    +'<div class="car-split" role="img" aria-label="Split of true cost: '+fmt(pmt)+' car payment, '+fmt(running)+' running costs"><i style="width:'+pmtShare+'%;background:var(--green)"></i><i style="width:'+(100-pmtShare)+'%;background:var(--gold)"></i></div>'
+    +'<div class="legend"><span><span class="dot" style="background:var(--green)"></span>The car — loan payment '+fmt(pmt)+'/mo ('+pmtShare+'%)</span><span><span class="dot" style="background:var(--gold)"></span>Running it — '+fmt(running)+'/mo ('+(100-pmtShare)+'%)</span></div>'
+    +'<div class="afford-grid">'
+    +'<div class="afford-box"><span>The car — loan payment</span><b>'+fmt(pmt)+' / mo</b><span>'+fmt(financed)+' financed over '+carTerm+' months · credit band '+band.range+' ('+band.label+')</span></div>'
+    +'<div class="afford-box"><span>Running it, every month</span><b>'+fmt(running)+' / mo</b><span>Insurance '+fmt(ins)+' · gas '+fmt(gas)+' · upkeep set-aside '+fmt(maint)+'</span></div>'
+    +'<div class="afford-box"><span>Amount financed</span><b>'+fmt(financed)+'</b><span>'+fmt(price)+' price − '+fmt(down)+' down</span></div></div>'
+    +'<p class="small-note" style="margin-top:10px">Payment basis: the '+band.range+' band averages <b>'+fmt(band.base)+'/mo</b> on $25,000 over 60 months (Experian, Q2 2026). Yours is scaled from that average to '+fmt(financed)+' over '+carTerm+' months.</p>';
+
+  // --- Verdict against the user's budget rule ---
+  if(c.income<=0){
+    html+='<div class="verdict warn"><b>Add your budget to get the verdict.</b> Enter your take-home pay and spending in the Budget tab and this checks the '+fmt(trueCost)+'/mo true cost against your '+rule.name+' rule — as a share of your pay, and against the bucket this car has to fit inside.</div>';
+  } else {
+    var share=trueCost/c.income*100;
+    var bucketKey, bucketPct, bucketLabel, bucketSpendBase;
+    if(currentRule==="702010"){ bucketPct=70; bucketLabel="Needs &amp; Wants bucket (70% of pay)"; bucketSpendBase=c.needs+c.wants; }
+    else if(currentRule==="5050"){ bucketPct=50; bucketLabel="Living bucket (50% of pay)"; bucketSpendBase=c.needs+c.wants; }
+    else { bucketPct=50; bucketLabel="Needs bucket (50% of pay)"; bucketSpendBase=c.needs; }
+    var bucketTarget=c.income*bucketPct/100;
+    var currentTransport=fv("transport");
+    var bucketWithCar=bucketSpendBase-currentTransport+trueCost;
+    var overBy=bucketWithCar-bucketTarget;
+    var guide15=c.income*0.15;
+    var guideNote = trueCost>guide15
+      ? ' It also passes the usual car guide — payment, insurance, and gas together under 15% of take-home ('+fmt(guide15)+') — by '+fmt(trueCost-guide15)+'.'
+      : ' It sits inside the usual car guide too — payment, insurance, and gas together under 15% of take-home ('+fmt(guide15)+').';
+    if(overBy>1){
+      html+='<div class="verdict bad"><b>This car breaks your '+rule.name+' budget.</b> The true cost is <b>'+fmt(trueCost)+'/mo — '+Math.round(share)+'% of your '+fmt(c.income)+' take-home pay</b>. Under '+rule.name+', the '+bucketLabel+' is '+fmt(bucketTarget)+'. Counting this car in place of the '+fmt(currentTransport)+' transport in your budget now, that bucket lands at '+fmt(bucketWithCar)+' — <b>'+fmt(overBy)+' over</b>. The payment alone might look fine; the full cost is what breaks it. A cheaper car, a bigger down payment, or a better credit band is how this fits.'+guideNote+'</div>';
+    } else {
+      html+='<div class="verdict good"><b>This car fits your '+rule.name+' budget.</b> The true cost is <b>'+fmt(trueCost)+'/mo — '+Math.round(share)+'% of your '+fmt(c.income)+' take-home pay</b>. Under '+rule.name+', the '+bucketLabel+' is '+fmt(bucketTarget)+'. Counting this car in place of the '+fmt(currentTransport)+' transport in your budget now, that bucket lands at '+fmt(bucketWithCar)+' — <b>'+fmt(-overBy)+' of room to spare</b>. Fitting isn&rsquo;t the same as free, though: that '+fmt(trueCost)+' leaves your account every month whether the car moves or not.'+guideNote+'</div>';
+    }
+  }
+
+  html+='<div class="smart-note"><b>The credit-score gap, in one sentence:</b> the same $25,000 car over 60 months costs $487/mo at a 781+ score and $650/mo at 501–600 — $163/mo apart — so fix the score first, or buy cheaper.</div>'
+    +'</div>';
+  out.innerHTML=html;
+}
+document.querySelectorAll("[data-carband]").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    carBand=parseInt(btn.getAttribute("data-carband"),10);
+    document.querySelectorAll("[data-carband]").forEach(function(b){ b.setAttribute("aria-pressed", b===btn?"true":"false"); });
+    renderCarCost();
+  });
+});
+document.querySelectorAll("[data-carterm]").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    carTerm=parseInt(btn.getAttribute("data-carterm"),10);
+    document.querySelectorAll("[data-carterm]").forEach(function(b){ b.setAttribute("aria-pressed", b===btn?"true":"false"); });
+    renderCarCost();
+  });
+});
+document.querySelectorAll("[data-down]").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    document.getElementById("carDown").value=btn.getAttribute("data-down");
+    renderCarCost();
+  });
+});
+["carPrice","carDown","carIns","carGas","carMaint"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el) el.addEventListener("input", renderCarCost);
+});
+renderCarCost();
 
 // ---- THE $100 MONEY CHALLENGE (progress saves on this device only) ----
 var C100_KEY="nad-100-challenge-v1";
